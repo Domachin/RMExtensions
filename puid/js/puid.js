@@ -13,7 +13,7 @@ var Attr_Increment = "Increment"
 var Attr_Padding = "Padding"
 var Attr_Separator = "Separator"
 var Attr_Counter = "Counter"
-var Attr_PUID = "Requirement Identifier"
+var Attr_PUID = "PUID"
 var Art_Type = undefined;
 var Window_Height = 200
 
@@ -283,7 +283,7 @@ function resetAllPUID()
 
 $(function()
 {
-
+window.alert("1");
 	if (window.RM)
 	{
 		RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(ref)
@@ -291,6 +291,7 @@ $(function()
 			gadgets.window.adjustHeight(1);
 		    RM.Data.getAttributes(ref,RM.Data.Attributes.FORMAT, function(res)
 		    {
+			    window.alert("2");
 		        Mod_Ref = undefined;
 		        Mod_Prefix = undefined;
 			Mod_Increment = undefined;
