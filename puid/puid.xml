@@ -54,8 +54,7 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 				<br>
 				<div id="b5" class="action" onClick="clearLog()">Clear log</div>
 				<hr></hr>
-				<div id="log"
-				</div>
+				<div id="log"></div>
 			</body>
 		</html>
 	]]>
