@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ Licensed Materials - Property of IBM
+ import-repair.xml
+© Copyright IBM Corporation 2014
+
+U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+-->
+<Module specificationVersion="2.0">
+<ModulePrefs title="PUID Processing" height="100" scrolling="true">
+	<Optional feature="com.ibm.rdm.rm.api"/>
+	<Require feature="dynamic-height"/>
+</ModulePrefs>
+<Content type="html">
+	<![CDATA[
+		<html>
+			<head>
+				<script src="lib/jquery.js"></script>
+				<script src="js/puid.js"></script>
+				<link rel="stylesheet" type="text/css" href="css/puid.css">
+			</head>
+			<body>
+			
+				<table>
+					<tr>
+						<td><div id="version" class="value"></div></td>
+						<td><div class="label">Prefix</div></td>
+						<td><div class="label">Counter/Increment</div></td>
+					</tr>
+					<tr>
+						<td><div class="label">Module:</div></td>
+						<td><div id="prefix" class="value"></div></td>
+						<td><div id="counter" class="value"></div></td>
+					</tr>
+					<tr>
+						<td><div class="label"></div></td>
+						<td><div  class="label">ID</div></td>
+						<td><div class="label">PUID</div></td>
+					</tr>
+					<tr> 
+						<td><div class="label">Artifact:</div></td>
+						<td><div id="artid" class="value"></div></td>
+						<td><div id="puid" class="value"></div></td>
+					</tr>
+				</table>
+				<br>
+				<div id="b1" class="action" onClick="genPUID()">Generate PUID</div>	
+				<br>
+				<div id="b2" class="action" onClick="genAllUndefPUID()">Generate all undefined PUID</div>
+				<br>
+				<div id="b3" class="action" onClick="genAllPUID()">Generate all PUID</div>
+				<br>
+				<div id="b4" class="action" onClick="resetAllPUID()">Reset all PUID</div>
+				<br>
+				<div id="b5" class="action" onClick="clearLog()">Clear log</div>
+				<hr></hr>
+				<div id="log"
+				</div>
+			</body>
+		</html>
+	]]>
+</Content>
+</Module>
