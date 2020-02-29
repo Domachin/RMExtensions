@@ -283,7 +283,7 @@ function resetAllPUID()
 
 $(function()
 {
-
+windows.alert("ss");
 	if (window.RM)
 	{
 		RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(ref)
