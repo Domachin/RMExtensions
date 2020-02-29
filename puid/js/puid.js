@@ -85,11 +85,11 @@ function computePUID()
 	var idPrefix = undefined;
 	// Mod_PJcode=PJ15;
 	// Mod_SolutionCode="01";
-	if (Art_Type == "Stakeholder Requirement")
+	if (Art_Type == "Requisito software")
 		idPrefix = "REQ" +  Mod_Separator + "UR";
-	else if (Art_Type == "System Requirement")
+	else if (Art_Type == "Requisito cliente")
                 idPrefix = "REQ" +  Mod_Separator + "SSS"; 
-	else if (Art_Type == "Interface Requirement")
+	else if (Art_Type == "Requisito sistema")
                 idPrefix = "REQ" +  Mod_Separator + "INT";
 	else
 		idPrefix="UNDEF";
@@ -106,7 +106,7 @@ function genPUID()
         var new_puid = computePUID()
  	var val = new RM.ArtifactAttributes(Art_Ref);
 
-	if(Art_Type == "Stakeholder Requirement" || Art_Type == "System Requirement" || Art_Type == "Interface Requirement")
+	if(Art_Type == "Requisito software" || Art_Type == "Requisito cliente" || Art_Type == "Requisito sistema")
 		Attr_PUID="Requirement Identifier";
 
         val.values[Attr_PUID] = new_puid;
@@ -140,7 +140,7 @@ function genModPUID(undef_only,reset_value)
         return
 
 	window.alert("PUID modification started...");
-	if(Art_Type == "Stakeholder Requirement" || Art_Type == "System Requirement" || Art_Type == "Interface Requirement")
+	if(Art_Type == "Requisito software" || Art_Type == "Requisito cliente" || Art_Type == "Requisito sistema")
 		Attr_PUID = "Requirement Identifier";
     RM.Data.getContentsAttributes(Mod_Ref, [RM.Data.Attributes.IDENTIFIER,
                                             RM.Data.Attributes.ARTIFACT_TYPE, Attr_PUID], function(res)
@@ -155,7 +155,7 @@ function genModPUID(undef_only,reset_value)
                 var id = attrs.values[RM.Data.Attributes.IDENTIFIER];
                 var t = attrs.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
                 Art_Type = t;
-	if(Art_Type == "Stakeholder Requirement" || Art_Type == "System Requirement" || Art_Type == "Interface Requirement")
+	if(Art_Type == "Requisito software" || Art_Type == "Requisito cliente" || Art_Type == "Requisito sistema")
 		Attr_PUID = "Requirement Identifier";
 
                 var puid = attrs.values[Attr_PUID];
@@ -171,7 +171,7 @@ function genModPUID(undef_only,reset_value)
 						if (puid != undefined)
 						{
 							var val = new RM.ArtifactAttributes(art);
-							if(Art_Type == "Stakeholder Requirement" || Art_Type == "System Requirement" || Art_Type == "Interface Requirement")
+							if(Art_Type == "Requisito software" || Art_Type == "Requisito cliente" || Art_Type == "Requisito sistema")
 								Attr_PUID = "Requirement Identifier";
 							val.values[Attr_PUID] = "";
 							puid_vals.push(val);
@@ -187,7 +187,7 @@ function genModPUID(undef_only,reset_value)
 						Mod_Counter = parseInt(Mod_Counter + Mod_Increment);
 
 						var val = new RM.ArtifactAttributes(art);
-						if(Art_Type == "Stakeholder Requirement" || Art_Type == "System Requirement" || Art_Type == "Interface Requirement")
+						if(Art_Type == "Requisito software" || Art_Type == "Requisito cliente" || Art_Type == "Requisito sistema")
 							Attr_PUID = "Requirement Identifier";
 						val.values[Attr_PUID] = new_puid;
 						puid_vals.push(val);
@@ -303,13 +303,13 @@ windows.alert("ss");
 		        Art_ID = undefined;
 		        Art_PUID = undefined;
 
-				document.getElementById("version").textContent = Script_Version;
+			document.getElementById("version").textContent = Script_Version;
 		        document.getElementById("prefix").textContent = "";
 		        document.getElementById("counter").textContent = "";
 		        document.getElementById("artid").textContent = "";
 		        document.getElementById("puid").textContent = "";
 		        
-		        //window.alert(res.code);
+		        window.alert(res.code);
 		        if (res.code == RM.OperationResult.OPERATION_OK)
 		        {
 		            if (res.data[0].values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
