@@ -283,7 +283,6 @@ function resetAllPUID()
 
 $(function()
 {
-window.alert("1");
 	if (window.RM)
 	{
 		RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(ref)
@@ -291,7 +290,6 @@ window.alert("1");
 			gadgets.window.adjustHeight(1);
 		    RM.Data.getAttributes(ref,RM.Data.Attributes.FORMAT, function(res)
 		    {
-			    window.alert("2");
 		        Mod_Ref = undefined;
 		        Mod_Prefix = undefined;
 			Mod_Increment = undefined;
@@ -310,7 +308,7 @@ window.alert("1");
 		        document.getElementById("artid").textContent = "";
 		        document.getElementById("puid").textContent = "";
 		        
-		        window.alert(res.code);
+		        //window.alert(res.code);
 		        if (res.code == RM.OperationResult.OPERATION_OK)
 		        {
 		            if (res.data[0].values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
