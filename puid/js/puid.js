@@ -18,7 +18,7 @@ var Art_Type = undefined;
 var Window_Height = 200
 
 // list of artefact types with a PUID attribute
-var List_PUID_Types = [ "Stakeholder Requirement", "System Requirement", "Interface Requirement" ]
+var List_PUID_Types = [ "Requisito software", "Requisito cliente", "Requisito sistema" ]
 
 // PUID application
 function checkType(t)
