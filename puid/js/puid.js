@@ -37,6 +37,10 @@ $(function()
       result.data.forEach(function(item){
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
          window.alert(type);
+	      window.alert(item.values["Name"]);
+	      window.alert(item.values["Nome"]);
+	      window.alert(item.values["Tipo"]);
+	      window.alert(item.values["State"]);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
