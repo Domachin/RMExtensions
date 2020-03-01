@@ -16,9 +16,6 @@ function updateCounters()
 
 $(function()
 {
-	window.alert(RM.Data.Attributes.ARTIFACT_TYPE);
-	window.alert(RM.Data.Attributes.NAME);
-	window.alert(RM.Data.Attributes.IDENTIFIER);
 	if (initialize==true) updateCounters();
 	
 	var selection = [];
@@ -42,10 +39,11 @@ $(function()
 	      console.table(item.values);
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
          window.alert(type);
-	      window.alert("Name "+item.values["Name"]);
-	      window.alert("Nome "+item.values["Nome"]);
-	      window.alert("Tipo "+item.values["Tipo"]);
-	      window.alert("State "+item.values["State"]);
+	      window.alert("Name "+item.values["Tipo di Risorsa Utente"]);
+	      window.alert("Nome "+item.values["Tipo di risorsa utente"]);
+	      window.alert("Tipo "+item.values["Tipo risorsa utente"]);
+	      window.alert("State "+item.values[RM.Data.Attributes.PRIMARY_TEXT]);
+	      window.alert("State "+item.values[RM.Data.Attributes.NAME]);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
