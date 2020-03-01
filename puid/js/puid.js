@@ -60,7 +60,7 @@ $(function()
 	selection = selected;
 	});
 			   
-
+	window.alert(selection.length);
 	$("#SetID").on("click", SetID);
 });
 
