@@ -52,7 +52,14 @@ function updateCounters()
 $(function()
 {
 	if (initialize==true) updateCounters();
-	RM.Event.subscribe(RM.Event.ARTIFACT_SELECTED, SetID);
+	
+	var selection = [];
+	RM.Event.subscribe(RM.Event.ARTIFACT_SELECTED, function(selected) {
+	selection = selected;
+	});
+			   
+
+	$("#SetID").on("click", SetID);
 });
 
 
