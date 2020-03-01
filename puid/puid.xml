@@ -15,11 +15,14 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 	<![CDATA[
 		<html>
 			<head>
-				<script src="lib/jquery.js"></script>
+				<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 				<script src="js/puid.js"></script>
 				<link rel="stylesheet" type="text/css" href="css/puid.css">
 			</head>
 			<body>
+				<br/>
+				<button id="SetID">Calcola gli identificativi</button>
+				<br/>
 				<div id="log">ID Generator</div>
 			</body>
 		</html>
