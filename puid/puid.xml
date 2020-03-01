@@ -20,7 +20,7 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 				<link rel="stylesheet" type="text/css" href="css/puid.css">
 			</head>
 			<body>
-				<div id="log">ID Generator</div>
+				<div id="log">ID Generator 2</div>
 				<br/>
 				<button id="SetID">Calcola gli identificativi</button>				
 			</body>
