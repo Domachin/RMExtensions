@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 6");
+	window.alert("initialization 7");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -38,6 +38,8 @@ $(function()
       window.alert("get attributes");
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
+	      console.log(item.values);
+	      console.table(item.values);
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
          window.alert(type);
 	      window.alert("Name "+item.values["Name"]);
