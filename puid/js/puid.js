@@ -6,6 +6,7 @@ var initialize = true;
 
 function SetID(artifactsArray)
 {
+   window.alert("start function");
    RM.Data.getAttributes(artifactsArray, function(result){
       
       // Store any required attribute changes here
@@ -14,6 +15,7 @@ function SetID(artifactsArray)
       // Go through artifact data examining artifact type
       result.data.forEach(function(item){
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
+         window.alert(type);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
