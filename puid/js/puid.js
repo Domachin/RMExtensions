@@ -11,7 +11,7 @@ function SetID(artifactsArray)
       
       // Store any required attribute changes here
       var toSave = [];
-      window.alert("get attributes);
+      window.alert("get attributes");
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
