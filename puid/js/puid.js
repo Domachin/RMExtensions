@@ -42,7 +42,7 @@ function SetID(artifactsArray)
 function updateCounters()
 {
 	window.alert("initialization");
-	RM.Data.getAttributes(artifactsArray, function(result){
+	RM.Data.getAttributes(RM.Data, function(result){
 		for (var i = 0; i < 8; i++)
 	 	{
 		}
@@ -52,7 +52,7 @@ function updateCounters()
 $(function()
 {
 	if (initialize==true) updateCounters();
-	RM.Event.subscribe(RM.Event.ARTIFACT_SAVED, SetID);
+	RM.Event.subscribe(RM.Event.ARTIFACT_SELECTED, SetID);
 });
 
 
