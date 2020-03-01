@@ -11,7 +11,7 @@ function SetID(artifactsArray)
       
       // Store any required attribute changes here
       var toSave = [];
-      
+      window.alert("get attributes);
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
@@ -43,7 +43,7 @@ function SetID(artifactsArray)
 
 function updateCounters()
 {
-	window.alert("initialization 2");
+	window.alert("initialization 3");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
