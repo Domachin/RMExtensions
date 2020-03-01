@@ -42,10 +42,10 @@ function SetID(artifactsArray)
 function updateCounters()
 {
 	window.alert("initialization");
-	RM.Data.getAttributes(RM.Data, function(result){
-		for (var i = 0; i < 8; i++)
-	 	{
-		}
+	//RM.Data.getAttributes(RM.Data, function(result){
+	//	for (var i = 0; i < 8; i++)
+	//	{
+	//	}
 	initialize=false;
 }
 
