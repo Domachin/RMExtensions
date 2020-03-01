@@ -61,7 +61,7 @@ $(function()
 	});
 			   
 	window.alert(selection.length);
-	$("#SetID").on("click", SetID);
+	$("#SetID").on("click", SetID(selection));
 });
 
 
