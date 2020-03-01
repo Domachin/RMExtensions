@@ -24,9 +24,11 @@ $(function()
 	});
 			   
 	window.alert(selection.length);
-	$("#SetID").on("click", function() {
-   window.alert("start function");
-   RM.Data.getAttributes(selection, function(result){
+	
+  $("#SetID").on("click", function() {
+	  
+      window.alert("start function");
+      RM.Data.getAttributes(selection, function(result){
       
       // Store any required attribute changes here
       var toSave = [];
@@ -51,8 +53,8 @@ $(function()
       });
       
       // Perform a bulk save for all changed attributes
-      RM.Data.setAttributes(toSave, function(result){
-         if(result.code !== RM.OperationResult.OPERATION_OK)
+      RM.Data.setAttributes(toSave, function(result2){
+         if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
             window.alert("Error: " + code);
          }
