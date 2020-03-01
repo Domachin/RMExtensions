@@ -16,6 +16,9 @@ function updateCounters()
 
 $(function()
 {
+	window.alert(RM.Data.Attributes.ARTIFACT_TYPE);
+	window.alert(RM.Data.Attributes.NAME);
+	window.alert(RM.Data.Attributes.IDENTIFIER);
 	if (initialize==true) updateCounters();
 	
 	var selection = [];
