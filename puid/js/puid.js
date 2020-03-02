@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 34");
+	window.alert("initialization 35");
 	initialize=false;
 }
 
@@ -14,17 +14,17 @@ $(function()
 	if (initialize==true) updateCounters();
 	
 	var selection = [];
-	RM.Event.subscribe(RM.Event.ARTIFACT_SELECTED, function(selected) {
+	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 	selection = selected;
 	});
 	
   $("#SetID").on("click", function() {
 	  
-      var counters = [1,1,1,1,1,1,1,1];
+      
       window.alert("start function");
 	  
-      RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
-      
+      RM.Data.getContentsAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
+      var counters = [1,1,1,1,1,1,1,1];
       // Store any required attribute changes here
       var toSave = [];
       window.alert("get attributes");
