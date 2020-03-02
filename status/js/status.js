@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 38");
+	window.alert("init 1");
 	initialize=false;
 }
 
@@ -13,9 +13,19 @@ $(function()
 {
 	if (initialize==true) updateCounters();
 	
-	var selection = [];
-	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
-	selection = selected;
+	RM.Event.subscribe(RM.Event.ARTIFACT_SAVED, function(selected) {
+		RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
+			var type = result.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+			var status = result.data[0].values["State (Workflow "+type+")"];
+			var allocation = result.data[0].values["Allocazione"];
+			if(status=="Identificato" && allocation!=undefined) result.data[0].values["State (Workflow "+type+")"]="Allocato"
+			RM.Data.setAttributes(toSave, function(result2){
+         			if(result2.code !== RM.OperationResult.OPERATION_OK)
+         			{
+            				window.alert("Error: " + code);
+         			}
+      			});
+		});
 	});
 	
   $("#SetID").on("click", function() {
