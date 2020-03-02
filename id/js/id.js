@@ -6,7 +6,7 @@ var counters = [1,1,1,1,1,1,1,1];
 
 function updateCounters()
 {
-	window.alert("initialization 41");
+	window.alert("initialization 42");
 	initialize=false;
 }
 
@@ -24,7 +24,8 @@ $(function()
 			 		window.alert("counter! "+counters[i]);
 				 	var oldid = item2.values[identifiers[i]];
 					var num = 0;
-					if(oldid.includes(prefixes[i])) num=Number(oldid.split(prefixes[i])[1]);
+					window.alert(oldid+" "+prefixes[i]);
+					if(oldid.includes(prefixes[i])) num=parseInt(oldid.slice(-3));
 					window.alert("counter "+counters[i]+" num "+num);
 					if (num>counters[i]) counters[i]=num;
 					if(isNaN(num)) window.alert("Number error");
