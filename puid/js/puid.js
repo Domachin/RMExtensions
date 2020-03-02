@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 21");
+	window.alert("initialization 22");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -41,7 +41,7 @@ $(function()
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
 	 {
-		 window.alert(identified_artifacts[i]+" vs "+type);
+		 //window.alert(identified_artifacts[i]+" vs "+type);
 		 if(identified_artifacts[i].includes(type)) {n=i; window.alert("found: "+i);}
 	 }
 	 /*if(counters[i]==1)
@@ -58,7 +58,7 @@ $(function()
 	 }*/
 	 if(n!=-1)
 	 {
-	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
+	    //newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    //counters[n]++;
             //item.values[identifiers[n]] = newid;
             //toSave.push(item);
