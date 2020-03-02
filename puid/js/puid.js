@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 13");
+	window.alert("initialization 14");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -43,7 +43,7 @@ $(function()
 	 {
 		 if(identified_artifacts[i].includes(type)) {n=i; window.alert("found: "+i);}
 	 }
-	 if(counters[i]==1)
+	 /*if(counters[i]==1)
 	 {
 		 var maximum = 1;
 		 RM.Data.getAttributes(selection, identifiers, function(result3){
@@ -53,7 +53,7 @@ $(function()
 				if (num>maximum) maximum=num;
 			});
 		 });
-	 }
+	 }*/
 	 if(n!=-1)
 	 {
 	    newid = prefixes[i]+('000' + counters[i]).substr(-3);
