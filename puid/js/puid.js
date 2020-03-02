@@ -24,6 +24,12 @@ $(function()
       window.alert("start function");
 	  
       RM.Data.getContentsAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
+	      
+      if(result.code !== RM.OperationResult.OPERATION_OK)
+      {
+         return;
+      }
+	      
       var counters = [1,1,1,1,1,1,1,1];
       // Store any required attribute changes here
       var toSave = [];
