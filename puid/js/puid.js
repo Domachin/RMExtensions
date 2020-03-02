@@ -1,7 +1,7 @@
 var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
 var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
 var prefixes = ["xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_"];
-var counters = [0,0,0,0,0,0,0,0];
+var counters = [1,1,1,1,1,1,1,1];
 var initialize = true;
 
 function updateCounters()
@@ -37,7 +37,7 @@ $(function()
       result.data.forEach(function(item){
 	      console.log(item.values);
 	      console.table(item.values);
-         var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
+         var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          window.alert(type);
 	      window.alert("format "+item.values[RM.Data.Attributes.FORMAT]);
 	      window.alert("description "+item.values[RM.Data.Attributes.DESCRIPTION]);
