@@ -27,7 +27,7 @@ $(function()
 	  
       window.alert("start function");
 	  
-      RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE, "State", "State (Workflow requisiti software)"]), function(result){
+      RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
       
       // Store any required attribute changes here
       var toSave = [];
@@ -36,10 +36,6 @@ $(function()
       result.data.forEach(function(item){
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          window.alert(type);
-	 var no = item.values["State"];
-	 window.alert(no);
-	      var nodd = item.values["State (Workflow requisiti software)"];
-	 window.alert(nodd);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
