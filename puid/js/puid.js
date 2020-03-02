@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 12");
+	window.alert("initialization 13");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -50,7 +50,7 @@ $(function()
 			 result3.data.forEach(function(item2){
 			 	var oldid = item2.values[identifiers[i]];
 				var num = Number(oldid.split(prefixes[i])[1]);
-				if (num>maximum) num=oldid;
+				if (num>maximum) maximum=num;
 			});
 		 });
 	 }
