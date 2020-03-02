@@ -16,7 +16,7 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 		<html>
 			<head>
 				<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-				<script src="https://raw.githubusercontent.com/Domachin/RMExtensions/master/puid/js/puid.js"></script>
+				<script src="//raw.githubusercontent.com/Domachin/RMExtensions/master/puid/js/puid.js"></script>
 				<link rel="stylesheet" type="text/css" href="css/puid.css">
 			</head>
 			<body>
