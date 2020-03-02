@@ -61,7 +61,7 @@ $(function()
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    window.alert(newid);
 	    //counters[n]++;
-            //item.values[identifiers[n]] = newid;
+            //if (item.values[identifiers[n]]=="") item.values[identifiers[n]] = newid;
             //toSave.push(item);
 	 }
       });
