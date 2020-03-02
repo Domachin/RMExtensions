@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 8");
+	window.alert("initialization 9");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -37,13 +37,13 @@ $(function()
       result.data.forEach(function(item){
 	      console.log(item.values);
 	      console.table(item.values);
-         var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
+         var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          window.alert(type);
-	      window.alert("Name "+item.values["Tipo di Risorsa Utente"]);
-	      window.alert("Nome "+item.values["Tipo di risorsa utente"]);
-	      window.alert("Tipo "+item.values["Tipo risorsa utente"]);
-	      window.alert("State "+item.values[RM.Data.Attributes.PRIMARY_TEXT]);
-	      window.alert("State "+item.values[RM.Data.Attributes.NAME]);
+	      window.alert("format "+item.values[RM.Data.Attributes.FORMAT]);
+	      window.alert("description "+item.values[RM.Data.Attributes.DESCRIPTION]);
+	      window.alert("container "+item.values[RM.Data.Attributes.CONTAINING_MODULE]);
+	      window.alert("testo "+item.values[RM.Data.Attributes.PRIMARY_TEXT]);
+	      window.alert("nome "+item.values[RM.Data.Attributes.NAME]);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
