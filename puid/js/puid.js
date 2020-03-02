@@ -28,15 +28,13 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       window.alert("start function");
-      RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME, RM.Data.Attributes.ARTIFACT_TYPE], function(result){
+      RM.Data.getAttributes(selection, [RM.Data.Attributes.ARTIFACT_TYPE], function(result){
       
       // Store any required attribute changes here
       var toSave = [];
       window.alert("get attributes");
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
-	      console.log(item.values);
-	      console.table(item.values);
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          window.alert(type);
          var newid = "";
@@ -45,13 +43,13 @@ $(function()
 	 {
 		 if(identified_artifacts[i].includes(type)) n=i;
 	 }
-	// if(n!=-1)
-	 //{
-	 //   newid = prefixes[i]+counters[i];
-	 //   counters[i]++;
-         //   item.values[identifiers[i]] = newid;
-         //   toSave.push(item);
-	 //}
+	 if(n!=-1)
+	 {
+	    newid = prefixes[i]+counters[i];
+	    counters[i]++;
+            item.values[identifiers[i]] = newid;
+            toSave.push(item);
+	 }
       });
       
       // Perform a bulk save for all changed attributes
