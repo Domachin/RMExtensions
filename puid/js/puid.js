@@ -1,16 +1,11 @@
 var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
 var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
 var prefixes = ["xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_"];
-var counters = [1,1,1,1,1,1,1,1];
 var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 32");
-	//RM.Data.getAttributes(RM.Data, function(result){
-	//	for (var i = 0; i < 8; i++)
-	//	{
-	//	}
+	window.alert("initialization 33");
 	initialize=false;
 }
 
@@ -25,6 +20,7 @@ $(function()
 	
   $("#SetID").on("click", function() {
 	  
+      var counters = [1,1,1,1,1,1,1,1];
       window.alert("start function");
 	  
       RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
@@ -51,7 +47,9 @@ $(function()
 		 RM.Data.getAttributes(selection, identifiers, function(result3){
 			 result3.data.forEach(function(item2){
 			 	var oldid = item2.values[identifiers[n]];
-				var num = Number(oldid.split(prefixes[n])[1]);
+				var num = 0;
+				if(item.values[identifiers[n]].includes(prefixes[n])) Number(oldid.split(prefixes[n])[1]);
+				window.alert("counter "+counters[n]+" num "+num);
 				if (num>maximum) maximum=num;
 				if(isNaN(num)) window.alert("Number error");
 			});
