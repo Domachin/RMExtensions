@@ -41,6 +41,7 @@ $(function()
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
 	 {
+		 window.alert(identified_artifacts[i]+" vs "+type);
 		 if(identified_artifacts[i].includes(type)) {n=i; window.alert("found: "+i);}
 	 }
 	 /*if(counters[i]==1)
