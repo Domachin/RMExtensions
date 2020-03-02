@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 11");
+	window.alert("initialization 12");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -43,9 +43,20 @@ $(function()
 	 {
 		 if(identified_artifacts[i].includes(type)) n=i;
 	 }
+	 if(counters[i]==1)
+	 {
+		 var maximum = 1;
+		 RM.Data.getAttributes(selection, identifiers, function(result3){
+			 result3.data.forEach(function(item2){
+			 	var oldid = item2.values[identifiers[i]];
+				var num = Number(oldid.split(prefixes[i])[1]);
+				if (num>maximum) num=oldid;
+			});
+		 });
+	 }
 	 if(n!=-1)
 	 {
-	    newid = prefixes[i]+counters[i];
+	    newid = prefixes[i]+('000' + counters[i]).substr(-3);
 	    counters[i]++;
             item.values[identifiers[i]] = newid;
             toSave.push(item);
