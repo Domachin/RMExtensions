@@ -36,7 +36,8 @@ $(function()
       result.data.forEach(function(item){
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          window.alert(type);
-	 window.alert(item.values["Identificativo Software"]);
+	 var no = item.values["Identificativo Software"];
+	 window.alert(no);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
