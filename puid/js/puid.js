@@ -47,21 +47,22 @@ $(function()
 		 //window.alert(identified_artifacts[i]+" vs "+type);
 		 if(identified_artifacts[i].includes(type)) {n=i; window.alert("found: "+i);}
 	 }
-	 if(counters[i]==1)
+	 if(n!=-1)
 	 {
+	    if(counters[n]==1)
+	    {
 		 var maximum = 1;
 		 RM.Data.getAttributes(selection, identifiers, function(result3){
 			 result3.data.forEach(function(item2){
-			 	var oldid = item2.values[identifiers[i]];
-				var num = Number(oldid.split(prefixes[i])[1]);
+			 	var oldid = item2.values[identifiers[n]];
+				var num = Number(oldid.split(prefixes[n])[1]);
 				if (num>maximum) maximum=num;
 				if(isNaN(num)) window.alert("Number error");
 			});
 		 });
-		 counters[i]=maximum;
-	 }
-	 if(n!=-1)
-	 {
+		 counters[n]=maximum;
+	    }
+		 
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    window.alert(newid);
 	    counters[n]++;
