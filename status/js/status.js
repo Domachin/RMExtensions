@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("init 1");
+	window.alert("init 2");
 	initialize=false;
 }
 
@@ -20,6 +20,7 @@ $(function()
 			var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 			var status = item.values["State (Workflow "+type+")"];
 			var allocation = item.values["Allocazione"];
+			window.alert(status+" "+allocation);
 			if(status=="Identificato" && allocation!=undefined) item.values["State (Workflow "+type+")"]="Allocato";
 			toSave.push(item);
 			RM.Data.setAttributes(toSave, function(result2){
