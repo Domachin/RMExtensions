@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 16");
+	window.alert("initialization 17");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -28,7 +28,7 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       window.alert("start function");
-      RM.Data.getAttributes(selection, [RM.Data.Attributes.ARTIFACT_TYPE], function(result){
+      RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
       
       // Store any required attribute changes here
       var toSave = [];
