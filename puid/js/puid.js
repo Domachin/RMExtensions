@@ -26,7 +26,7 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       window.alert("start function");
-      RM.Data.getAttributes(selection, [RM.Data.Attributes.ARTIFACT_TYPE], function(result){
+      RM.Data.getAttributes(selection, function(result){
       
       // Store any required attribute changes here
       var toSave = [];
@@ -58,9 +58,9 @@ $(function()
 	 {
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    window.alert(newid);
-	    counters[n]++;
-            item.values[identifiers[n]] = newid;
-            toSave.push(item);
+	    //counters[n]++;
+            //item.values[identifiers[n]] = newid;
+            //toSave.push(item);
 	 }
       });
       
