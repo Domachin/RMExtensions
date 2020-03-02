@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 22");
+	window.alert("initialization 23");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -26,7 +26,7 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       window.alert("start function");
-      RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
+      RM.Data.getAttributes(selection, [RM.Data.Attributes.ARTIFACT_TYPE], function(result){
       
       // Store any required attribute changes here
       var toSave = [];
@@ -56,8 +56,9 @@ $(function()
 	 }*/
 	 if(n!=-1)
 	 {
-	    //newid = prefixes[n]+('000'+counters[n]).slice(-3);
-	    //counters[n]++;
+	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
+	    window.alert(newid);
+	    counters[n]++;
             //item.values[identifiers[n]] = newid;
             //toSave.push(item);
 	 }
