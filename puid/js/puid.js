@@ -54,14 +54,15 @@ $(function()
 			});
 		 });
 	 }*/
-	 //if(n!=-1)
-	 //{
-	   // newid = prefixes[n]+('000'+counters[n]).slice(-3);
-	    //window.alert(newid);
+	      window.alert(n);
+	 if(n!=-1)
+	 {
+	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
+	    window.alert(newid);
 	    //counters[n]++;
             //item.values[identifiers[n]] = newid;
             //toSave.push(item);
-	 //}
+	 }
       });
       
       // Perform a bulk save for all changed attributes
