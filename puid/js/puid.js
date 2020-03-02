@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 29");
+	window.alert("initialization 30");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -27,7 +27,7 @@ $(function()
 	  
       window.alert("start function");
 	  
-      RM.Data.getAttributes(selection, ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test", RM.Data.Attributes.ARTIFACT_TYPE], function(result){
+      RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
       
       // Store any required attribute changes here
       var toSave = [];
