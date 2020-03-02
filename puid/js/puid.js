@@ -51,6 +51,7 @@ $(function()
 			 	var oldid = item2.values[identifiers[i]];
 				var num = Number(oldid.split(prefixes[i])[1]);
 				if (num>maximum) maximum=num;
+				if(isNaN(num)) window.alert("Number error");
 			});
 		 });
 	 }*/
