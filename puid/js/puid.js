@@ -61,9 +61,9 @@ $(function()
 	 {
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    window.alert(newid);
-	    //counters[n]++;
-            //if (item.values[identifiers[n]]=="") item.values[identifiers[n]] = newid;
-            //toSave.push(item);
+	    counters[n]++;
+            if (item.values[identifiers[n]]=="") item.values[identifiers[n]] = newid;
+            toSave.push(item);
 	 }
       });
       
