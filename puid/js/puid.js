@@ -23,6 +23,8 @@ $(function()
 	selection = selected;
 	});
 	
+	window.alert(typeof RM.Data.Attributes.ARTIFACT_TYPE);
+	
   $("#SetID").on("click", function() {
 	  
       window.alert("start function");
