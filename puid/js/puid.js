@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 33");
+	window.alert("initialization 34");
 	initialize=false;
 }
 
@@ -43,12 +43,13 @@ $(function()
 	 {
 	    if(counters[n]==1)
 	    {
+		 window.alert("counter! "+counters[n]);
 		 var maximum = 1;
 		 RM.Data.getAttributes(selection, identifiers, function(result3){
 			 result3.data.forEach(function(item2){
 			 	var oldid = item2.values[identifiers[n]];
 				var num = 0;
-				if(item.values[identifiers[n]].includes(prefixes[n])) Number(oldid.split(prefixes[n])[1]);
+				if(oldid.includes(prefixes[n])) Number(oldid.split(prefixes[n])[1]);
 				window.alert("counter "+counters[n]+" num "+num);
 				if (num>maximum) maximum=num;
 				if(isNaN(num)) window.alert("Number error");
