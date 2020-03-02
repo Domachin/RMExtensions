@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 26");
+	window.alert("initialization 27");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -26,7 +26,8 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       window.alert("start function");
-      RM.Data.getAttributes(selection, function(result){
+	  
+      RM.Data.getAttributes(selection, ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito sistema","Requisito software","Requisito sottosistema","Test", RM.Data.Attributes.ARTIFACT_TYPE], function(result){
       
       // Store any required attribute changes here
       var toSave = [];
