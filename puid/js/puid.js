@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 19");
+	window.alert("initialization 20");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -56,13 +56,13 @@ $(function()
 			});
 		 });
 	 }*/
-	 if(n!=-1)
+	 /*if(n!=-1)
 	 {
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    counters[n]++;
             item.values[identifiers[n]] = newid;
             toSave.push(item);
-	 }
+	 }*/
       });
       
       // Perform a bulk save for all changed attributes
