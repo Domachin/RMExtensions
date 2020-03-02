@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 35");
+	window.alert("initialization 37");
 	initialize=false;
 }
 
@@ -64,11 +64,14 @@ $(function()
 		 counters[n]=maximum;
 	    }
 		 
-	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
-	    window.alert(newid);
-	    counters[n]++;
-            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n]))) item.values[identifiers[n]] = newid;
-            toSave.push(item);
+            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])))
+	    {
+		newid = prefixes[n]+('000'+counters[n]).slice(-3);
+	    	window.alert(newid);
+	    	item.values[identifiers[n]] = newid;
+		counters[n]++;
+            	toSave.push(item);
+	    }
 	 }
       });
       
