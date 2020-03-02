@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 23");
+	window.alert("initialization 24");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -54,14 +54,14 @@ $(function()
 			});
 		 });
 	 }*/
-	 if(n!=-1)
-	 {
-	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
-	    window.alert(newid);
-	    counters[n]++;
+	 //if(n!=-1)
+	 //{
+	   // newid = prefixes[n]+('000'+counters[n]).slice(-3);
+	    //window.alert(newid);
+	    //counters[n]++;
             //item.values[identifiers[n]] = newid;
             //toSave.push(item);
-	 }
+	 //}
       });
       
       // Perform a bulk save for all changed attributes
