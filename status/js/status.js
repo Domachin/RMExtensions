@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("init 2");
+	window.alert("init 3");
 	initialize=false;
 }
 
@@ -14,6 +14,7 @@ $(function()
 	if (initialize==true) updateCounters();
 	
 	RM.Event.subscribe(RM.Event.ARTIFACT_SAVED, function(selected) {
+		window.alert("saved");
 		RM.Data.getAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
 			var toSave = [];
 			var item = result.data[0];
