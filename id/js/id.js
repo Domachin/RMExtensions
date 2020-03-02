@@ -6,7 +6,7 @@ var counters = [1,1,1,1,1,1,1,1];
 
 function updateCounters()
 {
-	window.alert("initialization 40");
+	window.alert("initialization 41");
 	initialize=false;
 }
 
