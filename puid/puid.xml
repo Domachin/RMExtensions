@@ -20,9 +20,9 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 				<link rel="stylesheet" type="text/css" href="css/puid.css">
 			</head>
 			<body>
-				<div id="log">Selezionare gli elementi per cui occorre un identificativo</div>
+				<div id="log">(Selezionare prima tutti gli elementi del modulo)</div>
 				<br/>
-				<button id="SetID">Calcola gli identificativi</button>				
+				<button id="SetID">Aggiorna gli identificativi</button>				
 			</body>
 		</html>
 	]]>
