@@ -22,8 +22,6 @@ $(function()
 	RM.Event.subscribe(RM.Event.ARTIFACT_SELECTED, function(selected) {
 	selection = selected;
 	});
-			   
-	window.alert(selection.length);
 	
   $("#SetID").on("click", function() {
 	  
