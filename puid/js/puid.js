@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 31");
+	window.alert("initialization 32");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -47,7 +47,7 @@ $(function()
 		 //window.alert(identified_artifacts[i]+" vs "+type);
 		 if(identified_artifacts[i].includes(type)) {n=i; window.alert("found: "+i);}
 	 }
-	 /*if(counters[i]==1)
+	 if(counters[i]==1)
 	 {
 		 var maximum = 1;
 		 RM.Data.getAttributes(selection, identifiers, function(result3){
@@ -58,13 +58,14 @@ $(function()
 				if(isNaN(num)) window.alert("Number error");
 			});
 		 });
-	 }*/
+		 counters[i]=maximum;
+	 }
 	 if(n!=-1)
 	 {
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    window.alert(newid);
 	    counters[n]++;
-            if (item.values[identifiers[n]]==null) item.values[identifiers[n]] = newid;
+            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n]))) item.values[identifiers[n]] = newid;
             toSave.push(item);
 	 }
       });
