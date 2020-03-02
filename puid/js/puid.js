@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 37");
+	window.alert("initialization 38");
 	initialize=false;
 }
 
@@ -51,7 +51,7 @@ $(function()
 	    {
 		 window.alert("counter! "+counters[n]);
 		 var maximum = 1;
-		 RM.Data.getAttributes(selection, identifiers, function(result3){
+		 RM.Data.getContentsAttributes(selection, identifiers, function(result3){
 			 result3.data.forEach(function(item2){
 			 	var oldid = item2.values[identifiers[n]];
 				var num = 0;
