@@ -2,10 +2,11 @@ var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Re
 var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
 var prefixes = ["xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_"];
 var initialize = true;
+var counters = [1,1,1,1,1,1,1,1];
 
 function updateCounters()
 {
-	window.alert("initialization 39");
+	window.alert("initialization 40");
 	initialize=false;
 }
 
@@ -15,7 +16,23 @@ $(function()
 	
 	var selection = [];
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
-	selection = selected;
+		selection = selected;
+		for(var i = 0; i < 8;i++)
+		{
+			 window.alert("counter! "+counters[i]);
+			 var maximum = 1;
+			 RM.Data.getContentsAttributes(selection, identifiers, function(result3){
+				 result3.data.forEach(function(item2){
+				 	var oldid = item2.values[identifiers[i]];
+					var num = 0;
+					if(oldid.includes(prefixes[i])) num=Number(oldid.split(prefixes[i])[1]);
+					window.alert("counter "+counters[i]+" num "+num);
+					if (num>maximum) maximum=num;
+					if(isNaN(num)) window.alert("Number error");
+				});
+			 });
+			 counters[i]=maximum;
+		}
 	});
 	
   $("#SetID").on("click", function() {
@@ -29,8 +46,7 @@ $(function()
       {
          return;
       }
-	      
-      var counters = [1,1,1,1,1,1,1,1];
+      
       // Store any required attribute changes here
       var toSave = [];
       window.alert("get attributes");
@@ -47,22 +63,6 @@ $(function()
 	 }
 	 if(n!=-1)
 	 {
-	    if(counters[n]==1)
-	    {
-		 window.alert("counter! "+counters[n]);
-		 var maximum = 1;
-		 RM.Data.getContentsAttributes(selection, identifiers, function(result3){
-			 result3.data.forEach(function(item2){
-			 	var oldid = item2.values[identifiers[n]];
-				var num = 0;
-				if(oldid.includes(prefixes[n])) num=Number(oldid.split(prefixes[n])[1]);
-				window.alert("counter "+counters[n]+" num "+num);
-				if (num>maximum) maximum=num;
-				if(isNaN(num)) window.alert("Number error");
-			});
-		 });
-		 counters[n]=maximum;
-	    }
 		 
             if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])))
 	    {
