@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 25");
+	window.alert("initialization 26");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -54,14 +54,13 @@ $(function()
 			});
 		 });
 	 }*/
-	      window.alert(n);
 	 if(n!=-1)
 	 {
 	    newid = prefixes[n]+('000'+counters[n]).slice(-3);
 	    window.alert(newid);
-	    //counters[n]++;
-            //item.values[identifiers[n]] = newid;
-            //toSave.push(item);
+	    counters[n]++;
+            item.values[identifiers[n]] = newid;
+            toSave.push(item);
 	 }
       });
       
