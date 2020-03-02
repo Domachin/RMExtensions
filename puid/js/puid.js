@@ -37,7 +37,7 @@ $(function()
       result.data.forEach(function(item){
 	      console.log(item.values);
 	      console.table(item.values);
-         var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+         var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE];
          window.alert(type);
 	      window.alert("format "+item.values[RM.Data.Attributes.FORMAT]);
 	      window.alert("description "+item.values[RM.Data.Attributes.DESCRIPTION]);
