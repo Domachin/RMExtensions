@@ -6,7 +6,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("initialization 10");
+	window.alert("initialization 11");
 	//RM.Data.getAttributes(RM.Data, function(result){
 	//	for (var i = 0; i < 8; i++)
 	//	{
@@ -39,11 +39,6 @@ $(function()
 	      console.table(item.values);
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          window.alert(type);
-	      window.alert("format "+item.values[RM.Data.Attributes.FORMAT]);
-	      window.alert("description "+item.values[RM.Data.Attributes.DESCRIPTION]);
-	      window.alert("container "+item.values[RM.Data.Attributes.CONTAINING_MODULE]);
-	      window.alert("testo "+item.values[RM.Data.Attributes.PRIMARY_TEXT]);
-	      window.alert("nome "+item.values[RM.Data.Attributes.NAME]);
          var newid = "";
 	 var n = -1;
 	 for (var i = 0; i < 8; i++)
