@@ -62,6 +62,7 @@ $(function()
 	    //counters[n]++;
             //item.values[identifiers[n]] = newid;
             //toSave.push(item);
+	 }
       });
       
       // Perform a bulk save for all changed attributes
