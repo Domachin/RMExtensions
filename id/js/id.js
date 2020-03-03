@@ -1,6 +1,6 @@
 var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
 var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo Hardware","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
-var prefixes = ["xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_"];
+var prefixes = ["","CM_","HZ_","UN_","","","","",""];
 var initialize = true;
 var counters = [0,0,0,0,0,0,0,0,0];
 
@@ -15,6 +15,7 @@ $(function()
 	//if (initialize==true) updateCounters();
 	
 	var selection = [];
+	var docID = "";
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
@@ -26,13 +27,18 @@ $(function()
 					var num = 0;
 					//window.alert(oldid+" "+prefixes[i]);
 					if (oldid==undefined) oldid="";
-					if(oldid.includes(prefixes[i])) num=parseInt(oldid.slice(-3));
+					if(oldid.includes(prefixes[i]) && oldid.length>7) num=parseInt(oldid.slice(-6));
 					//window.alert("counter "+counters[i]+" num "+num);
-					if (num>counters[i]) counters[i]=num;
-					if(isNaN(num)) window.alert("Number error");
+					if(isNaN(num)) {window.alert("Number error");}
+					else if (num>counters[i]) counters[i]=num;
 				}
 			});
-		});		 	
+		});
+		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
+			result4.data.forEach(function(item3){
+				docID=item3.values[RM.Data.Attributes.NAME]+"_";
+			}
+		}
 	});
 	
   $("#SetID").on("click", function() {
@@ -66,10 +72,10 @@ $(function()
 	 if(n!=-1)
 	 {
 		 
-            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])))
+            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])  && item.values[identifiers[n]].length>7))
 	    {
 		var counter = counters[n]+1;
-		newid = prefixes[n]+('000'+counter).slice(-3);
+		newid = prefixes[n]+docID+('000000'+counter).slice(-6);
 	    	//window.alert(newid);
 	    	item.values[identifiers[n]] = newid;
 		counters[n]++;
