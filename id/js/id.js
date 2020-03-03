@@ -37,8 +37,8 @@ $(function()
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
 				docID=item3.values[RM.Data.Attributes.NAME]+"_";
-			}
-		}
+			});
+		});
 	});
 	
   $("#SetID").on("click", function() {
