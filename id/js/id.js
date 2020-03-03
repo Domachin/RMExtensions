@@ -6,7 +6,7 @@ var counters = [1,1,1,1,1,1,1,1];
 
 function updateCounters()
 {
-	window.alert("initialization 42");
+	window.alert("initialization 43");
 	initialize=false;
 }
 
@@ -25,6 +25,7 @@ $(function()
 				 	var oldid = item2.values[identifiers[i]];
 					var num = 0;
 					window.alert(oldid+" "+prefixes[i]);
+					if (oldid==undefined) oldid="";
 					if(oldid.includes(prefixes[i])) num=parseInt(oldid.slice(-3));
 					window.alert("counter "+counters[i]+" num "+num);
 					if (num>counters[i]) counters[i]=num;
