@@ -21,7 +21,7 @@ $(function()
 			result3.data.forEach(function(item2){
 				for(var i = 0; i < 8;i++)
 				{
-			 		window.alert("counter! "+counters[i]);
+			 		window.alert("counter ["+i+"]="+counters[i]+":"+identifiers[i]);
 				 	var oldid = item2.values[identifiers[i]];
 					var num = 0;
 					window.alert(oldid+" "+prefixes[i]);
