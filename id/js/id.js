@@ -1,8 +1,8 @@
-var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
-var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
-var prefixes = ["xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_"];
+var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
+var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo Hardware","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
+var prefixes = ["xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_","xxx_"];
 var initialize = true;
-var counters = [0,0,0,0,0,0,0,0];
+var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
@@ -19,7 +19,7 @@ $(function()
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
 			result3.data.forEach(function(item2){
-				for(var i = 0; i < 8;i++)
+				for(var i = 0; i < counters.length;i++)
 				{
 			 		//window.alert("counter ["+i+"]="+counters[i]+":"+identifiers[i]);
 				 	var oldid = item2.values[identifiers[i]];
@@ -58,7 +58,7 @@ $(function()
          //window.alert(type);
          var newid = "";
 	 var n = -1;
-	 for (var i = 0; i < 8; i++)
+	 for (var i = 0; i < counters.length; i++)
 	 {
 		 //window.alert(identified_artifacts[i]+" vs "+type);
 		 if(identified_artifacts[i].includes(type)) n=i; //window.alert("found: "+i);
