@@ -5,7 +5,7 @@ var initialize = true;
 
 function updateCounters()
 {
-	window.alert("init 3");
+	window.alert("init 4");
 	initialize=false;
 }
 
@@ -22,7 +22,7 @@ $(function()
 			var status = item.values["State (Workflow "+type+")"];
 			var allocation = item.values["Allocazione"];
 			window.alert(status+" "+allocation);
-			if(status=="Identificato" && allocation!=undefined) item.values["State (Workflow "+type+")"]="Allocato";
+			if(status=="Identificato" && allocation!=undefined) item.values["State (Workflow "+type+")"]="Caratterizzato";
 			toSave.push(item);
 			RM.Data.setAttributes(toSave, function(result2){
          			if(result2.code !== RM.OperationResult.OPERATION_OK)
