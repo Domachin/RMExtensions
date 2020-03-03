@@ -15,7 +15,7 @@ $(function()
 	//if (initialize==true) updateCounters();
 	
 	var selection = [];
-	var docID = "";
+	var docName = "";
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
@@ -36,7 +36,7 @@ $(function()
 		});
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
-				docID=item3.values[RM.Data.Attributes.NAME]+"_";
+				docName=item3.values[RM.Data.Attributes.NAME]+"_";
 			});
 		});
 	});
@@ -75,7 +75,7 @@ $(function()
             if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])  && item.values[identifiers[n]].length>7))
 	    {
 		var counter = counters[n]+1;
-		newid = prefixes[n]+docID+('000000'+counter).slice(-6);
+		newid = prefixes[n]+docName+('000000'+counter).slice(-6);
 	    	//window.alert(newid);
 	    	item.values[identifiers[n]] = newid;
 		counters[n]++;
