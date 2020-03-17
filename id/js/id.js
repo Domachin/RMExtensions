@@ -12,7 +12,7 @@ function version()
 
 $(function()
 {
-	//if (initialize==true) updateCounters();
+	//if (initialize==true) version();
 	
 	var selection = [];
 	var docName = "";
