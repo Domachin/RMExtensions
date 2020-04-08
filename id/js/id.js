@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("46");
+	window.alert("47");
 	initialize=false;
 }
 
@@ -16,7 +16,7 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
-	$("#log").html("<p class='info'>Prima di aggiornare gli identificativi occorre entrare in un modulo</p>");
+	$("#log").append("<p class='info'>Prima di aggiornare gli identificativi occorre entrare in un modulo</p>");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
@@ -36,7 +36,7 @@ $(function()
 			});
 		});
 		$("#log").empty();
-		$("#log").html("<p class='info'>Modulo: "+item3.values[RM.Data.Attributes.NAME]+"</p>");
+		$("#log").append("<p class='info'>Modulo:"+item3.values[RM.Data.Attributes.NAME]+"</p>");
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
 				docName=item3.values[RM.Data.Attributes.NAME]+"_";
