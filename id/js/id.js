@@ -6,11 +6,11 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("3");
+	window.alert("4");
 	initialize=false;
 }
 
-function println(string,element) {
+function write(string,element) {
 	$("#"+element).empty();
 	var p = document.createElement("p");
 	p.innerHTML = string;
@@ -23,7 +23,7 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
-	println("Entrare in un modulo per aggiornare gli identificativi","intro");
+	write("Entrare in un modulo per aggiornare gli identificativi","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
@@ -44,7 +44,7 @@ $(function()
 		});
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
-				println("Modulo:"+item3.values[RM.Data.Attributes.NAME],"intro");
+				write("Modulo: "+item3.values[RM.Data.Attributes.NAME],"intro");
 				docName=item3.values[RM.Data.Attributes.NAME]+"_";
 			});
 		});
@@ -66,9 +66,11 @@ $(function()
       // Store any required attribute changes here
       var toSave = [];
       //window.alert("get attributes");
-	      
+      var number=1;
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
+	 write(number+"/"+result.data.length,"progress");
+	 number++;
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
          var newid = "";
@@ -99,6 +101,7 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
+	 write("FINITO","progress");
       });
    });
 });
