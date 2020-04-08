@@ -6,9 +6,16 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("1");
+	window.alert("2");
 	initialize=false;
 }
+
+function println(string,element) {
+	$("#"+element).empty();
+	var p = document.createElement("p");
+	p.innerHTML = string;
+	$(p).appendTo("#"+element);
+};
 
 $(function()
 {
@@ -16,6 +23,7 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
+	println("Entrare in un modulo per aggiornare gli identificativi","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
