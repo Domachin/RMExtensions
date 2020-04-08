@@ -1,4 +1,4 @@
-var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito cliente","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
+var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito input","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
 var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo Hardware","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
 var prefixes = ["","CM_","HZ_","UN_","","","","",""];
 var initialize = true;
