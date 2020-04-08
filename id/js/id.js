@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("2");
+	window.alert("3");
 	initialize=false;
 }
 
@@ -42,9 +42,9 @@ $(function()
 				}
 			});
 		});
-		println("Modulo:"+item3.values[RM.Data.Attributes.NAME],"intro");
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
+				println("Modulo:"+item3.values[RM.Data.Attributes.NAME],"intro");
 				docName=item3.values[RM.Data.Attributes.NAME]+"_";
 			});
 		});
