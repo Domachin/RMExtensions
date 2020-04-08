@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("43");
+	window.alert("44");
 	initialize=false;
 }
 
@@ -35,6 +35,7 @@ $(function()
 				}
 			});
 		});
+		$("#log").html("<p class='info'>Modulo: "+item3.values[RM.Data.Attributes.NAME]+"</p>");
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
 				docName=item3.values[RM.Data.Attributes.NAME]+"_";
