@@ -42,7 +42,7 @@ $(function()
 				}
 			});
 		});
-		$(".log").html("Modulo:"+item3.values[RM.Data.Attributes.NAME]);
+		println("Modulo:"+item3.values[RM.Data.Attributes.NAME],"intro");
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
 				docName=item3.values[RM.Data.Attributes.NAME]+"_";
