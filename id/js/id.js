@@ -16,6 +16,7 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
+	$("#log").append("Prima di aggiornare gli identificativi occorre entrare in un modulo");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
