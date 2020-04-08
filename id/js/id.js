@@ -16,7 +16,6 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
-	$(".log").html("Prima di aggiornare gli identificativi occorre entrare in un modulo");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
@@ -35,7 +34,6 @@ $(function()
 				}
 			});
 		});
-		$(".log").empty();
 		$(".log").html("Modulo:"+item3.values[RM.Data.Attributes.NAME]);
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
