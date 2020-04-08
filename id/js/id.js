@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("44");
+	window.alert("45");
 	initialize=false;
 }
 
@@ -16,7 +16,7 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
-	$("#log").html("<p class='info'>Prima di aggiornare gli identificativi occorre entrare in un modulo</p>");
+	$("#log").append("Prima di aggiornare gli identificativi occorre entrare in un modulo");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
@@ -35,7 +35,8 @@ $(function()
 				}
 			});
 		});
-		$("#log").html("<p class='info'>Modulo: "+item3.values[RM.Data.Attributes.NAME]+"</p>");
+		$("#log").empty();
+		$("#log").append("Modulo: "+item3.values[RM.Data.Attributes.NAME]);
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
 			result4.data.forEach(function(item3){
 				docName=item3.values[RM.Data.Attributes.NAME]+"_";
