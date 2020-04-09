@@ -100,7 +100,7 @@ $(function()
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
 		 number++;
-		 println("Salvataggio: "+number+"/"+result.data.length,"progress");
+		 println("Salvataggio: "+number+"/"+result2.data.length,"progress");
 	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
