@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("6");
+	window.alert("7");
 	initialize=false;
 }
 
@@ -87,7 +87,7 @@ $(function()
             if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])  && item.values[identifiers[n]].length>7))
 	    {
 		var counter = counters[n]+1;
-		newid = prefixes[n]+docName+('000000'+counter).slice(-6);
+		newid = prefixes[n]+docName+('0000'+counter).slice(-4);
 	    	//window.alert(newid);
 	    	item.values[identifiers[n]] = newid;
 		counters[n]++;
@@ -106,8 +106,8 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
-	 println("FINITO","progress");
       });
+      println("FINITO","progress");
    });
 });
 });
