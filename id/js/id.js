@@ -130,6 +130,7 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
+      $("#progress3").empty();
       println("FINITO","progress3");
       });
    });
