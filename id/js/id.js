@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("8");
+	window.alert("prova 8");
 	initialize=false;
 }
 
@@ -75,7 +75,7 @@ $(function()
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
 	 number++;
-	 $("#progress").empty();
+	 println("Attendere...","progress");
 	 println("Elaborazione: <b>"+number+"/"+result.data.length+"</b>","progress");
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
@@ -105,7 +105,7 @@ $(function()
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
 		 number2++;
-		 $("#progress2").empty();
+		 println("Attendere...","progress2");
 		 println("Salvataggio: <b>"+number2+"/"+result2.data.length+"</b>","progress2");
 	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
