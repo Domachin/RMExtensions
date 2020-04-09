@@ -112,7 +112,7 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
-      println("\nFinito","progress2");
+      println("\nFINITO","progress2");
       });
    });
 });
