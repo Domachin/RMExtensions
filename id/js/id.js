@@ -18,12 +18,13 @@ function println(string,element) {
 
 $(function()
 {
-	if (initialize==true) version();
+	//if (initialize==true) version();
 	
 	var selection = [];
 	var docName = "";
 	println("Entrare in un modulo per aggiornare gli identificativi","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
+		$("#progress").empty();
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
 			result3.data.forEach(function(item3){
@@ -56,7 +57,7 @@ $(function()
 	
   $("#SetID").on("click", function() {
 	  
-      
+      $("#progress").empty();
       //window.alert("start function");
 	  
       RM.Data.getContentsAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
@@ -74,7 +75,6 @@ $(function()
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
 	 number++;
-	 $("#progress").empty();
 	 println("Elaborazione: "+number+"/"+result.data.length,"progress");
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
