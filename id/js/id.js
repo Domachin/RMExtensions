@@ -25,6 +25,7 @@ $(function()
 	println("Entrare in un modulo per aggiornare gli identificativi","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		$("#progress").empty();
+		$("#progress2").empty();
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
 			result3.data.forEach(function(item3){
