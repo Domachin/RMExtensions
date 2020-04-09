@@ -75,10 +75,12 @@ $(function()
       //window.alert("get attributes");
       var number=0;
        // Go through artifact data examining artifact type
+      println("Attendere...","progress2");
       result.data.forEach(function(item){
 	 number++;
-	 println("Attendere...","progress");
+	 $("#progress").empty();
 	 println("Elaborazione: <b>"+number+"/"+result.data.length+"</b>","progress");
+	 
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
          var newid = "";
@@ -104,17 +106,19 @@ $(function()
       });
       // Perform a bulk save for all changed attributes
       var number2=0;
+      println("Attendere...","progress3");
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
 		 number2++;
-		 println("Attendere...","progress2");
+		 $("#progress2").empty();
 		 println("Salvataggio: <b>"+number2+"/"+result2.data.length+"</b>","progress2");
+		 
 	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
             window.alert("Error: " + result2.code);
          }
-      println("\nFINITO","progress2");
+      println("\nFINITO","progress3");
       });
    });
 });
