@@ -38,7 +38,7 @@ $(function()
 					if (oldid==undefined) oldid="";
 					if(oldid.includes(prefixes[i]) && oldid.length>5) num=parseInt(oldid.slice(-4));
 					//window.alert("counter "+counters[i]+" num "+num);
-					if(isNaN(num)) {window.alert("Number error");}
+					if(isNaN(num)) {}
 					else if (num>counters[i]) counters[i]=num;
 				}
 			});
@@ -94,10 +94,19 @@ $(function()
 	 }
 	 if(n!=-1)
 	 {
-		 
-            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n])  && item.values[identifiers[n]].length>7))
+	    var progressive="";
+            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n]+docName)  && item.values[identifiers[n]].length>5))
 	    {
-		var counter = counters[n]+1;
+		var counter = "";
+		try
+	    	{
+			progressive=('0000'+parseInt(x.match(/\d+$/)[0])).slice(-4);
+	    	}
+	    	catch(error)
+	    	{
+			progressive=('0000'+counter).slice(-4);
+			counter=counters[n]+1;
+	    	}
 		newid = prefixes[n]+docName+('0000'+counter).slice(-4);
 	    	//window.alert(newid);
 	    	item.values[identifiers[n]] = newid;
