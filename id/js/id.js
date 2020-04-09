@@ -100,7 +100,7 @@ $(function()
 		var counter = "";
 		try
 	    	{
-			progressive=('0000'+item.values[identifiers[n]].match(/\d+$/)[0]).slice(-4);
+			progressive=('0000'+item.values[identifiers[n]].match(/\d+$/)[0]).slice(-Math.max(4,item.values[identifiers[n]].match(/\d+$/)[0].length));
 	    	}
 	    	catch(error)
 	    	{
