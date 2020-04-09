@@ -18,7 +18,7 @@ function println(string,element) {
 
 $(function()
 {
-	//if (initialize==true) version();
+	if (initialize==true) version();
 	
 	var selection = [];
 	var docName = "";
@@ -35,7 +35,7 @@ $(function()
 					var num = 0;
 					//window.alert(oldid+" "+prefixes[i]);
 					if (oldid==undefined) oldid="";
-					if(oldid.includes(prefixes[i]) && oldid.length>7) num=parseInt(oldid.slice(-4));
+					if(oldid.includes(prefixes[i]) && oldid.length>5) num=parseInt(oldid.slice(-4));
 					//window.alert("counter "+counters[i]+" num "+num);
 					if(isNaN(num)) {window.alert("Number error");}
 					else if (num>counters[i]) counters[i]=num;
