@@ -100,18 +100,18 @@ $(function()
 	 }
       });
       // Perform a bulk save for all changed attributes
-      number=0;
+      var number2=0;
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
-		 number++;
-		 println("Salvataggio: <b>"+number+"/"+result2.data.length+"</b>","progress");
+		 number2++;
+		 println("Salvataggio: <b>"+number2+"/"+result2.data.length+"</b>","progress");
 	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
             window.alert("Error: " + result2.code);
          }
       });
-      println("<b>FINITO</b>","progress");
+      window.alert("FINITO\n\nAggiornati "+number2+" identificativi su "+number);
    });
 });
 });
