@@ -6,12 +6,11 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("4");
+	window.alert("6");
 	initialize=false;
 }
 
-function write(string,element) {
-	$("#"+element).empty();
+function println(string,element) {
 	var p = document.createElement("p");
 	p.innerHTML = string;
 	$(p).appendTo("#"+element);
@@ -23,15 +22,15 @@ $(function()
 	
 	var selection = [];
 	var docName = "";
-	write("Entrare in un modulo per aggiornare gli identificativi","intro");
+	println("Entrare in un modulo per aggiornare gli identificativi","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		selection = selected;
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
-			result3.data.forEach(function(item2){
+			result3.data.forEach(function(item3){
 				for(var i = 0; i < counters.length;i++)
 				{
 			 		//window.alert("counter ["+i+"]="+counters[i]+":"+identifiers[i]);
-				 	var oldid = item2.values[identifiers[i]];
+				 	var oldid = item3.values[identifiers[i]];
 					var num = 0;
 					//window.alert(oldid+" "+prefixes[i]);
 					if (oldid==undefined) oldid="";
@@ -42,10 +41,11 @@ $(function()
 				}
 			});
 		});
-		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){
-			result4.data.forEach(function(item3){
-				write("Modulo: "+item3.values[RM.Data.Attributes.NAME],"intro");
-				docName=item3.values[RM.Data.Attributes.NAME]+"_";
+		$("#intro").empty();
+		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){			
+				result4.data.forEach(function(item4){
+				println("Modulo: "+item4.values[RM.Data.Attributes.NAME],"intro");
+				docName=item4.values[RM.Data.Attributes.NAME]+"_";
 			});
 		});
 	});
@@ -66,11 +66,12 @@ $(function()
       // Store any required attribute changes here
       var toSave = [];
       //window.alert("get attributes");
-      var number=1;
+      var number=0;
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
-	 write(number+"/"+result.data.length,"progress");
 	 number++;
+	 $("#progress").empty();
+	 println("Elaborazione: "+number+"/"+result.data.length,"progress");
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
          var newid = "";
@@ -94,14 +95,18 @@ $(function()
 	    }
 	 }
       });
-      
       // Perform a bulk save for all changed attributes
+      number=0;
       RM.Data.setAttributes(toSave, function(result2){
+	 result2.data.forEach(function(item2){
+		 number++;
+		 println("Salvataggio: "+number+"/"+result.data.length,"progress");
+	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
             window.alert("Error: " + result2.code);
          }
-	 write("FINITO","progress");
+	 println("FINITO","progress");
       });
    });
 });
