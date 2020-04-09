@@ -59,6 +59,7 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       $("#progress").empty();
+      println("Attendere...","progress3");
       $("#progress2").empty();
       //window.alert("start function");
 	  
@@ -75,6 +76,7 @@ $(function()
       //window.alert("get attributes");
       var number=0;
        // Go through artifact data examining artifact type
+      $("#progress").empty();
       println("Attendere...","progress2");
       result.data.forEach(function(item){
 	 number++;
@@ -108,6 +110,7 @@ $(function()
       var number2=0;
       println("Attendere...","progress3");
       RM.Data.setAttributes(toSave, function(result2){
+	 $("#progress2").empty();
 	 result2.data.forEach(function(item2){
 		 number2++;
 		 $("#progress2").empty();
