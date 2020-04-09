@@ -75,6 +75,7 @@ $(function()
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
 	 number++;
+	 $("#progress").empty();
 	 println("Elaborazione: <b>"+number+"/"+result.data.length+"</b>","progress");
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
@@ -104,14 +105,15 @@ $(function()
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
 		 number2++;
-		 println("Salvataggio: <b>"+number2+"/"+result2.data.length+"</b>","progress");
+		 $("#progress2").empty();
+		 println("Salvataggio: <b>"+number2+"/"+result2.data.length+"</b>","progress2");
 	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
             window.alert("Error: " + result2.code);
          }
-      });
       window.alert("FINITO\n\nAggiornati "+number2+" identificativi su "+number);
+      });
    });
 });
 });
