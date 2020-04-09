@@ -112,7 +112,7 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
-      window.alert("FINITO\n\nAggiornati "+number2+" identificativi su "+number);
+      //window.alert("FINITO\n\nAggiornati "+number2+" identificativi su "+number);
       });
    });
 });
