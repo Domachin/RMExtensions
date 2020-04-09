@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("7");
+	window.alert("8");
 	initialize=false;
 }
 
@@ -41,11 +41,15 @@ $(function()
 				}
 			});
 		});
-		$("#intro").empty();
-		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME], function(result4){			
-				result4.data.forEach(function(item4){
-				println("Modulo: "+item4.values[RM.Data.Attributes.NAME],"intro");
-				docName=item4.values[RM.Data.Attributes.NAME]+"_";
+		
+		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME,RM.Data.Attributes.FORMAT], function(result4){			
+			result4.data.forEach(function(item4){
+				if (item4.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
+				{
+					$("#intro").empty();
+					println("Modulo: "+item4.values[RM.Data.Attributes.NAME],"intro");
+					docName=item4.values[RM.Data.Attributes.NAME]+"_";
+				}
 			});
 		});
 	});
