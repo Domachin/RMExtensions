@@ -107,7 +107,7 @@ $(function()
 			progressive=('0000'+counter).slice(-4);
 			counter=counters[n]+1;
 	    	}
-		newid = prefixes[n]+docName+('0000'+counter).slice(-4);
+		newid = prefixes[n]+docName+progressive;
 	    	//window.alert(newid);
 	    	item.values[identifiers[n]] = newid;
 		counters[n]++;
