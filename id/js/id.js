@@ -118,7 +118,7 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
-      println("\nFINITO","progress3");
+      println("FINITO","progress3");
       });
    });
 });
