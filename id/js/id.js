@@ -48,7 +48,7 @@ $(function()
 				if (item4.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
 				{
 					$("#intro").empty();
-					println("Modulo: "+item4.values[RM.Data.Attributes.NAME],"intro");
+					println("Modulo: <b>"+item4.values[RM.Data.Attributes.NAME]+"</b>","intro");
 					docName=item4.values[RM.Data.Attributes.NAME]+"_";
 				}
 			});
@@ -75,7 +75,7 @@ $(function()
        // Go through artifact data examining artifact type
       result.data.forEach(function(item){
 	 number++;
-	 println("Elaborazione: "+number+"/"+result.data.length,"progress");
+	 println("Elaborazione: <b>"+number+"/"+result.data.length+"</b>","progress");
          var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
          //window.alert(type);
          var newid = "";
@@ -104,14 +104,14 @@ $(function()
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
 		 number++;
-		 println("Salvataggio: "+number+"/"+result2.data.length,"progress");
+		 println("Salvataggio: <b>"+number+"/"+result2.data.length+"</b>","progress");
 	 });
          if(result2.code !== RM.OperationResult.OPERATION_OK)
          {
             window.alert("Error: " + result2.code);
          }
       });
-      println("FINITO","progress");
+      println("<b>FINITO</b>","progress");
    });
 });
 });
