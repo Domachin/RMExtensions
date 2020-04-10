@@ -18,7 +18,7 @@ function println(string,element) {
 
 $(function()
 {
-	if (initialize==true) version();
+	//if (initialize==true) version();
 	
 	var selection = [];
 	var docName = "";
@@ -122,8 +122,6 @@ $(function()
       });
       // Perform a bulk save for all changed attributes
       var number2=0;
-      $("#progress2").empty();
-      println("Attendere...","progress3");
       RM.Data.setAttributes(toSave, function(result2){
 	 result2.data.forEach(function(item2){
 		 number2++;
@@ -135,8 +133,7 @@ $(function()
          {
             window.alert("Error: " + result2.code);
          }
-      $("#progress3").empty();
-      println("FINITO","progress3");
+      println("FINITO","progress2");
       });
    });
 });
