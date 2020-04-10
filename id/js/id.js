@@ -104,8 +104,8 @@ $(function()
 	    	}
 	    	catch(error)
 	    	{
-			progressive=('0000'+counter).slice(-4);
 			counter=counters[n]+1;
+			progressive=('0000'+counter).slice(-4);
 	    	}
 		newid = prefixes[n]+docName+progressive;
 	    	//window.alert(newid);
