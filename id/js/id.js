@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("prova 9");
+	window.alert("prova 1");
 	initialize=false;
 }
 
@@ -111,11 +111,11 @@ $(function()
 	    	{
 			counter=counters[n]+1;
 			progressive=('0000'+counter).slice(-4);
+			counters[n]++;
 	    	}
 		newid = prefixes[n]+docName+progressive;
 	    	//window.alert(newid);
 	    	item.values[identifiers[n]] = newid;
-		counters[n]++;
             	toSave.push(item);
 	    }
 	 }
