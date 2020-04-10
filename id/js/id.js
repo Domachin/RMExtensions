@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("prova 8");
+	window.alert("prova 9");
 	initialize=false;
 }
 
@@ -100,7 +100,7 @@ $(function()
 	 if(n!=-1)
 	 {
 	    var progressive="";
-            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n]+docName)  && item.values[identifiers[n]].length>5))
+            if (item.values[identifiers[n]]==null || !(item.values[identifiers[n]].includes(prefixes[n]+docName) && item.values[identifiers[n]].length>(prefixes[n].length+docName.length)))
 	    {
 		var counter = "";
 		try
