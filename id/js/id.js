@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("prova 1");
+	window.alert("prova 2");
 	initialize=false;
 }
 
@@ -137,6 +137,7 @@ $(function()
       println("FINITO","progress2");
       });
    });
+});
  $("#RemoveID").on("click", function() {
 	  
       $("#progress").empty();
@@ -197,7 +198,7 @@ $(function()
       println("FINITO","progress2");
       });}
    });
-});
+});	 
 });
 
 
