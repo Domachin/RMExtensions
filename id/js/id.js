@@ -6,7 +6,7 @@ var counters = [0,0,0,0,0,0,0,0,0];
 
 function version()
 {
-	window.alert("prova 2");
+	window.alert("prova 3");
 	initialize=false;
 }
 
@@ -54,7 +54,7 @@ $(function()
 				if (item4.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
 				{
 					$("#intro").empty();
-					println("Modulo: <b>"+item4.values[RM.Data.Attributes.NAME]+"\n\nSe si effettuano modifiche, uscire e rientrare nel modulo.</b>","intro");
+					println("Modulo: <b>"+item4.values[RM.Data.Attributes.NAME]+"</b>&#x13&#x10&#x13&#x10Se si effettuano modifiche, uscire e rientrare nel modulo.","intro");
 					docName=item4.values[RM.Data.Attributes.NAME]+"_";
 				}
 			});
