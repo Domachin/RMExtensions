@@ -18,7 +18,7 @@ function println(string,element) {
 
 $(function()
 {
-	//if (initialize==true) version();
+	if (initialize==true) version();
 	
 	var selection = [];
 	var docName = "";
