@@ -64,8 +64,8 @@ $(function()
   $("#SetID").on("click", function() {
 	  
       $("#progress").empty();
-      println("Attendere...","progress3");
       $("#progress2").empty();
+      println("Attendere...","progress");
       //window.alert("start function");
 	  
       RM.Data.getContentsAttributes(selection, identifiers.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(result){
