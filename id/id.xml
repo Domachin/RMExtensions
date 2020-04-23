@@ -22,6 +22,7 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 			<body>
 				<div id="intro" class="info"></div>
 				<button id="SetID">Aggiorna gli identificativi</button>
+				<button id="RemoveID">Cancella tutti gli identificativi</button>
    				<br/>
 				<div id="progress" class="info"></div>
 				<div id="progress2" class="info"></div>
