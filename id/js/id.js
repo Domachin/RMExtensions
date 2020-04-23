@@ -158,8 +158,9 @@ $(function()
       var number=0;
        // Go through artifact data examining artifact type
       $("#progress").empty();
-      println("Attendere...","progress2");
+      
       if (window.confirm("Sei sicuro?")){
+      println("Attendere...","progress2");
       result.data.forEach(function(item){
 	 number++;
 	 $("#progress").empty();
