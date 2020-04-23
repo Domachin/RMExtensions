@@ -20,6 +20,7 @@ $(function()
 {
 	//if (initialize==true) version();
 	
+	
 	var selection = [];
 	var docName = "";
 	println("Entrare in un modulo per aggiornare gli identificativi","intro");
@@ -27,6 +28,7 @@ $(function()
 		$("#progress").empty();
 		$("#progress2").empty();
 		selection = selected;
+		counters = [0,0,0,0,0,0,0,0,0];
 		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
 			result3.data.forEach(function(item3){
 				for(var i = 0; i < counters.length;i++)
