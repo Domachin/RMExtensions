@@ -161,7 +161,7 @@ $(function()
        // Go through artifact data examining artifact type
       $("#progress").empty();
       
-      if (window.confirm("Sei sicuro?")){
+      if (window.confirm("ATTENZIONE: Sei sicuro di voler cancellare gli identificativi?")){
       println("Attendere...","progress2");
       result.data.forEach(function(item){
 	 number++;
