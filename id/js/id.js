@@ -56,7 +56,7 @@ $(function()
 				if (item4.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
 				{
 					$("#intro").empty();
-					println("Modulo: <b>"+item4.values[RM.Data.Attributes.NAME]+"</b><br/><br/>Se si effettuano modifiche, uscire e rientrare nel moduloprima di ricalcolare.","intro");
+					println("Modulo: <b>"+item4.values[RM.Data.Attributes.NAME]+"</b><br/><br/>Se si effettuano modifiche, uscire e rientrare nel modulo prima di ricalcolare.","intro");
 					docName=item4.values[RM.Data.Attributes.NAME]+"_";
 				}
 			});
