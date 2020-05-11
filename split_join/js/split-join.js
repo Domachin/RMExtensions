@@ -1,7 +1,7 @@
 /*
  Licensed Materials - Property of IBM
  import-repair.js
- © Copyright IBM Corporation 2014
+ Â© Copyright IBM Corporation 2014
 
 U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule 
 Contract with IBM Corp. 
@@ -37,8 +37,13 @@ function constructJoined(artifactAttributes) {
 	
 	artifactAttributes.forEach(function(aa) {
 		var aaText = aa.values[RM.Data.Attributes.PRIMARY_TEXT];
+		var identifier = parseInt(aa.values[RM.Data.Attributes.IDENTIFIER]);
+		var theMax = -1;
+		var theMin = -1;
 		if (aaText) {
-			newText = newText + aaText;
+			if(theMax == -1 && theMin == -1) {newText = newText + aaText; theMax = identifier; theMin = identifier;}
+			else if(identifier > theMax) {newText = newText + aaText; theMax = identifier;}
+			else if(identifier < theMin) {newText = aaText + newText; theMin = identifier;}
 		} else {
 			// Error handling
 		}
@@ -149,7 +154,7 @@ $(function() {
 	});
 	
 	$("#joinArtifacts").on("click", function() {
-		RM.Data.getAttributes(selection, [RM.Data.Attributes.PRIMARY_TEXT], function (attrResult) {
+		RM.Data.getAttributes(selection, [RM.Data.Attributes.PRIMARY_TEXT, RM.Data.Attributes.IDENTIFIER], function (attrResult) {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
 				if (artifactAttributes) {
