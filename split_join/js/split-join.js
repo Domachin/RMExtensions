@@ -34,12 +34,12 @@ function println(string) {
  */
 function constructJoined(artifactAttributes) {
 	var newText = "";
+	var theMax = -1;
+	var theMin = -1;
 	
 	artifactAttributes.forEach(function(aa) {
 		var aaText = aa.values[RM.Data.Attributes.PRIMARY_TEXT];
 		var identifier = parseInt(aa.values[RM.Data.Attributes.IDENTIFIER]);
-		var theMax = -1;
-		var theMin = -1;
 		if (aaText) {
 			if(theMax == -1 && theMin == -1) {newText = newText + aaText; theMax = identifier; theMin = identifier;}
 			else if(identifier > theMax) {newText = newText + aaText; theMax = identifier;}
