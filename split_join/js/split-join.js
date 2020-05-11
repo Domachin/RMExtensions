@@ -44,6 +44,7 @@ function constructJoined(artifactAttributes) {
 			if(theMax == -1 && theMin == -1) {newText = newText + aaText; theMax = identifier; theMin = identifier;}
 			else if(identifier > theMax) {newText = newText + aaText; theMax = identifier;}
 			else if(identifier < theMin) {newText = aaText + newText; theMin = identifier;}
+			else {newText = newText + aaText;}
 		} else {
 			// Error handling
 		}
