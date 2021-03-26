@@ -32,13 +32,13 @@ function println(string) {
 /* Creates a single, joined block of text from the RM.Data.Attributes.PRIMARY_TEXT contents of the selected
  * artifacts to send to the server.
  */
-function constructJoined(artifactAttributes) {
+function constructJoined(artifactAttributes, attrName) {
 	var newText = "";
 	var theMax = -1;
 	var theMin = -1;
 	
 	artifactAttributes.forEach(function(aa) {
-		var aaText = aa.values[RM.Data.Attributes.PRIMARY_TEXT];
+		var aaText = aa.values[attrName];
 		var identifier = parseInt(aa.values[RM.Data.Attributes.IDENTIFIER]);
 		if (aaText) {
 			if(theMax == -1 && theMin == -1) {newText = newText + aaText; theMax = identifier; theMin = identifier;}
@@ -155,15 +155,17 @@ $(function() {
 	});
 	
 	$("#joinArtifacts").on("click", function() {
-		RM.Data.getAttributes(selection, [RM.Data.Attributes.PRIMARY_TEXT, RM.Data.Attributes.IDENTIFIER], function (attrResult) {
+		RM.Data.getAttributes(selection, function (attrResult) {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
 				if (artifactAttributes) {
+					for (var key in attrs.values){
 					// Get the text for the joined artifact
-					var joinedText = constructJoined(artifactAttributes);					
+					var attrName = ......
+					var joinedText = constructJoined(artifactAttributes,attrName);					
 					var firstChoice = artifactAttributes.shift();
 					var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
-					newTextValues.values[RM.Data.Attributes.PRIMARY_TEXT] = joinedText;
+					newTextValues.values[attrName] = joinedText;
 
 					println("Joining all selected text into first artifact");
 					operationInProgress = true;
