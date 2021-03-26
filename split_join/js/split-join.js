@@ -159,16 +159,18 @@ $(function() {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
 				if (artifactAttributes) {
-					for (var key in attrs.values){
-					// Get the text for the joined artifact
-					var attrName = ......
-					var joinedText = constructJoined(artifactAttributes,attrName);					
-					var firstChoice = artifactAttributes.shift();
-					var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
-					newTextValues.values[attrName] = joinedText;
+					for (var key in attrs.values)
+					{
+						// Get the text for the joined artifact
+						var attrName = key
+						var joinedText = constructJoined(artifactAttributes,attrName);					
+						var firstChoice = artifactAttributes.shift();
+						var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
+						newTextValues.values[attrName] = joinedText;
 
-					println("Joining all selected text into first artifact");
-					operationInProgress = true;
+						println("Joining all selected text into first artifact");
+						operationInProgress = true;
+					}
 					RM.Data.setAttributes(newTextValues, function(setResult) {
 						if (setResult.code === RM.OperationResult.OPERATION_OK) {
 							// Remove the leftover artifacts
