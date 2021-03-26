@@ -169,7 +169,7 @@ $(function() {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
 				if (artifactAttributes) {
-					for (var key in artifactAttributes.data[0].values)
+					for (var key in attrResult.data[0].values)
 					{
 						// Get the text for the joined artifact
 						var attrName = key
