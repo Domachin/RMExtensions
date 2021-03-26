@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 4");
+	window.alert("prova 5");
 	initialize=false;
 }
 
@@ -169,7 +169,7 @@ $(function() {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
 				if (artifactAttributes) {
-					for (var key in attrs.values)
+					for (var key in artifactAttributes.data[0].values)
 					{
 						// Get the text for the joined artifact
 						var attrName = key
