@@ -22,6 +22,13 @@ Contract with IBM Corp.
  * 
  */
 
+var initialize = true;
+function version()
+{
+	window.alert("prova 1");
+	initialize=false;
+}
+
 /* Helper function for simple output */
 function println(string) {
 	var p = document.createElement("p");
@@ -56,6 +63,9 @@ function constructJoined(artifactAttributes, attrName) {
 /* Main Operating Function */
 
 $(function() {
+	
+	if (initialize==true) version();
+	
 	// this function is run when the document is ready.
 	
 	var selection = [];
