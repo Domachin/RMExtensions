@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 7");
+	window.alert("prova 8");
 	initialize=false;
 }
 
@@ -169,16 +169,20 @@ $(function() {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
 				if (artifactAttributes) {
+					window.alert("entering");
 					var firstChoice = artifactAttributes.shift();
 					var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
+					window.alert("new created");
 					for (var i = 0; i < artifactAttributes.length; i++)
 					{
+						window.alert(i);
 						// Get the text for the joined artifact
 						var attrName = attrResult.data[i].attributeKey;
 						try
 						{
 							var joinedText = constructJoined(artifactAttributes,attrName);					
 							newTextValues.values[attrName] = joinedText;
+							window.alert(attrName);
 						}
 						catch(err) {}
 
