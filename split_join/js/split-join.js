@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 11");
+	window.alert("prova 12");
 	initialize=false;
 }
 
@@ -45,6 +45,7 @@ function constructJoined(artifactAttributes, attrName) {
 	var theMin = -1;
 	
 	var it = 0
+	window.alert("length: " artifactAttributes.length);
 	artifactAttributes.forEach(function(aa) {
 		it++;
 		var aaText = aa.values[attrName];
@@ -172,19 +173,17 @@ $(function() {
 		RM.Data.getAttributes(selection, function (attrResult) {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
-				var attrs = attrResult.data[0];
 				var keys = [];
-				for (var key in attrs.values)
+				for (var key in attrResult.data[0].values)
 				{
 					keys.push(key);
 				}
 				if (artifactAttributes) {
 					window.alert("entering");
-					var firstChoice = artifactAttributes.shift();
-					var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
-					window.alert("new created");
 					RM.Data.getValueRange(selection[0], keys, function (valResult)
 					{
+						var joinedText = [];
+						var attrNames = [];
 						if (valResult.code != RM.OperationResult.OPERATION_OK)
 						{
 							return;
@@ -192,39 +191,28 @@ $(function() {
 						for (var i = 0; i < keys.length; i++)
 						{
 							// Collect the information for each attribute in turn.
-							var attrName = valResult.data[i].attributeKey;
-
+							attrNames[i] = valResult.data[i].attributeKey;
 							try
 							{
-								window.alert(attrName);
-								var joinedText = constructJoined(artifactAttributes,attrName);					
-								newTextValues.values[attrName] = joinedText;
+								window.alert(attrNames[i]);
+								joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);					
 							}
-							catch(err) {}
+							catch(err)
+							{
+								joinedText[i] = null
+							}
 
 							println("Joining all selected text into first artifact");
 							operationInProgress = true;
 						}
-
-						// Add the table we have constructed to the attributes section of the gadget.
-						$("#attributes").append(table);
-					});
-					/*for (var i = 0; i < keys.length; i++)
-					{
-						window.alert(i);
-						// Get the text for the joined artifact
-						var attrName = attrResult.data[i].attributeKey;
-						try
+						var firstChoice = artifactAttributes.shift();
+						var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
+						for (var i = 0; i < keys.length; i++)
 						{
-							var joinedText = constructJoined(artifactAttributes,attrName);					
-							newTextValues.values[attrName] = joinedText;
-							window.alert(attrName);
+							newTextValues.values[attrNames[i]] = joinedText[i];
 						}
-						catch(err) {}
-
-						println("Joining all selected text into first artifact");
-						operationInProgress = true;
-					}*/
+						window.alert("new created");
+					});
 					RM.Data.setAttributes(newTextValues, function(setResult) {
 						if (setResult.code === RM.OperationResult.OPERATION_OK) {
 							// Remove the leftover artifacts
