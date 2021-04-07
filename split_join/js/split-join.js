@@ -45,18 +45,18 @@ function constructJoined(artifactAttributes, attrName) {
 	var theMin = -1;
 	
 	var it = 0
-	window.alert("length: " artifactAttributes.length);
+	//window.alert("length: " artifactAttributes.length);
 	artifactAttributes.forEach(function(aa) {
 		it++;
 		var aaText = aa.values[attrName];
-		window.alert(it + " old: " + aaText + "new: " + newText);
+		//window.alert(it + " old: " + aaText + "new: " + newText);
 		var identifier = parseInt(aa.values[RM.Data.Attributes.IDENTIFIER]);
 		if (aaText) {
 			if(theMax == -1 && theMin == -1) {newText = newText + aaText; theMax = identifier; theMin = identifier;}
 			else if(identifier > theMax) {newText = newText + aaText; theMax = identifier;}
 			else if(identifier < theMin) {newText = aaText + newText; theMin = identifier;}
 			else {newText = newText + aaText;}
-			window.alert(newText);
+			//window.alert(newText);
 		} else {
 			// Error handling
 		}
