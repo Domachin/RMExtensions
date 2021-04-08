@@ -173,41 +173,35 @@ $(function() {
 		RM.Data.getAttributes(selection, function (attrResult) {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
-				var keys = [];
+				var numattr = 0;
+				var attrNames = [];
 				for (var key in attrResult.data[0].values)
 				{
-					keys.push(key);
+					attrNames[i] = valResult.data[i].attributeKey;
+					numattr++;
 				}
 				if (artifactAttributes) {
 					window.alert("entering");
 					RM.Data.getValueRange(selection[0], keys, function (valResult)
 					{
 						var joinedText = [];
-						var attrNames = [];
 						if (valResult.code != RM.OperationResult.OPERATION_OK)
 						{
 							return;
 						}
-						for (var i = 0; i < keys.length; i++)
+						for (var i = 0; i < numattr; i++)
 						{
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
-							try
-							{
-								window.alert(attrNames[i]);
-								joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
-								window.alert(joinedText[i]);
-							}
-							catch(err)
-							{
-								joinedText[i] = null;
-							}
+							window.alert(attrNames[i]);
+							joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
+							window.alert(joinedText[i]);
 							operationInProgress = true;
 						}
 						var firstChoice = artifactAttributes.shift();
 						var newTextValues;
 						println("Joining all selected text into first artifact");
-						for (var i = 0; i < keys.length; i++)
+						for (var i = 0; i < numattr; i++)
 						{
 							if(joinedText[i]!==null)
 							{
