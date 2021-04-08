@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 15");
+	window.alert("prova 16");
 	initialize=false;
 }
 
@@ -175,9 +175,11 @@ $(function() {
 				var artifactAttributes = attrResult.data;
 				var numattr = 0;
 				var attrNames = [];
-				for (var key in attrResult.data[0].values)
+				var keys = [];
+				var item = attrResult.data[0];
+				for (var key in item.values)
 				{
-					attrNames[i] = valResult.data[i].attributeKey;
+					keys.push(key);
 					numattr++;
 				}
 				if (artifactAttributes) {
@@ -198,23 +200,22 @@ $(function() {
 							window.alert(joinedText[i]);
 							operationInProgress = true;
 						}
-						var firstChoice = artifactAttributes.shift();
-						var newTextValues;
+						var newTextValues = [];
 						println("Joining all selected text into first artifact");
 						for (var i = 0; i < numattr; i++)
 						{
 							if(joinedText[i]!==null)
 							{
 								//newTextValues = null;
-								newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
-								newTextValues.values[attrNames[i]] = joinedText[i];
+								var toSave = [];
+								attrNames[i] = valResult.data[i].attributeKey;
+								item.values[attrNames[i]] = joinedText[i];
+								toSave.push(item);
 								try
 								{
-									RM.Data.setAttributes(newTextValues, function(setResult) {
-										if(setResult.code !== RM.OperationResult.OPERATION_OK)
-										{
-											window.alert("Error: " + code);
-										}
+									RM.Data.setAttributes(toSave, function(setResult) {
+										if(setResult.code !== RM.OperationResult.OPERATION_OK) window.alert("Error: " + code);
+										else newTextValues = toSave;
 									});
 								}
 								catch(err) {}
@@ -225,7 +226,7 @@ $(function() {
 					RM.Data.setAttributes(newTextValues, function(setResult) {
 						if (setResult.code === RM.OperationResult.OPERATION_OK) {
 							// Remove the leftover artifacts
-							var targetCount = 0;
+							var targetCount = 1;
 							// Use a recursive delete function to delete however many artifacts are left
 							// over from the join operation, while waiting for each individual deletion
 							// to complete before starting the next one
