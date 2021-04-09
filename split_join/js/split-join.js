@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 17");
+	window.alert("prova 18");
 	initialize=false;
 }
 
@@ -215,7 +215,9 @@ $(function() {
 						item = attrResult.data[0];
 						for (var i = 0; i < numattr; i++)
 						{
-							if(!isIgnored[i]) item.values[attrNames[i]] = joinedText[i];
+							if(!isIgnored[i]) {item.values[attrNames[i]] = joinedText[i];
+									   window.alert(i + ": " + attrNames[i]);
+									   window.alert(item.values[attrNames[i]]);}
 						}
 						toSave = [];
 						toSave.push(item);
