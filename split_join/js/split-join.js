@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 23");
+	window.alert("prova 24");
 	initialize=false;
 }
 
@@ -195,9 +195,8 @@ $(function() {
 						}
 						var i = -1;
 						var stri = "";
-						var savecheck = function()
+						for (var i = 0; i < numattr; i++)
 						{
-							i++;
 							toSave = [];
 							isIgnored[i] = true;
 							// Collect the information for each attribute in turn.
@@ -216,10 +215,8 @@ $(function() {
 									if(setResult.code !== RM.OperationResult.OPERATION_OK) window.alert("Error: " + code);
 									else {isIgnored[i] = false; window.alert("ok: "+attrNames[i]);}
 								});
-								savecheck();
 							}
 						};
-						savecheck();
 						window.alert(stri);
 						//Reset item and insert only the attributes which can be joined
 						item = attrResult.data[0];
