@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 25");
+	window.alert("prova 26");
 	initialize=false;
 }
 
@@ -188,45 +188,29 @@ $(function() {
 					RM.Data.getValueRange(selection[0], keys, function (valResult)
 					{
 						var joinedText = [];
-						var isIgnored = [];
 						if (valResult.code != RM.OperationResult.OPERATION_OK)
 						{
 							return;
 						}
-						var i = -1;
-						var stri = "";
 						for (var i = 0; i < numattr; i++)
 						{
-							toSave = [];
-							isIgnored[i] = true;
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
-							item = attrResult.data[0];
-							stri = stri+"\n"+attrNames[i];
 							//window.alert(attrNames[i]);
 							joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
 							if(joinedText[i]!==null)
 							{
 								item.values[attrNames[i]] = joinedText[i];
 								//window.alert(joinedText[i]);
-								//Check if the attribute can be joined
-								toSave.push(item);
-								RM.Data.setAttributes(toSave, function(setResult) {
-									if(setResult.code !== RM.OperationResult.OPERATION_OK) window.alert("Error: " + code);
-									else {isIgnored[i] = false; window.alert("ok: "+attrNames[i]);}
-								});
 							}
 						};
-						println(stri);
-						//Reset item and insert only the attributes which can be joined
-						item = attrResult.data[0];
+						//insert only the attributes which can be joined
 						for (var i = 0; i < numattr; i++)
 						{
-							if(!isIgnored[i]) {item.values[attrNames[i]] = joinedText[i];
+							if(attrNames[i] == "http://www.ibm.com/xmlns/rdm/types/PrimaryText" || attrNames[i] == "http://purl.org/dc/terms/title" || attrNames[i] == "Identificativo Sottosistema") {item.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
 									   window.alert(item.values[attrNames[i]]);}
 						}
-						toSave = [];
 						toSave.push(item);
 						println("Joining all selected text into first artifact");
 					});
