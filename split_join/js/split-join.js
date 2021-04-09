@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 19");
+	window.alert("prova 20");
 	initialize=false;
 }
 
@@ -199,16 +199,16 @@ $(function() {
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
 							item = attrResult.data[0];
-							//window.alert(attrNames[i]);
+							window.alert(attrNames[i]);
 							joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
 							if(joinedText[i]!==null)
 							{
 								item.values[attrNames[i]] = joinedText[i];
-								//window.alert(joinedText[i]);
+								window.alert(joinedText[i]);
 								//Check if the attribute can be joined
 								RM.Data.setAttributes(toSave, function(setResult) {
 									if(setResult.code !== RM.OperationResult.OPERATION_OK) window.alert("Error: " + code);
-									else isIgnored[i] = false;
+									else {isIgnored[i] = false; window.alert("ok");}
 								});
 							}
 						}
