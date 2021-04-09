@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 18");
+	window.alert("prova 19");
 	initialize=false;
 }
 
@@ -198,6 +198,7 @@ $(function() {
 							isIgnored[i] = true;
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
+							item = attrResult.data[0];
 							//window.alert(attrNames[i]);
 							joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
 							if(joinedText[i]!==null)
