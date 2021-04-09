@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 16");
+	window.alert("prova 17");
 	initialize=false;
 }
 
@@ -183,58 +183,60 @@ $(function() {
 					numattr++;
 				}
 				if (artifactAttributes) {
-					window.alert("entering");
+					var toSave = [];
 					RM.Data.getValueRange(selection[0], keys, function (valResult)
 					{
 						var joinedText = [];
+						var isIgnored = [];
 						if (valResult.code != RM.OperationResult.OPERATION_OK)
 						{
 							return;
 						}
 						for (var i = 0; i < numattr; i++)
 						{
+							isIgnored[i] = true;
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
-							window.alert(attrNames[i]);
+							//window.alert(attrNames[i]);
 							joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
-							window.alert(joinedText[i]);
-							operationInProgress = true;
-						}
-						var newTextValues = [];
-						println("Joining all selected text into first artifact");
-						for (var i = 0; i < numattr; i++)
-						{
 							if(joinedText[i]!==null)
 							{
-								//newTextValues = null;
-								var toSave = [];
-								attrNames[i] = valResult.data[i].attributeKey;
 								item.values[attrNames[i]] = joinedText[i];
-								toSave.push(item);
-								try
-								{
-									RM.Data.setAttributes(toSave, function(setResult) {
-										if(setResult.code !== RM.OperationResult.OPERATION_OK) window.alert("Error: " + code);
-										else newTextValues = toSave;
-									});
-								}
-								catch(err) {}
+								//window.alert(joinedText[i]);
+								//Check if the attribute can be joined
+								RM.Data.setAttributes(toSave, function(setResult) {
+									if(setResult.code !== RM.OperationResult.OPERATION_OK) window.alert("Error: " + code);
+									else isIgnored[i] = false;
+								});
 							}
+							operationInProgress = true;
 						}
-						window.alert("new created");
+						//Reset item and insert only the attributes which can be joined
+						item = attrResult.data[0];
+						for (var i = 0; i < numattr; i++)
+						{
+							if(!isIgnored[i]) item.values[attrNames[i]] = joinedText[i];
+						}
+						toSave = [];
+						toSave.push(item);
+						println("Joining all selected text into first artifact");
 					});
-					RM.Data.setAttributes(newTextValues, function(setResult) {
+					RM.Data.setAttributes(toSave, function(setResult) {
 						if (setResult.code === RM.OperationResult.OPERATION_OK) {
 							// Remove the leftover artifacts
 							var targetCount = 1;
+							window.alert("deleting");
 							// Use a recursive delete function to delete however many artifacts are left
 							// over from the join operation, while waiting for each individual deletion
 							// to complete before starting the next one
 							var removeSequence = function() {
 								if (artifactAttributes[targetCount]) {
+									window.alert("deleting1 " + targetCount);
 									RM.Data.Module.removeArtifact(artifactAttributes[targetCount].ref, 
 											true, function(removeResult) {
+										window.alert("deleting2 " + targetCount);
 										if (removeResult.code === RM.OperationResult.OPERATION_OK) {
+											window.alert("deleting3 " + targetCount);
 											targetCount++;
 											removeSequence();
 										} else {
