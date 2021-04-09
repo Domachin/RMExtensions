@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 24");
+	window.alert("prova 25");
 	initialize=false;
 }
 
@@ -217,7 +217,7 @@ $(function() {
 								});
 							}
 						};
-						window.alert(stri);
+						println(stri);
 						//Reset item and insert only the attributes which can be joined
 						item = attrResult.data[0];
 						for (var i = 0; i < numattr; i++)
