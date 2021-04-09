@@ -7,7 +7,7 @@
 U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
 -->
 <Module specificationVersion="2.0">
-<ModulePrefs title="Split and Join" height="700" scrolling="true">
+<ModulePrefs title="Split and Join" height="300" scrolling="true">
 	<Require feature="com.ibm.rdm.rm.api"/>
 </ModulePrefs>
 <Content type="html">
