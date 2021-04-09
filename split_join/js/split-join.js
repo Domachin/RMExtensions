@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 27");
+	window.alert("prova 28");
 	initialize=false;
 }
 
@@ -207,7 +207,7 @@ $(function() {
 						//insert only the attributes which can be joined
 						for (var i = 0; i < numattr; i++)
 						{
-							if(attrNames[i] == "http://www.ibm.com/xmlns/rdm/types/PrimaryText" || attrNames[i] == "http://purl.org/dc/terms/title" || attrNames[i] == "Identificativo Sottosistema") {item.values[attrNames[i]] = joinedText[i];
+							if(attrNames[i] == "Identificativo Sottosistema") {item.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
 									   window.alert(item.values[attrNames[i]]);}
 						}
@@ -221,7 +221,7 @@ $(function() {
 								// Use a recursive delete function to delete however many artifacts are left
 								// over from the join operation, while waiting for each individual deletion
 								// to complete before starting the next one
-								var removeSequence = function() {
+								/*var removeSequence = function() {
 									if (artifactAttributes[targetCount]) {
 										window.alert("deleting1 " + targetCount);
 										RM.Data.Module.removeArtifact(artifactAttributes[targetCount].ref, 
@@ -245,7 +245,7 @@ $(function() {
 								};
 								println("Removing leftover artifacts after joining their content.");
 								// Start the sequence of deletions
-								removeSequence();
+								removeSequence();*/
 							} else {
 								println("Unable to join content into first artifact, aborting join operation.");
 								operationInProgress = false;
