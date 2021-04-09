@@ -182,6 +182,7 @@ $(function() {
 					keys.push(key);
 					numattr++;
 				}
+				operationInProgress = true;
 				if (artifactAttributes) {
 					var toSave = [];
 					RM.Data.getValueRange(selection[0], keys, function (valResult)
@@ -209,7 +210,6 @@ $(function() {
 									else isIgnored[i] = false;
 								});
 							}
-							operationInProgress = true;
 						}
 						//Reset item and insert only the attributes which can be joined
 						item = attrResult.data[0];
