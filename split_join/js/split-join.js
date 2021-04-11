@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 29");
+	window.alert("prova 30");
 	initialize=false;
 }
 
@@ -205,20 +205,49 @@ $(function() {
 							}
 						};
 						//insert only the attributes which can be joined
+						var firstChoice = artifactAttributes.shift();
+						var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
 						for (var i = 0; i < numattr; i++)
 						{
-							if(attrNames[i] == "Identificativo Sottosistema") {item.values[attrNames[i]] = joinedText[i];
+							if(attrNames[i] == "Identificativo Sottosistema") {newTextValues.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
-									   window.alert(item.values[attrNames[i]]);}
+									   window.alert(newTextValues.values[attrNames[i]]);}
 						}
-						toSave.push(item);
 						println("Joining all selected text into first artifact");
-						RM.Data.setAttributes(toSave, function(result){
-							 if(result.code !== RM.OperationResult.OPERATION_OK)
-							 {
-							    // error handling code here
-							 }
-						      });
+						RM.Data.setAttributes(newTextValues, function(setResult) {
+							if (setResult.code === RM.OperationResult.OPERATION_OK) {
+								// Remove the leftover artifacts
+								var targetCount = 0;
+								// Use a recursive delete function to delete however many artifacts are left
+								// over from the join operation, while waiting for each individual deletion
+								// to complete before starting the next one
+								var removeSequence = function() {
+									if (artifactAttributes[targetCount]) {
+										RM.Data.Module.removeArtifact(artifactAttributes[targetCount].ref, 
+												true, function(removeResult) {
+											if (removeResult.code === RM.OperationResult.OPERATION_OK) {
+												targetCount++;
+												removeSequence();
+											} else {
+												println("Unable to remove joined artifact, aborting join operation.");
+												operationInProgress = false;
+											}
+										});
+									} else {
+										println("The first artifact that you selected now contains the contents of " 
+												+ "the other selected artifacts. The other artifacts were removed.");
+										println("The artifacts were joined.");
+										operationInProgress = false;
+									}
+								};
+								println("Removing leftover artifacts after joining their content.");
+								// Start the sequence of deletions
+								removeSequence();
+							} else {
+								println("Unable to join content into first artifact, aborting join operation.");
+								operationInProgress = false;
+							}
+						});
 					});
 					
 				}
