@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 38");
+	window.alert("prova 39");
 	initialize=false;
 }
 
@@ -188,24 +188,29 @@ $(function() {
 					{
 						var toSave = [];
 						var joinedText = [];
+						var toSkip = [];
 						if (valResult.code != RM.OperationResult.OPERATION_OK)
 						{
 							return;
 						}
 						for (var i = 0; i < numattr; i++)
 						{
+							toSkip[i] = false;
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
 							//window.alert(attrNames[i]);
-							if(valResult.valueType === RM.Data.ValueTypes.ENUMERATION) joinedText[i] = item.values[attrNames[i]];
-							else joinedText[i] = constructJoined(artifactAttributes,attrNames[i]);
+							var construct = constructJoined(artifactAttributes,attrNames[i]);
+							var lines = construct.split("\n");
+							if(valResult.valueType !== RM.Data.ValueTypes.ENUMERATION) joinedText[i] = construct;
+							else if((construct+"")!="") joinedText[i] = lines[0];
+							else toSkip[i] = true;
 						};
 						//insert only the attributes which can be joined
 						var firstChoice = artifactAttributes.shift();
 						var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
 						for (var i = 0; i < numattr; i++)
 						{
-							/*if(attrNames[i] != "http://purl.org/dc/terms/creator"
+							if(attrNames[i] != "http://purl.org/dc/terms/creator"
 							   && attrNames[i] != "http://purl.org/dc/terms/created"
 							   && attrNames[i] != "http://purl.org/dc/terms/contributor"
 							   && attrNames[i] != "http://purl.org/dc/terms/modified"
@@ -215,13 +220,9 @@ $(function() {
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/section"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/module"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/isHeading"
-							   && attrNames[i] != "http://purl.org/dc/terms/description"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/AlternateSpelling"
-							   && !(attrNames[i].startsWith("State (Workflow "))) {newTextValues.values[attrNames[i]] = joinedText[i];*/
-							if(attrNames[i] == "http://www.ibm.com/xmlns/rdm/types/PrimaryText"
-							   || attrNames[i] == "SIL sistema/sottosistema"
-							   || attrNames[i] == "http://purl.org/dc/terms/title"
-							  || attrNames[i] == "Identificativo Sottosistema") {newTextValues.values[attrNames[i]] = joinedText[i];
+							   && !(attrNames[i].startsWith("State (Workflow "))
+							   && !toSkip) {newTextValues.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
 									   window.alert(newTextValues.values[attrNames[i]]);}
 						}
