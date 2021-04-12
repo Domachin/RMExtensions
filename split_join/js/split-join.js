@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 32");
+	window.alert("prova 33");
 	initialize=false;
 }
 
@@ -219,6 +219,7 @@ $(function() {
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/section"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/module"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/isHeading"
+							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/AlternateSpelling"
 							   && !(attrNames[i].startsWith("State (Workflow "))) {newTextValues.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
 									   window.alert(newTextValues.values[attrNames[i]]);}
