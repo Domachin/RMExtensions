@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 44");
+	window.alert("prova 45");
 	initialize=false;
 }
 
@@ -201,9 +201,9 @@ $(function() {
 							//window.alert(attrNames[i]+": "+valResult.data[i].multiValued);
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
 							var lines = construct.split("\n");
-							if(valResult.data[i].multiValued !== true) joinedText[i] = construct;
+							if(valResult.data[i].multiValued != true) joinedText[i] = construct;
 							else if((construct+"")!="") {joinedText[i] = lines[0]; window.alert(attrNames[i]+":---"+construct+"---");}
-							else toSkip[i] = true;
+							else {toSkip[i] = true;; window.alert(attrNames[i]+":..."+construct+"...");}
 						};
 						//insert only the attributes which can be joined
 						var firstChoice = artifactAttributes.shift();
