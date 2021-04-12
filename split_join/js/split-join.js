@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 41");
+	window.alert("prova 42");
 	initialize=false;
 }
 
@@ -198,7 +198,7 @@ $(function() {
 							toSkip[i] = false;
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
-							window.alert(attrNames[i]+": "+valResult.valueType);
+							window.alert(attrNames[i]+": "+valResult.data[i].multiValued);
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
 							var lines = construct.split("\n");
 							if(valResult.valueType !== RM.Data.ValueTypes.ENUMERATION) joinedText[i] = construct;
