@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 43");
+	window.alert("prova 44");
 	initialize=false;
 }
 
@@ -202,7 +202,7 @@ $(function() {
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
 							var lines = construct.split("\n");
 							if(valResult.data[i].multiValued !== true) joinedText[i] = construct;
-							else if((construct+"")!="") joinedText[i] = lines[0];
+							else if((construct+"")!="") {joinedText[i] = lines[0]; window.alert(attrNames[i]+":---"+construct+"---";}
 							else toSkip[i] = true;
 						};
 						//insert only the attributes which can be joined
