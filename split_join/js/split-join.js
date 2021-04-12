@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 37");
+	window.alert("prova 38");
 	initialize=false;
 }
 
@@ -53,8 +53,8 @@ function constructJoined(artifactAttributes, attrName) {
 		var identifier = parseInt(aa.values[RM.Data.Attributes.IDENTIFIER]);
 		if (aaText) {
 			if(theMax == -1 && theMin == -1) {newText = newText + aaText; theMax = identifier; theMin = identifier;}
-			else if(identifier > theMax) {newText = (((newText+"")=="")? newText : newText+"\n") + aaText; theMax = identifier;}
-			else if(identifier < theMin) {newText = (((aaText+"")=="")? aaText : aaText+"\n") + newText; theMin = identifier;}
+			else if(identifier > theMax) {newText = (((newText+"")=="" || (aaText+"")=="")? newText : newText+"\n") + aaText; theMax = identifier;}
+			else if(identifier < theMin) {newText = (((newText+"")=="" || (aaText+"")=="")? aaText : aaText+"\n") + newText; theMin = identifier;}
 			else {newText = newText + aaText;}
 			//window.alert(newText);
 		} else {
@@ -219,6 +219,7 @@ $(function() {
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/AlternateSpelling"
 							   && !(attrNames[i].startsWith("State (Workflow "))) {newTextValues.values[attrNames[i]] = joinedText[i];*/
 							if(attrNames[i] == "http://www.ibm.com/xmlns/rdm/types/PrimaryText"
+							   || attrNames[i] == "SIL sistema/sottosistema"
 							   || attrNames[i] == "http://purl.org/dc/terms/title"
 							  || attrNames[i] == "Identificativo Sottosistema") {newTextValues.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
