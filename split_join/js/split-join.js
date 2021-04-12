@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 31");
+	window.alert("prova 32");
 	initialize=false;
 }
 
@@ -209,7 +209,17 @@ $(function() {
 						var newTextValues = new RM.ArtifactAttributes(firstChoice.ref);
 						for (var i = 0; i < numattr; i++)
 						{
-							if(attrNames[i] == "Identificativo Sottosistema") {newTextValues.values[attrNames[i]] = joinedText[i];
+							if(attrNames[i] != "http://purl.org/dc/terms/creator"
+							   && attrNames[i] != "http://purl.org/dc/terms/created"
+							   && attrNames[i] != "http://purl.org/dc/terms/contributor"
+							   && attrNames[i] != "http://purl.org/dc/terms/modified"
+							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/ArtifactFormat"
+							   && attrNames[i] != "http://purl.org/dc/terms/identifier"
+							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/depth"
+							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/section"
+							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/module"
+							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/isHeading"
+							   && !(attrNames[i].startsWith("State (Workflow "))) {newTextValues.values[attrNames[i]] = joinedText[i];
 									   window.alert(i + ": " + attrNames[i]);
 									   window.alert(newTextValues.values[attrNames[i]]);}
 						}
