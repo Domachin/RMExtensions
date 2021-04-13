@@ -69,7 +69,7 @@ function constructJoined(artifactAttributes, attrName) {
 
 $(function() {
 	
-	if (initialize==true) version();
+	//if (initialize==true) version();
 	
 	// this function is run when the document is ready.
 	
@@ -198,7 +198,6 @@ $(function() {
 							toSkip[i] = false;
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
-							window.alert(attrNames[i]+": "+valResult.data[i].valueType);
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
 							var lines = construct.split("\n");
 							if(valResult.data[i].valueType !== RM.Data.ValueTypes.ENUMERATION) joinedText[i] = construct;
@@ -222,9 +221,7 @@ $(function() {
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/isHeading"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/AlternateSpelling"
 							   && !(attrNames[i].startsWith("State (Workflow "))
-							   && !toSkip[i]) {newTextValues.values[attrNames[i]] = joinedText[i];
-									   window.alert(i + ": " + attrNames[i]);
-									   window.alert(newTextValues.values[attrNames[i]]);}
+							   && !toSkip[i]) newTextValues.values[attrNames[i]] = joinedText[i];
 						}
 						println("Joining all selected text into first artifact");
 						RM.Data.setAttributes(newTextValues, function(setResult) {
