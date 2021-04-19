@@ -69,7 +69,7 @@ function constructJoined(artifactAttributes, attrName) {
 
 $(function() {
 	
-	if (initialize==true) version();
+	//if (initialize==true) version();
 	
 	// this function is run when the document is ready.
 	
