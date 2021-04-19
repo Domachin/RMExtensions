@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 49");
+	window.alert("prova 50");
 	initialize=false;
 }
 
@@ -201,7 +201,6 @@ $(function() {
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
 							var lines = construct.split("\n");
 							if(valResult.data[i].valueType !== RM.Data.ValueTypes.ENUMERATION) joinedText[i] = construct;
-							else if((construct+"")!="" && valResult.data[i].multiValued) joinedText[i] = lines[0].split(", ");
 							else if((construct+"")!="") joinedText[i] = lines[0];
 							else toSkip[i] = true;
 						};
@@ -222,7 +221,7 @@ $(function() {
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/isHeading"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/AlternateSpelling"
 							   && !(attrNames[i].startsWith("State (Workflow "))
-							   && !toSkip[i]) newTextValues.values[attrNames[i]] = joinedText[i];
+					  		   && !toSkip[i]) newTextValues.values[attrNames[i]] = (valResult.data[i].multiValued)?(joinedText[i].split(", ")):(joinedText[i]);
 						}
 						println("Joining all selected text into first artifact");
 						RM.Data.setAttributes(newTextValues, function(setResult) {
