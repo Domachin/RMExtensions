@@ -199,6 +199,7 @@ $(function() {
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
+							if(valResult.data[i].multiValued) construct = construct.replace(/\n/g, ",");
 							var lines = construct.split("\n");
 							if(valResult.data[i].valueType !== RM.Data.ValueTypes.ENUMERATION) joinedText[i] = construct;
 							else if((construct+"")!="") joinedText[i] = lines[0];
