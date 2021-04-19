@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 50");
+	window.alert("prova 51");
 	initialize=false;
 }
 
@@ -221,7 +221,7 @@ $(function() {
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/rdf/isHeading"
 							   && attrNames[i] != "http://www.ibm.com/xmlns/rdm/types/AlternateSpelling"
 							   && !(attrNames[i].startsWith("State (Workflow "))
-					  		   && !toSkip[i]) newTextValues.values[attrNames[i]] = (valResult.data[i].multiValued)?(joinedText[i].split(", ")):(joinedText[i]);
+					  		   && !toSkip[i]) newTextValues.values[attrNames[i]] = (valResult.data[i].multiValued)?(joinedText[i].split(",")):(joinedText[i]);
 						}
 						println("Joining all selected text into first artifact");
 						RM.Data.setAttributes(newTextValues, function(setResult) {
@@ -254,7 +254,7 @@ $(function() {
 								// Start the sequence of deletions
 								removeSequence();
 							} else {
-								println("Unable to join content into first artifact, aborting join operation.");
+								println("Unable to join content into first artifact, aborting join operation. ");
 								operationInProgress = false;
 							}
 						});
