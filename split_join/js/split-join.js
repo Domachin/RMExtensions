@@ -69,7 +69,7 @@ function constructJoined(artifactAttributes, attrName) {
 
 $(function() {
 	
-	//if (initialize==true) version();
+	if (initialize==true) version();
 	
 	// this function is run when the document is ready.
 	
@@ -85,16 +85,17 @@ $(function() {
 		selection = selected;
 		if (!operationInProgress) {
 			// Get the name of the initial selected artifact to make it clear what is being operated on.
-			RM.Data.getAttributes(selection[0], [RM.Data.Attributes.NAME], function (attrResult) {
+			RM.Data.getAttributes(selection[0], [RM.Data.Attributes.ARTIFACT_TYPE], function (attrResult) {
 				if (attrResult.code === RM.OperationResult.OPERATION_OK) {
-					var rootName = attrResult.data[0].values[RM.Data.Attributes.NAME];
+					var rootType = attrResult.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE];
 					if (selected.length > 1) {
-						println((selection.length - 1) + " objects ready to join to: " + rootName);
+						println(selected.length + " objects ready to join, ordered according to the identifier.");
+						println("Resulting artifact type: " + rootType);
 					} else if (selected.length === 1) {
-						println(rootName + " ready to split into component artifacts.")
+						println("Ready to split into component artifacts.");
 					}
 				} else {
-					println("Unable to determine name of root artifact for operation.");
+					println("Unable to determine root artifact for operation.");
 				}
 			});
 		}
@@ -173,17 +174,17 @@ $(function() {
 		RM.Data.getAttributes(selection, function (attrResult) {
 			if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 				var artifactAttributes = attrResult.data;
-				var numattr = 0;
-				var attrNames = [];
-				var keys = [];
-				var item = attrResult.data[0];
-				for (var key in item.values)
-				{
-					keys.push(key);
-					numattr++;
-				}
-				operationInProgress = true;
 				if (artifactAttributes) {
+					operationInProgress = true;
+					var numattr = 0;
+					var attrNames = [];
+					var keys = [];
+					var item = attrResult.data[0];
+					for (var key in item.values)
+					{
+						keys.push(key);
+						numattr++;
+					}
 					RM.Data.getValueRange(selection[0], keys, function (valResult)
 					{
 						var toSave = [];
