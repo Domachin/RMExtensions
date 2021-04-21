@@ -44,10 +44,10 @@ function constructJoined(artifactAttributes, attrName) {
 	var theMax = -1;
 	var theMin = -1;
 	
-	var it = 0
+	//var it = 0
 	//window.alert("length: " artifactAttributes.length);
 	artifactAttributes.forEach(function(aa) {
-		it++;
+		//it++;
 		var aaText = aa.values[attrName];
 		//window.alert(it + " old: " + aaText + "new: " + newText);
 		var identifier = parseInt(aa.values[RM.Data.Attributes.IDENTIFIER]);
@@ -84,10 +84,12 @@ $(function() {
 		$("#result").empty();
 		selection = selected;
 		if (!operationInProgress) {
-			// Get the name of the initial selected artifact to make it clear what is being operated on.
+			// Get the type of the initial selected artifact to make it clear what is being operated on.
 			RM.Data.getAttributes(selection[0], [RM.Data.Attributes.ARTIFACT_TYPE], function (attrResult) {
 				if (attrResult.code === RM.OperationResult.OPERATION_OK) {
-					var rootType = attrResult.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE];
+					var artifactAttributes = attrResult.data;
+					var rootType = ""
+					rootType = attrResult.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE];
 					if (selected.length > 1) {
 						println(selected.length + " objects ready to join, ordered according to the identifier.");
 						println("Resulting artifact type: " + rootType);
