@@ -21,7 +21,8 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 			<body>
 				<h3>Operations</h3>				
 				<button id="joinArtifacts">Join Artifacts</button>
-				<br/>				
+				<br/>
+    				<hr style="height:1pt; visibility:hidden;" />
 				<button id="splitArtifact">Split Artifact</button>
 				<br/>
 				<h3>Information</h3>
