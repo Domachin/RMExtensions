@@ -25,7 +25,7 @@ Contract with IBM Corp.
 var initialize = true;
 function version()
 {
-	window.alert("prova 51");
+	window.alert("prova 52");
 	initialize=false;
 }
 
@@ -88,11 +88,11 @@ $(function() {
 			RM.Data.getAttributes(selection[0], [RM.Data.Attributes.ARTIFACT_TYPE], function (attrResult) {
 				if (attrResult.code === RM.OperationResult.OPERATION_OK) {
 					var artifactAttributes = attrResult.data;
-					var rootType = ""
+					var rootType = "";
 					rootType = attrResult.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE];
 					if (selected.length > 1) {
 						println(selected.length + " objects ready to join, ordered according to the identifier.");
-						println("Resulting artifact type: " + rootType);
+						println("Artifact type of the result: " + rootType);
 					} else if (selected.length === 1) {
 						println("Ready to split into component artifacts.");
 					}
@@ -202,6 +202,7 @@ $(function() {
 							// Collect the information for each attribute in turn.
 							attrNames[i] = valResult.data[i].attributeKey;
 							var construct = constructJoined(artifactAttributes,attrNames[i]);
+							window.alert(construct);
 							if(valResult.data[i].multiValued) construct = construct.replace(/\n/g, ",");
 							var lines = construct.split("\n");
 							if(valResult.data[i].valueType !== RM.Data.ValueTypes.ENUMERATION) joinedText[i] = construct;
