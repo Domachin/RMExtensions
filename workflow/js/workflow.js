@@ -4,6 +4,8 @@ var prefixes = ["","CM_","HZ_","UN_","","","","",""];
 var initialize = true;
 var counters = [0,0,0,0,0,0,0,0,0];
 
+//deve essere utilizzabile solo per hazard e contromisure
+//deve contare solo link a requisiti/contromisure
 function version()
 {
 	window.alert("prova 3");
