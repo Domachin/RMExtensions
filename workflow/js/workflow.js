@@ -1,9 +1,9 @@
 var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito input","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
 var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo Hardware","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
 var prefixes = ["","CM_","HZ_","UN_","","","","",""];
-var initialize = true;
 var counters = [0,0,0,0,0,0,0,0,0];
 
+var initialize = true;
 var allowedTypes = ["Contromisura","Hazard","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema"];
 
 //deve essere utilizzabile solo per hazard, contromisure e requisiti
@@ -26,13 +26,28 @@ $(function()
 	//if (initialize==true) version();
 	
 	var selection = [];
-	var stati = [];
-	var linked = [];
 	var docName = "";
 	println("Entrare in un modulo per aggiornare gli status","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		$("#result").empty();
 		selection = selected;
+	});
+	
+	$("#SetStatus").on("click", function() {
+		RM.Data.getAttributes(selection, function(result1){
+			result1.data.forEach(function(item1){
+				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				if (type.startsWith("Requisito "))
+				{
+					
+				}
+			});
+		});
+	});
+}
+  
+  
+//---------------------------------------------------------------------------------------------------------------------------------------
 		RM.Data.getAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
 				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
