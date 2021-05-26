@@ -53,15 +53,18 @@ $(function()
 				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (type.startsWith("Requisito "))
 				{
-					RM.Data.getLinkedArtifacts(ref, [], function(linksResult) {
+					RM.Data.getLinkedArtifacts(item1, function(linksResult) {
 						var artifactIndex = [];
 						linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 						linkDefinition.targets.forEach(function(ref) {
 							indexArtifact(artifactIndex, ref);
 							});
-						});	
+						});
+						RM.Data.getAttributes(artifactIndex, function(attrResult) {
+							var linkedtype = attrResult.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+						});
 					});
-					item1.values["State (Workflow "+type+")"] = ... nei vari casi
+					item1.values["State (Workflow "+type+")"] = ... nei vari casi di combinazioni
 					toSave.push(item1);
 				}
 			});
