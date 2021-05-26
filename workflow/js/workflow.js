@@ -34,14 +34,23 @@ $(function()
 	});
 	
 	$("#SetStatus").on("click", function() {
+		var toSave = [];
 		RM.Data.getAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
 				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (type.startsWith("Requisito "))
 				{
-					
+					...link...
+					item1.values["State (Workflow "+type+")"] = ... nei vari casi
+					toSave.push(item1);
 				}
 			});
+			RM.Data.setAttributes(toSave, function(result1){
+         			if(result1.code !== RM.OperationResult.OPERATION_OK)
+         			{
+            				window.alert("Error: " + result1.code);
+         			}
+      			});
 		});
 	});
 }
