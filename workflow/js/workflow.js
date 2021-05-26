@@ -21,6 +21,19 @@ function println(string,element) {
 	$(p).appendTo("#"+element);
 };
 
+function indexArtifact(/*RM.ArtifactRef[]*/ refs, /*RM.ArtifactRef*/ ref) {
+	// Summary: Maintains a non-duplicating array of RM.ArtifactRef objects.
+	var refPresent = false;
+	for (var i = 0; i < refs.length; i++) {
+		if (refs[i].equals(ref)) {
+			refPresent = true;
+		}
+	}
+	if (!refPresent) {
+		refs.push(ref);
+	}
+};
+
 $(function()
 {
 	//if (initialize==true) version();
@@ -40,7 +53,14 @@ $(function()
 				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (type.startsWith("Requisito "))
 				{
-					...link...
+					RM.Data.getLinkedArtifacts(ref, [], function(linksResult) {
+						var artifactIndex = [];
+						linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+						linkDefinition.targets.forEach(function(ref) {
+							indexArtifact(artifactIndex, ref);
+							});
+						});	
+					});
 					item1.values["State (Workflow "+type+")"] = ... nei vari casi
 					toSave.push(item1);
 				}
