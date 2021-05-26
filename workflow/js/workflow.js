@@ -4,8 +4,11 @@ var prefixes = ["","CM_","HZ_","UN_","","","","",""];
 var initialize = true;
 var counters = [0,0,0,0,0,0,0,0,0];
 
-//deve essere utilizzabile solo per hazard e contromisure
-//deve contare solo link a requisiti/contromisure
+var allowedTypes = ["Contromisura","Hazard","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema"];
+
+//deve essere utilizzabile solo per hazard, contromisure e requisiti
+//deve contare solo link contromisura->requisito / hazard->contromisura / requisito->test
+//result deve dare la lista degli aggiornati (anche se è lunga)
 function version()
 {
 	window.alert("prova 3");
@@ -22,34 +25,36 @@ $(function()
 {
 	//if (initialize==true) version();
 	
-	
 	var selection = [];
+	var stati = [];
+	var linked = [];
 	var docName = "";
-	println("Entrare in un modulo per aggiornare gli identificativi","intro");
+	println("Entrare in un modulo per aggiornare gli status","intro");
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
-		$("#progress").empty();
-		$("#progress2").empty();
+		$("#result").empty();
 		selection = selected;
-		counters = [0,0,0,0,0,0,0,0,0];
-		RM.Data.getContentsAttributes(selection, identifiers, function(result3){
-			result3.data.forEach(function(item3){
-				for(var i = 0; i < counters.length;i++)
+		RM.Data.getAttributes(selection, function(result1){
+			result1.data.forEach(function(item1){
+				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				if (allowedTypes.includes(type))
 				{
-			 		//window.alert("counter ["+i+"]="+counters[i]+":"+identifiers[i]);
-				 	var oldid = item3.values[identifiers[i]];
-					var num = 0;
-					//window.alert(oldid+" "+prefixes[i]);
-					if (oldid==undefined) oldid="";
-					try
-					{
-						num=parseInt(oldid.match(/\d+$/)[0]);
-					}
-					catch(err)
-					{}
-					//window.alert("counter "+counters[i]+" num "+num);
-					if(isNaN(num)) {}
-					else if (num>counters[i]) counters[i]=num;
+					stati.push(item.values["State (Workflow "+type+")"]);
+					linked.push(item.values["State (Workflow "+type+")"]);
 				}
+				
+				var oldid = item3.values[identifiers[i]];
+				var num = 0;
+				//window.alert(oldid+" "+prefixes[i]);
+				if (oldid==undefined) oldid="";
+				try
+				{
+					num=parseInt(oldid.match(/\d+$/)[0]);
+				}
+				catch(err)
+				{}
+				//window.alert("counter "+counters[i]+" num "+num);
+				if(isNaN(num)) {}
+				else if (num>counters[i]) counters[i]=num;
 			});
 		});
 		
