@@ -66,7 +66,7 @@ $(function()
 								var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 								if (linkedtype = "Test")
 								{
-									linkedStat.push(item2.values["Esito"].name)
+									linkedStat.push(item2.values["Esito"].name);
 								}
 							});
 						});
