@@ -53,6 +53,7 @@ $(function()
 				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (type.startsWith("Requisito "))
 				{
+					var linkedStat = [];
 					RM.Data.getLinkedArtifacts(item1, function(linksResult) {
 						var artifactIndex = [];
 						linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -61,10 +62,16 @@ $(function()
 							});
 						});
 						RM.Data.getAttributes(artifactIndex, function(attrResult) {
-							var linkedtype = attrResult.data[0].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+							attrResult.data.forEach(function(item2){
+								var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+								if (linkedtype = "Test")
+								{
+									linkedStat.push(item2.values["Esito"].name)
+								}
+							});
 						});
 					});
-					item1.values["State (Workflow "+type+")"] = ... nei vari casi di combinazioni
+					item1.values["State (Workflow "+type+")"] = ... nei vari casi di combinazioni, basati su linkedstat
 					toSave.push(item1);
 				}
 			});
