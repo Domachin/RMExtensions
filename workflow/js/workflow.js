@@ -34,6 +34,12 @@ function indexArtifact(/*RM.ArtifactRef[]*/ refs, /*RM.ArtifactRef*/ ref) {
 	}
 };
 
+var comp = "";
+function isequal(string)
+{
+	return string == comp;
+}
+
 $(function()
 {
 	//if (initialize==true) version();
@@ -64,14 +70,18 @@ $(function()
 						RM.Data.getAttributes(artifactIndex, function(attrResult) {
 							attrResult.data.forEach(function(item2){
 								var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-								if (linkedtype = "Test")
+								if (linkedtype == "Test")
 								{
 									linkedStat.push(item2.values["Esito"].name);
 								}
 							});
 						});
 					});
-					item1.values["State (Workflow "+type+")"] = ... nei vari casi di combinazioni, basati su linkedstat
+					comp = "Passato";
+					if(linkedStat.every(isequal))
+					{
+						item1.values["State (Workflow "+type+")"] = "Validato";
+					}
 					toSave.push(item1);
 				}
 			});
