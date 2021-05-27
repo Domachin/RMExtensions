@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 1");
+	window.alert("prova 2");
 	initialize=false;
 }
 
@@ -189,13 +189,13 @@ $(function()
          			{
             				window.alert("Error: " + result1.code);
          			}
+				var modified = "";
+				idChanged.forEach(function(i){
+					modified = "\n" + i;
+				});
+				$("#result").empty();
+				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
       			});
-			$("#result").empty();
-			var modified = "";
-			idChanged.forEach(function(i){
-				modified = "\n" + i;
-			});
-			println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
 		});
 	});
 });
