@@ -1,8 +1,9 @@
+var stati = ["State (Workflow Hazard)","State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
 var initialize = true;
 
 function version()
 {
-	window.alert("prova 11");
+	window.alert("prova 121");
 	initialize=false;
 }
 
@@ -169,12 +170,12 @@ $(function()
 	
 	$("#SetStatus").on("click", function() {
 		println("Azioni in corso:","result");
-		RM.Data.getContentsAttributes(selection, function(result1){
+		RM.Data.getContentsAttributes(selection, stati, function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
-				//var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				window.alert("");
-				/*if (type.startsWith("Requisito ") && type != "Requisito input")
+				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				window.alert(type);
+				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
 				}
@@ -185,10 +186,10 @@ $(function()
 				else if (type == "Hazard")
 				{
 					updateHzStatus(item1);
-				}*/
+				}
 			});
 			println("Salvataggio in corso...","result");
-			/*RM.Data.setAttributes(toSave, function(result2){
+			RM.Data.setAttributes(toSave, function(result2){
          			if(result2.code !== RM.OperationResult.OPERATION_OK)
          			{
             				window.alert("Error: " + result2.code);
@@ -201,7 +202,7 @@ $(function()
 				}
 				$("#result").empty();
 				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
-      			});*/
+      			});
 		});
 	});
 });
