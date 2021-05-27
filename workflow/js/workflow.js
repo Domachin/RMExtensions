@@ -1,6 +1,5 @@
 var initialize = true;
 
-//result deve dare la lista degli aggiornati (anche se è lunga)
 function version()
 {
 	window.alert("prova 3");
