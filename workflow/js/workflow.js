@@ -198,4 +198,4 @@ $(function()
 			println("I seguenti " + numChanged + "artefatti sono stati aggiornati:" + modified,"result");
 		});
 	});
-}
+});
