@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 8");
+	window.alert("prova 9");
 	initialize=false;
 }
 
@@ -174,7 +174,7 @@ $(function()
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				window.alert(type);
-				if (type.startsWith("Requisito ") && type != "Requisito input")
+				/*if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
 				}
@@ -185,7 +185,7 @@ $(function()
 				else if (type == "Hazard")
 				{
 					updateHzStatus(item1);
-				}
+				}*/
 			});
 			println("Salvataggio in corso...","result");
 			RM.Data.setAttributes(toSave, function(result2){
