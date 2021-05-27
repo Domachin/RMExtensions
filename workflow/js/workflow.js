@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 7");
+	window.alert("prova 8");
 	initialize=false;
 }
 
@@ -188,10 +188,10 @@ $(function()
 				}
 			});
 			println("Salvataggio in corso...","result");
-			RM.Data.setAttributes(toSave, function(result1){
-         			if(result1.code !== RM.OperationResult.OPERATION_OK)
+			RM.Data.setAttributes(toSave, function(result2){
+         			if(result2.code !== RM.OperationResult.OPERATION_OK)
          			{
-            				window.alert("Error: " + result1.code);
+            				window.alert("Error: " + result2.code);
          			}
 				var modified = "";
 				var i;
