@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 5");
+	window.alert("prova 6");
 	initialize=false;
 }
 
@@ -172,6 +172,7 @@ $(function()
 		RM.Data.getContentsAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
