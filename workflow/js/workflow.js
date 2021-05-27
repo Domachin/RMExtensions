@@ -195,7 +195,7 @@ $(function()
 			idChanged.forEach(function(i){
 				modified = "\n" + i;
 			});
-			println("I seguenti " + numChanged + "artefatti sono stati aggiornati:" + modified,"result");
+			println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
 		});
 	});
 });
