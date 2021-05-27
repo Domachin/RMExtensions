@@ -166,6 +166,7 @@ $(function()
 	});
 	
 	$("#SetStatus").on("click", function() {
+		println("Azioni in corso:","result");
 		RM.Data.getAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
