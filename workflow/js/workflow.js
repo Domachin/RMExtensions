@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 4");
+	window.alert("prova 5");
 	initialize=false;
 }
 
@@ -169,7 +169,7 @@ $(function()
 	
 	$("#SetStatus").on("click", function() {
 		println("Azioni in corso:","result");
-		RM.Data.getAttributes(selection, function(result1){
+		RM.Data.getContentsAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (type.startsWith("Requisito ") && type != "Requisito input")
