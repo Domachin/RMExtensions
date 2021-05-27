@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 121");
+	window.alert("prova 13");
 	initialize=false;
 }
 
@@ -170,7 +170,7 @@ $(function()
 	
 	$("#SetStatus").on("click", function() {
 		println("Azioni in corso:","result");
-		RM.Data.getContentsAttributes(selection, stati, function(result1){
+		RM.Data.getContentsAttributes(selection, stati.concat([[RM.Data.Attributes.ARTIFACT_TYPE],[RM.Data.Attributes.IDENTIFIER]]), function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
