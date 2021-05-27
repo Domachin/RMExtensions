@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 9");
+	window.alert("prova 10");
 	initialize=false;
 }
 
@@ -173,7 +173,7 @@ $(function()
 			window.alert("AA");
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				window.alert(type);
+				window.alert("" + type);
 				/*if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
@@ -188,7 +188,7 @@ $(function()
 				}*/
 			});
 			println("Salvataggio in corso...","result");
-			RM.Data.setAttributes(toSave, function(result2){
+			/*RM.Data.setAttributes(toSave, function(result2){
          			if(result2.code !== RM.OperationResult.OPERATION_OK)
          			{
             				window.alert("Error: " + result2.code);
@@ -201,7 +201,7 @@ $(function()
 				}
 				$("#result").empty();
 				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
-      			});
+      			});*/
 		});
 	});
 });
