@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 2");
+	window.alert("prova 3");
 	initialize=false;
 }
 
@@ -29,6 +29,7 @@ var equal = "";
 var toSave = [];
 var numChanged = 0;
 var idChanged = [];
+var urlChanged = [];
 
 function isequal(string)
 {
@@ -42,6 +43,7 @@ function updateStatus(item,string)
 		item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = string;
 		numChanged++;
 		idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
+		uriChanged.push(item.ref.toUri());
 		toSave.push(item);
 	}
 }
@@ -190,9 +192,11 @@ $(function()
             				window.alert("Error: " + result1.code);
          			}
 				var modified = "";
-				idChanged.forEach(function(i){
-					modified = modified + "\n" + i;
-				});
+				var i;
+				for(i=0;i<idChanged.length;i++)
+				{
+					modified = modified + "\n" + "<a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+				}
 				$("#result").empty();
 				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
       			});
