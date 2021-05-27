@@ -34,15 +34,27 @@ function indexArtifact(/*RM.ArtifactRef[]*/ refs, /*RM.ArtifactRef*/ ref) {
 	}
 };
 
-var comp = "";
-function isequal(string)
-{
-	return string == comp;
-}
-
+var equal = "";
 var toSave = [];
 var numChanged = 0;
 var idChanged = [];
+
+function isequal(string)
+{
+	return string == equal;
+}
+
+function updateStatus(item,string)
+{
+	if (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] != string)
+	{
+		item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = string;
+		numChanged++;
+		idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
+		toSave.push(item);
+	}
+}
+
 function updateReqStatus(item)
 {
 	var linkedStat = [];
@@ -63,17 +75,75 @@ function updateReqStatus(item)
 			});
 		});
 	});
-	comp = "Passato";
-	if(linkedStat.every(isequal))
+	equal = "Passato";
+	if(linkedStat.length > 0 && linkedStat.every(isequal))
 	{
-		if (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] != "Validato")
-		{
-			item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = "Validato";
-			numChanged++;
-			idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
-		}
+		updateStatus(item,"Validato");
 	}
-	toSave.push(itemx);
+}
+
+function updateCmStatus(item)
+{
+	var linkedStat = [];
+	RM.Data.getLinkedArtifacts(item, function(linksResult) {
+		var artifactIndex = [];
+		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+		linkDefinition.targets.forEach(function(ref) {
+			indexArtifact(artifactIndex, ref);
+			});
+		});
+		RM.Data.getAttributes(artifactIndex, function(attrResult) {
+			attrResult.data.forEach(function(item2){
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
+				{
+					updateReqStatus(item2);
+					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+				}
+			});
+		});
+	});
+	equal = "Validato";
+	if(linkedStat.length > 0 && linkedStat.every(isequal))
+	{
+		updateStatus(item,"Chiuso");
+	}
+	else if(linkedStat.length > 0)
+	{
+		updateStatus(item,"Coperto");
+	}
+}
+
+function updateHzStatus(item)
+{
+	var linkedStat = [];
+	RM.Data.getLinkedArtifacts(item, function(linksResult) {
+		var artifactIndex = [];
+		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+		linkDefinition.targets.forEach(function(ref) {
+			indexArtifact(artifactIndex, ref);
+			});
+		});
+		RM.Data.getAttributes(artifactIndex, function(attrResult) {
+			attrResult.data.forEach(function(item2){
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				if (linkedtype == "Contromisura")
+				{
+					updateCmStatus(item2);
+					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+				}
+			});
+		});
+	});
+	equal = "Chiuso";
+	if(linkedStat.length > 0 && linkedStat.every(isequal))
+	{
+		updateStatus(item,"Chiuso");
+	}
+	else if(linkedStat.length > 0)
+	{
+		updateStatus(item,"Risolto");
+	}
 }
 
 $(function()
@@ -92,9 +162,17 @@ $(function()
 		RM.Data.getAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				if (type.startsWith("Requisito "))
+				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
+				}
+				else if (type == "Contromisura")
+				{
+					updateCmStatus(item1);
+				}
+				else if (type == "Hazard")
+				{
+					updateHzStatus(item1);
 				}
 			});
 			RM.Data.setAttributes(toSave, function(result1){
