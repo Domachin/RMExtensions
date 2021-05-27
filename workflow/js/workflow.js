@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 3");
+	window.alert("prova 1");
 	initialize=false;
 }
 
@@ -145,7 +145,7 @@ function updateHzStatus(item)
 
 $(function()
 {
-	//if (initialize==true) version();
+	if (initialize==true) version();
 	
 	var selection = [];
 	var docName = "";
