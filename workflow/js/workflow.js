@@ -191,7 +191,7 @@ $(function()
          			}
 				var modified = "";
 				idChanged.forEach(function(i){
-					modified = "\n" + i;
+					modified = modified + "\n" + i;
 				});
 				$("#result").empty();
 				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
