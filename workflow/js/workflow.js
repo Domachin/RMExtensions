@@ -1,13 +1,5 @@
-var identified_artifacts = ["Condizione applicativa","Contromisura","Hazard","Requisito input","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema","Test"];
-var identifiers = ["Identificativo Condizione Applicativa","Identificativo Contromisura","Identificativo Hazard","Identificativo UN","Identificativo Hardware","Identificativo ERIS","Identificativo Software","Identificativo Sottosistema","Identificativo Test"];
-var prefixes = ["","CM_","HZ_","UN_","","","","",""];
-var counters = [0,0,0,0,0,0,0,0,0];
-
 var initialize = true;
-var allowedTypes = ["Contromisura","Hazard","Requisito hardware","Requisito sistema","Requisito software","Requisito sottosistema"];
 
-//deve essere utilizzabile solo per hazard, contromisure e requisiti
-//deve contare solo link contromisura->requisito / hazard->contromisura / requisito->test
 //result deve dare la lista degli aggiornati (anche se è lunga)
 function version()
 {
@@ -57,6 +49,7 @@ function updateStatus(item,string)
 
 function updateReqStatus(item)
 {
+	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item, function(linksResult) {
 		var artifactIndex = [];
@@ -80,6 +73,7 @@ function updateReqStatus(item)
 	{
 		updateStatus(item,"Validato");
 	}
+	println("Completato","result");
 }
 
 function updateCmStatus(item)
@@ -98,6 +92,7 @@ function updateCmStatus(item)
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
 					updateReqStatus(item2);
+					println("Aggiornamento status contromisure...","result");
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
 				}
 			});
@@ -112,6 +107,7 @@ function updateCmStatus(item)
 	{
 		updateStatus(item,"Coperto");
 	}
+	println("Completato","result");
 }
 
 function updateHzStatus(item)
@@ -130,6 +126,7 @@ function updateHzStatus(item)
 				if (linkedtype == "Contromisura")
 				{
 					updateCmStatus(item2);
+					println("Aggiornamento status hazard...","result");
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
 				}
 			});
@@ -144,6 +141,7 @@ function updateHzStatus(item)
 	{
 		updateStatus(item,"Risolto");
 	}
+	println("Completato","result");
 }
 
 $(function()
@@ -156,6 +154,16 @@ $(function()
 	RM.Event.subscribe(RM.Event.ARTIFACT_OPENED, function(selected) {
 		$("#result").empty();
 		selection = selected;
+		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME,RM.Data.Attributes.FORMAT], function(result){			
+			result.data.forEach(function(item){
+				if (item4.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
+				{
+					$("#intro").empty();
+					println("Modulo: <b>"+item.values[RM.Data.Attributes.NAME]+"</b><br/><br/>Se si effettuano modifiche, uscire e rientrare nel modulo prima di ricalcolare.","intro");
+					docName=item.values[RM.Data.Attributes.NAME]+"_";
+				}
+			});
+		});
 	});
 	
 	$("#SetStatus").on("click", function() {
@@ -175,12 +183,19 @@ $(function()
 					updateHzStatus(item1);
 				}
 			});
+			println("Salvataggio in corso...","result");
 			RM.Data.setAttributes(toSave, function(result1){
          			if(result1.code !== RM.OperationResult.OPERATION_OK)
          			{
             				window.alert("Error: " + result1.code);
          			}
       			});
+			$("#result").empty();
+			var modified = "";
+			idChanged.forEach(function(i){
+				modified = "\n" + i;
+			});
+			println("I seguenti " + numChanged + "artefatti sono stati aggiornati:" + modified,"result");
 		});
 	});
 }
