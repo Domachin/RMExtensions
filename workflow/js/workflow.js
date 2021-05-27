@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 6");
+	window.alert("prova 7");
 	initialize=false;
 }
 
@@ -170,6 +170,7 @@ $(function()
 	$("#SetStatus").on("click", function() {
 		println("Azioni in corso:","result");
 		RM.Data.getContentsAttributes(selection, function(result1){
+			window.alert("AA");
 			result1.data.forEach(function(item1){
 				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				window.alert(type);
