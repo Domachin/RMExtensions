@@ -41,6 +41,8 @@ function isequal(string)
 }
 
 var toSave = [];
+var numChanged = 0;
+var 
 function updateReqStatus(item)
 {
 	var linkedStat = [];
