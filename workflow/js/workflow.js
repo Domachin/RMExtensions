@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 3");
+	window.alert("prova 4");
 	initialize=false;
 }
 
@@ -157,7 +157,7 @@ $(function()
 		selection = selected;
 		RM.Data.getAttributes(selection, [RM.Data.Attributes.NAME,RM.Data.Attributes.FORMAT], function(result){			
 			result.data.forEach(function(item){
-				if (item4.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
+				if (item.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
 				{
 					$("#intro").empty();
 					println("Modulo: <b>"+item.values[RM.Data.Attributes.NAME]+"</b><br/><br/>Se si effettuano modifiche, uscire e rientrare nel modulo prima di ricalcolare.","intro");
