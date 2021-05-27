@@ -2,7 +2,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 10");
+	window.alert("prova 11");
 	initialize=false;
 }
 
@@ -170,10 +170,10 @@ $(function()
 	$("#SetStatus").on("click", function() {
 		println("Azioni in corso:","result");
 		RM.Data.getContentsAttributes(selection, function(result1){
-			window.alert("AA");
+			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
-				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				window.alert("" + type);
+				//var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				window.alert("");
 				/*if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
