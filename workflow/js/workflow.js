@@ -40,6 +40,35 @@ function isequal(string)
 	return string == comp;
 }
 
+var toSave = [];
+function updateReqStatus(item)
+{
+	var linkedStat = [];
+	RM.Data.getLinkedArtifacts(item, function(linksResult) {
+		var artifactIndex = [];
+		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+		linkDefinition.targets.forEach(function(ref) {
+			indexArtifact(artifactIndex, ref);
+			});
+		});
+		RM.Data.getAttributes(artifactIndex, function(attrResult) {
+			attrResult.data.forEach(function(item2){
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				if (linkedtype == "Test")
+				{
+					linkedStat.push(item2.values["Esito"].name);
+				}
+			});
+		});
+	});
+	comp = "Passato";
+	if(linkedStat.every(isequal))
+	{
+		itemx.values["State (Workflow "+item.values[RM.Data.Attributes.ARTIFACT_TYPE].name+")"] = "Validato";
+	}
+	toSave.push(itemx);
+}
+
 $(function()
 {
 	//if (initialize==true) version();
@@ -53,36 +82,12 @@ $(function()
 	});
 	
 	$("#SetStatus").on("click", function() {
-		var toSave = [];
 		RM.Data.getAttributes(selection, function(result1){
 			result1.data.forEach(function(item1){
-				var type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (type.startsWith("Requisito "))
 				{
-					var linkedStat = [];
-					RM.Data.getLinkedArtifacts(item1, function(linksResult) {
-						var artifactIndex = [];
-						linksResult.data.artifactLinks.forEach(function(linkDefinition) {
-						linkDefinition.targets.forEach(function(ref) {
-							indexArtifact(artifactIndex, ref);
-							});
-						});
-						RM.Data.getAttributes(artifactIndex, function(attrResult) {
-							attrResult.data.forEach(function(item2){
-								var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-								if (linkedtype == "Test")
-								{
-									linkedStat.push(item2.values["Esito"].name);
-								}
-							});
-						});
-					});
-					comp = "Passato";
-					if(linkedStat.every(isequal))
-					{
-						item1.values["State (Workflow "+type+")"] = "Validato";
-					}
-					toSave.push(item1);
+					updateReqStatus(item1);
 				}
 			});
 			RM.Data.setAttributes(toSave, function(result1){
