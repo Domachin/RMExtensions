@@ -42,7 +42,7 @@ function isequal(string)
 
 var toSave = [];
 var numChanged = 0;
-var 
+var idChanged = [];
 function updateReqStatus(item)
 {
 	var linkedStat = [];
@@ -66,7 +66,12 @@ function updateReqStatus(item)
 	comp = "Passato";
 	if(linkedStat.every(isequal))
 	{
-		itemx.values["State (Workflow "+item.values[RM.Data.Attributes.ARTIFACT_TYPE].name+")"] = "Validato";
+		if (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] != "Validato")
+		{
+			item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = "Validato";
+			numChanged++;
+			idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
+		}
 	}
 	toSave.push(itemx);
 }
