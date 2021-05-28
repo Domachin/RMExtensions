@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 17");
+	window.alert("prova 18");
 	initialize=false;
 }
 
@@ -62,12 +62,14 @@ function updateReqStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
+		window.alert("link number: " + artifactIndex.length);
 		RM.Data.getAttributes(artifactIndex, function(attrResult) {
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
-					window.alert(uuu + ": " + item2.values["Esito"].name);
+					window.alert("Req " + uuu + ": " + item2.values["Esito"].name);
 					linkedStat.push(item2.values["Esito"].name);
 				}
 			});
