@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 15");
+	window.alert("prova 16");
 	initialize=false;
 }
 
@@ -51,6 +51,7 @@ function updateStatus(item,string)
 
 function updateReqStatus(item)
 {
+	$("#result").empty();
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item, function(linksResult) {
@@ -95,6 +96,7 @@ function updateCmStatus(item)
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
 					updateReqStatus(item2);
+					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
 				}
@@ -129,6 +131,7 @@ function updateHzStatus(item)
 				if (linkedtype == "Contromisura")
 				{
 					updateCmStatus(item2);
+					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
 				}
@@ -170,7 +173,6 @@ $(function()
 	});
 	
 	$("#SetStatus").on("click", function() {
-		println("Azioni in corso:","result");
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
@@ -190,6 +192,7 @@ $(function()
 				}
 			});
 			println("Salvataggio in corso...","result");
+			window.alert(toSave.length);
 			RM.Data.setAttributes(toSave, function(result2){
          			if(result2.code !== RM.OperationResult.OPERATION_OK)
          			{
@@ -197,12 +200,13 @@ $(function()
          			}
 				var modified = "";
 				var i;
-				/*for(i=0;i<idChanged.length;i++)
+				window.alert("salva");
+				for(i=0;i<idChanged.length;i++)
 				{
-					modified = modified + "\n" + "<a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+					modified = modified + "</br>" + "<a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
 				}
 				$("#result").empty();
-				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");*/
+				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
       			});
 		});
 	});
