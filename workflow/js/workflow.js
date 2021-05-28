@@ -203,7 +203,7 @@ $(function()
 				window.alert("salva");
 				for(i=0;i<idChanged.length;i++)
 				{
-					modified = modified + "</br>" + "<a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+					modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
 				}
 				$("#result").empty();
 				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
