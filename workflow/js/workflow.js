@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 16");
+	window.alert("prova 17");
 	initialize=false;
 }
 
@@ -48,9 +48,10 @@ function updateStatus(item,string)
 		toSave.push(item);
 	}
 }
-
+var uuu = 0;
 function updateReqStatus(item)
 {
+	uuu++;
 	$("#result").empty();
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
@@ -66,6 +67,7 @@ function updateReqStatus(item)
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Test")
 				{
+					window.alert(uuu + ": " + item2.values["Esito"].name);
 					linkedStat.push(item2.values["Esito"].name);
 				}
 			});
