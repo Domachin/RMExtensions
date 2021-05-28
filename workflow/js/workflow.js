@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 18");
+	window.alert("prova 19");
 	initialize=false;
 }
 
@@ -55,7 +55,7 @@ function updateReqStatus(item)
 	$("#result").empty();
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
-	RM.Data.getLinkedArtifacts(item, function(linksResult) {
+	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
