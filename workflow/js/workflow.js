@@ -31,6 +31,10 @@ var toSave = [];
 var numChanged = 0;
 var idChanged = [];
 var urlChanged = [];
+var reqdone = false;
+var cmdone = false;
+var hzdone = false;
+var type = "";
 
 function isequal(string)
 {
@@ -51,7 +55,6 @@ function updateStatus(item,string)
 var uuu = 0;
 function updateReqStatus(item)
 {
-	uuu++;
 	$("#result").empty();
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
@@ -74,15 +77,16 @@ function updateReqStatus(item)
 					linkedStat.push(item2.values["Esito"]);
 				}
 			});
+			equal = "Passato";
+			if(linkedStat.length > 0 && linkedStat.every(isequal))
+			{
+				window.alert("modified " + uuu);
+				updateStatus(item,"Validato");
+			}
+			println("Completato","result");
+			if (type.startsWith("Requisito ")) proceed = true;
 		});
 	});
-	equal = "Passato";
-	if(linkedStat.length > 0 && linkedStat.every(isequal))
-	{
-		window.alert("modified " + uuu);
-		updateStatus(item,"Validato");
-	}
-	println("Completato","result");
 }
 
 function updateCmStatus(item)
@@ -95,7 +99,7 @@ function updateCmStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], function(attrResult) {
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
@@ -106,18 +110,19 @@ function updateCmStatus(item)
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
 				}
 			});
+			equal = "Validato";
+			if(linkedStat.length > 0 && linkedStat.every(isequal))
+			{
+				updateStatus(item,"Chiuso");
+			}
+			else if(linkedStat.length > 0)
+			{
+				updateStatus(item,"Coperto");
+			}
+			println("Completato","result");
+			if (type == "Contromisura") proceed = true;
 		});
 	});
-	equal = "Validato";
-	if(linkedStat.length > 0 && linkedStat.every(isequal))
-	{
-		updateStatus(item,"Chiuso");
-	}
-	else if(linkedStat.length > 0)
-	{
-		updateStatus(item,"Coperto");
-	}
-	println("Completato","result");
 }
 
 function updateHzStatus(item)
@@ -130,7 +135,7 @@ function updateHzStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], function(attrResult) {
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
@@ -141,18 +146,19 @@ function updateHzStatus(item)
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
 				}
 			});
+			equal = "Chiuso";
+			if(linkedStat.length > 0 && linkedStat.every(isequal))
+			{
+				updateStatus(item,"Chiuso");
+			}
+			else if(linkedStat.length > 0)
+			{
+				updateStatus(item,"Risolto");
+			}
+			println("Completato","result");
+			if (type == "Hazard") proceed = true;
 		});
 	});
-	equal = "Chiuso";
-	if(linkedStat.length > 0 && linkedStat.every(isequal))
-	{
-		updateStatus(item,"Chiuso");
-	}
-	else if(linkedStat.length > 0)
-	{
-		updateStatus(item,"Risolto");
-	}
-	println("Completato","result");
 }
 
 $(function()
@@ -181,7 +187,7 @@ $(function()
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
-				var type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
@@ -196,6 +202,10 @@ $(function()
 					updateHzStatus(item1);
 				}
 			});
+			while(true)
+			{
+				if (proceed == true) break;
+			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
 			RM.Data.setAttributes(toSave, function(result2){
