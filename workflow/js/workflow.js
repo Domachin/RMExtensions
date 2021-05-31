@@ -52,7 +52,6 @@ function updateStatus(item,string)
 		toSave.push(item);
 	}
 }
-var uuu = 0;
 function updateReqStatus(item)
 {
 	$("#result").empty();
@@ -73,18 +72,18 @@ function updateReqStatus(item)
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
-					window.alert("Req " + uuu + ": " + item2.values["Esito"]);
+					window.alert("Req : " + item2.values["Esito"]);
 					linkedStat.push(item2.values["Esito"]);
 				}
 			});
 			equal = "Passato";
 			if(linkedStat.length > 0 && linkedStat.every(isequal))
 			{
-				window.alert("modified " + uuu);
+				window.alert("modified ");
 				updateStatus(item,"Validato");
 			}
 			println("Completato","result");
-			if (type.startsWith("Requisito ")) proceed = true;
+			reqdone = true;
 		});
 	});
 }
@@ -120,7 +119,7 @@ function updateCmStatus(item)
 				updateStatus(item,"Coperto");
 			}
 			println("Completato","result");
-			if (type == "Contromisura") proceed = true;
+			cmdone = true;
 		});
 	});
 }
@@ -156,7 +155,7 @@ function updateHzStatus(item)
 				updateStatus(item,"Risolto");
 			}
 			println("Completato","result");
-			if (type == "Hazard") proceed = true;
+			hzdone = true;
 		});
 	});
 }
