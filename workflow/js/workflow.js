@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 27");
+	window.alert("prova 28");
 	initialize=false;
 }
 
@@ -66,7 +66,7 @@ function updateReqStatus(item)
 		RM.Data.getAttributes(artifactIndex, function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
-				var linkedtype = item2.values[RM.Data.Attributes.IDENTIFIER];
+				var linkedtype = item2.values[RM.Data.Attributes.PRIMARY_TEXT];
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
