@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 22");
+	window.alert("prova 23");
 	initialize=false;
 }
 
@@ -68,11 +68,11 @@ function updateReqStatus(item)
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				window.alert("Linked type: " + linkedtype);
-				if (linkedtype == "Test")
+				/*if (linkedtype == "Test")
 				{
 					window.alert("Req " + uuu + ": " + item2.values["Esito"]);
 					linkedStat.push(item2.values["Esito"]);
-				}
+				}*/
 			});
 		});
 	});
