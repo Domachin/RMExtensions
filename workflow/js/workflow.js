@@ -91,7 +91,7 @@ function updateReqStatus(item)
 function updateCmStatus(item)
 {
 	var linkedStat = [];
-	RM.Data.getLinkedArtifacts(item, function(linksResult) {
+	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
@@ -104,6 +104,10 @@ function updateCmStatus(item)
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
 					updateReqStatus(item2);
+					while(true)
+					{
+						if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
+					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
@@ -127,7 +131,7 @@ function updateCmStatus(item)
 function updateHzStatus(item)
 {
 	var linkedStat = [];
-	RM.Data.getLinkedArtifacts(item, function(linksResult) {
+	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
@@ -203,7 +207,7 @@ $(function()
 			});
 			while(true)
 			{
-				if (proceed == true) break;
+				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
 			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
