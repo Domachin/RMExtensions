@@ -66,21 +66,20 @@ function updateReqStatus(item)
 		RM.Data.getAttributes(artifactIndex, function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
-				window.alert("Linked type");
-				/*var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE];
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
 					window.alert("Req " + uuu + ": " + item2.values["Esito"]);
 					linkedStat.push(item2.values["Esito"]);
-				}*/
+				}
 			});
 		});
 	});
 	equal = "Passato";
 	if(linkedStat.length > 0 && linkedStat.every(isequal))
 	{
-		window.alert("modified");
+		window.alert("modified " + uuu);
 		updateStatus(item,"Validato");
 	}
 	println("Completato","result");
