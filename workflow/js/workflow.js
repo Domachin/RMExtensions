@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 21");
+	window.alert("prova 22");
 	initialize=false;
 }
 
@@ -70,8 +70,8 @@ function updateReqStatus(item)
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
-					window.alert("Req " + uuu + ": " + item2.values["Esito"].name);
-					linkedStat.push(item2.values["Esito"].name);
+					window.alert("Req " + uuu + ": " + item2.values["Esito"]);
+					linkedStat.push(item2.values["Esito"]);
 				}
 			});
 		});
