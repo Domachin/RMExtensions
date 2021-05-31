@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 30");
+	window.alert("prova 31");
 	initialize=false;
 }
 
@@ -63,10 +63,10 @@ function updateReqStatus(item)
 			});
 		});
 		window.alert("link number: " + artifactIndex.length);
-		RM.Data.getAttributes(artifactIndex, function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
-				var linkedtype = item2.values["Esito"];
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE];
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
