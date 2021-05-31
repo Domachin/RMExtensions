@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 24");
+	window.alert("prova 25");
 	initialize=false;
 }
 
