@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 26");
+	window.alert("prova 27");
 	initialize=false;
 }
 
@@ -59,8 +59,6 @@ function updateReqStatus(item)
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
-			var linkedtyp = ref.values[RM.Data.Attributes.ARTIFACT_TYPE];
-			window.alert("Linked typ: " + linkedtyp);
 			indexArtifact(artifactIndex, ref);
 			});
 		});
@@ -68,7 +66,7 @@ function updateReqStatus(item)
 		RM.Data.getAttributes(artifactIndex, function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE];
+				var linkedtype = item2.values[RM.Data.Attributes.IDENTIFIER];
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
