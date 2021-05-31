@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 23");
+	window.alert("prova 24");
 	initialize=false;
 }
 
@@ -66,9 +66,10 @@ function updateReqStatus(item)
 		RM.Data.getAttributes(artifactIndex, function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				window.alert("Linked type");
+				/*var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				window.alert("Linked type: " + linkedtype);
-				/*if (linkedtype == "Test")
+				if (linkedtype == "Test")
 				{
 					window.alert("Req " + uuu + ": " + item2.values["Esito"]);
 					linkedStat.push(item2.values["Esito"]);
