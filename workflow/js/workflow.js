@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 34");
+	window.alert("prova 35");
 	initialize=false;
 }
 
@@ -148,7 +148,7 @@ async function updateHzStatus(item)
 					while(true)
 					{
 						if (cmdone == true) break;
-						//await new Promise(resolve => setTimeout(resolve, 10));
+						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
