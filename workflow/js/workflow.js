@@ -1,4 +1,4 @@
-var stati = ["State (Workflow Hazard)","State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
+var stati = ["Esito", "State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
 var initialize = true;
 
 function version()
@@ -187,15 +187,15 @@ $(function()
 				$("#result").empty();
 				println("Aggiornamento status requisiti...","result");
 				var linkedStat = [];
-				RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
+				RM.Data.getLinkedArtifacts(item1.ref, function(linksResult1) {
 					var artifactIndex = [];
-					linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+					linksResult1.data.artifactLinks.forEach(function(linkDefinition) {
 					linkDefinition.targets.forEach(function(ref) {
 						indexArtifact(artifactIndex, ref);
 						});
 					});
 					window.alert("link number: " + artifactIndex.length);
-					RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult1) {
+					RM.Data.getAttributes(artifactIndex, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE]) , function(attrResult1) {
 						window.alert("length: " + attrResult1.data.length);
 						attrResult1.data.forEach(function(item2){
 							var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
@@ -238,7 +238,7 @@ $(function()
 											indexArtifact(artifactIndex, ref);
 											});
 										});
-										RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], function(attrResult) {
+										RM.Data.getAttributes(artifactIndex, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(attrResult) {
 											attrResult.data.forEach(function(item2){
 												var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 												if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
@@ -280,7 +280,7 @@ $(function()
 															indexArtifact(artifactIndex, ref);
 															});
 														});
-														RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Contromisura)", function(attrResult) {
+														RM.Data.getAttributes(artifactIndex, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(attrResult) {
 															attrResult.data.forEach(function(item2){
 																var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 																if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
@@ -310,7 +310,6 @@ $(function()
 																{
 																	modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
 																}
-																linkedStat = [];
 															});
 														});
 													});
