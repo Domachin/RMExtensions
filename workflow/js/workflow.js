@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 32");
+	window.alert("prova 33");
 	initialize=false;
 }
 
@@ -106,11 +106,11 @@ function updateCmStatus(item)
 					updateReqStatus(item2);
 					while(true)
 					{
-						if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
+						if (reqdone == true) break;
 					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
 				}
 			});
 			equal = "Validato";
@@ -144,9 +144,13 @@ function updateHzStatus(item)
 				if (linkedtype == "Contromisura")
 				{
 					updateCmStatus(item2);
+					while(true)
+					{
+						if (cmdone == true) break;
+					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+					linkedStat.push(item2.values["State (Workflow Contromisura)"]);
 				}
 			});
 			equal = "Chiuso";
