@@ -1,9 +1,9 @@
-var stati = ["Esito", "State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
+var stati = ["State (Workflow Hazard)","State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
 var initialize = true;
 
 function version()
 {
-	window.alert("prova 32");
+	window.alert("prova 33");
 	initialize=false;
 }
 
@@ -31,6 +31,9 @@ var toSave = [];
 var numChanged = 0;
 var idChanged = [];
 var urlChanged = [];
+var reqdone = false;
+var cmdone = false;
+var hzdone = false;
 var type = "";
 
 function isequal(string)
@@ -101,9 +104,13 @@ function updateCmStatus(item)
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
 					updateReqStatus(item2);
+					while(true)
+					{
+						if (reqdone == true) break;
+					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
 				}
 			});
 			equal = "Validato";
@@ -137,9 +144,13 @@ function updateHzStatus(item)
 				if (linkedtype == "Contromisura")
 				{
 					updateCmStatus(item2);
+					while(true)
+					{
+						if (cmdone == true) break;
+					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+					linkedStat.push(item2.values["State (Workflow Contromisura)"]);
 				}
 			});
 			equal = "Chiuso";
@@ -184,147 +195,7 @@ $(function()
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
 				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				$("#result").empty();
-				println("Aggiornamento status requisiti...","result");
-				var linkedStat = [];
-				RM.Data.getLinkedArtifacts(item1.ref, function(linksResult1) {
-					var artifactIndex = [];
-					linksResult1.data.artifactLinks.forEach(function(linkDefinition) {
-					linkDefinition.targets.forEach(function(ref) {
-						indexArtifact(artifactIndex, ref);
-						});
-					});
-					window.alert("link number: " + artifactIndex.length);
-					RM.Data.getAttributes(artifactIndex, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE]) , function(attrResult1) {
-						window.alert("length: " + attrResult1.data.length);
-						attrResult1.data.forEach(function(item2){
-							var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-							window.alert("Linked type: " + linkedtype);
-							if (linkedtype == "Test")
-							{
-								window.alert("Req : " + item2.values["Esito"]);
-								linkedStat.push(item2.values["Esito"]);
-							}
-						});
-						equal = "Passato";
-						if(linkedStat.length > 0 && linkedStat.every(isequal))
-						{
-							window.alert("modified ");
-							updateStatus(item,"Validato");
-						}
-						println("Completato","result");
-						if ()//è l'ultimo giro)
-						{
-							RM.Data.setAttributes(toSave, function(result2){
-								if(result2.code !== RM.OperationResult.OPERATION_OK)
-								{
-									window.alert("Error: " + result2.code);
-								}
-								var modified = "";
-								var i;
-								window.alert("salva");
-								for(i=0;i<idChanged.length;i++)
-								{
-									modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
-								}
-								linkedStat = [];
-								toSave = [];
-								if (type == "Contromisura" || type == "Hazard")
-								{
-									RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
-										var artifactIndex = [];
-										linksResult.data.artifactLinks.forEach(function(linkDefinition) {
-										linkDefinition.targets.forEach(function(ref) {
-											indexArtifact(artifactIndex, ref);
-											});
-										});
-										RM.Data.getAttributes(artifactIndex, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(attrResult) {
-											attrResult.data.forEach(function(item2){
-												var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-												if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
-												{
-													updateReqStatus(item2);
-													$("#result").empty();
-													println("Aggiornamento status contromisure...","result");
-													linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
-												}
-											});
-											equal = "Validato";
-											if(linkedStat.length > 0 && linkedStat.every(isequal))
-											{
-												updateStatus(item,"Chiuso");
-											}
-											else if(linkedStat.length > 0)
-											{
-												updateStatus(item,"Coperto");
-											}
-											println("Completato","result");
-											RM.Data.setAttributes(toSave, function(result2){
-												if(result2.code !== RM.OperationResult.OPERATION_OK)
-												{
-													window.alert("Error: " + result2.code);
-												}
-												window.alert("salva contromisure");
-												for(i=0;i<idChanged.length;i++)
-												{
-													modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
-												}
-												linkedStat = [];
-												toSave = [];
-												if (type == "Hazard")
-												{
-													RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
-														var artifactIndex = [];
-														linksResult.data.artifactLinks.forEach(function(linkDefinition) {
-														linkDefinition.targets.forEach(function(ref) {
-															indexArtifact(artifactIndex, ref);
-															});
-														});
-														RM.Data.getAttributes(artifactIndex, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE]), function(attrResult) {
-															attrResult.data.forEach(function(item2){
-																var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-																if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
-																{
-																	$("#result").empty();
-																	println("Aggiornamento status hazard...","result");
-																	linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
-																}
-															});
-															equal = "Chiuso";
-															if(linkedStat.length > 0 && linkedStat.every(isequal))
-															{
-																updateStatus(item,"Chiuso");
-															}
-															else if(linkedStat.length > 0)
-															{
-																updateStatus(item,"Risolto");
-															}
-															println("Completato","result");
-															RM.Data.setAttributes(toSave, function(result2){
-																if(result2.code !== RM.OperationResult.OPERATION_OK)
-																{
-																	window.alert("Error: " + result2.code);
-																}
-																window.alert("salva hazard");
-																for(i=0;i<idChanged.length;i++)
-																{
-																	modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
-																}
-															});
-														});
-													});
-												}
-											});
-										});
-									});
-								}
-								$("#result").empty();
-								println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
-							});
-						}
-					});
-				});
-				/*//window.alert(type);
+				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item1);
@@ -336,8 +207,12 @@ $(function()
 				else if (type == "Hazard")
 				{
 					updateHzStatus(item1);
-				}*/
+				}
 			});
+			while(true)
+			{
+				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
+			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
 			RM.Data.setAttributes(toSave, function(result2){
