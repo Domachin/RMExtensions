@@ -195,9 +195,9 @@ $(function()
 						});
 					});
 					window.alert("link number: " + artifactIndex.length);
-					RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
-						window.alert("length: " + attrResult.data.length);
-						attrResult.data.forEach(function(item2){
+					RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult1) {
+						window.alert("length: " + attrResult1.data.length);
+						attrResult1.data.forEach(function(item2){
 							var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 							window.alert("Linked type: " + linkedtype);
 							if (linkedtype == "Test")
@@ -213,7 +213,6 @@ $(function()
 							updateStatus(item,"Validato");
 						}
 						println("Completato","result");
-						reqdone = true;
 						if ()//è l'ultimo giro)
 						{
 							RM.Data.setAttributes(toSave, function(result2){
@@ -229,6 +228,7 @@ $(function()
 									modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
 								}
 								linkedStat = [];
+								toSave = [];
 								if (type == "Contromisura" || type == "Hazard")
 								{
 									RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -259,7 +259,63 @@ $(function()
 												updateStatus(item,"Coperto");
 											}
 											println("Completato","result");
-											cmdone = true;
+											RM.Data.setAttributes(toSave, function(result2){
+												if(result2.code !== RM.OperationResult.OPERATION_OK)
+												{
+													window.alert("Error: " + result2.code);
+												}
+												window.alert("salva contromisure");
+												for(i=0;i<idChanged.length;i++)
+												{
+													modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+												}
+												linkedStat = [];
+												toSave = [];
+												if (type == "Hazard")
+												{
+													RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
+														var artifactIndex = [];
+														linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+														linkDefinition.targets.forEach(function(ref) {
+															indexArtifact(artifactIndex, ref);
+															});
+														});
+														RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Contromisura)", function(attrResult) {
+															attrResult.data.forEach(function(item2){
+																var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+																if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
+																{
+																	$("#result").empty();
+																	println("Aggiornamento status hazard...","result");
+																	linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"].name);
+																}
+															});
+															equal = "Chiuso";
+															if(linkedStat.length > 0 && linkedStat.every(isequal))
+															{
+																updateStatus(item,"Chiuso");
+															}
+															else if(linkedStat.length > 0)
+															{
+																updateStatus(item,"Risolto");
+															}
+															println("Completato","result");
+															RM.Data.setAttributes(toSave, function(result2){
+																if(result2.code !== RM.OperationResult.OPERATION_OK)
+																{
+																	window.alert("Error: " + result2.code);
+																}
+																window.alert("salva hazard");
+																for(i=0;i<idChanged.length;i++)
+																{
+																	modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+																}
+																linkedStat = [];
+															});
+														});
+													});
+												}
+											});
 										});
 									});
 								}
