@@ -129,7 +129,7 @@ function updateCmStatus(item)
 	});
 }
 
-function updateHzStatus(item)
+async function updateHzStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -192,7 +192,7 @@ $(function()
 		});
 	});
 	
-	$("#SetStatus").on("click", async function() {
+	$("#SetStatus").on("click", function() {
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
@@ -214,7 +214,7 @@ $(function()
 			while(true)
 			{
 				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
-				await new Promise(resolve => setTimeout(resolve, 10));
+				//await new Promise(resolve => setTimeout(resolve, 10));
 			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
