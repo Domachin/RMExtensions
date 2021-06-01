@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 33");
+	window.alert("prova 34");
 	initialize=false;
 }
 
@@ -88,7 +88,7 @@ function updateReqStatus(item)
 	});
 }
 
-function updateCmStatus(item)
+async function updateCmStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -107,6 +107,7 @@ function updateCmStatus(item)
 					while(true)
 					{
 						if (reqdone == true) break;
+						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
@@ -128,7 +129,7 @@ function updateCmStatus(item)
 	});
 }
 
-function updateHzStatus(item)
+async function updateHzStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -147,6 +148,7 @@ function updateHzStatus(item)
 					while(true)
 					{
 						if (cmdone == true) break;
+						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
@@ -168,7 +170,7 @@ function updateHzStatus(item)
 	});
 }
 
-$(function()
+$(async function()
 {
 	if (initialize==true) version();
 	
@@ -212,6 +214,7 @@ $(function()
 			while(true)
 			{
 				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
+				await new Promise(resolve => setTimeout(resolve, 10));
 			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
