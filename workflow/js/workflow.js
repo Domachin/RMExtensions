@@ -1,9 +1,9 @@
-var stati = ["Esito","State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
+var stati = ["State (Workflow Hazard)","State (Workflow Contromisura)","State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"];
 var initialize = true;
 
 function version()
 {
-	window.alert("prova 35");
+	window.alert("prova 33");
 	initialize=false;
 }
 
@@ -39,7 +39,7 @@ var type = "";
 function isequal(string)
 {
 	return string == equal;
-};
+}
 
 function updateStatus(item,string)
 {
@@ -51,8 +51,7 @@ function updateStatus(item,string)
 		uriChanged.push(item.ref.toUri());
 		toSave.push(item);
 	}
-};
-
+}
 function updateReqStatus(item)
 {
 	$("#result").empty();
@@ -66,7 +65,7 @@ function updateReqStatus(item)
 			});
 		});
 		window.alert("link number: " + artifactIndex.length);
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
@@ -87,9 +86,9 @@ function updateReqStatus(item)
 			reqdone = true;
 		});
 	});
-};
+}
 
-async function updateCmStatus(item)
+function updateCmStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -99,7 +98,7 @@ async function updateCmStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], function(attrResult) {
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
@@ -108,7 +107,6 @@ async function updateCmStatus(item)
 					while(true)
 					{
 						if (reqdone == true) break;
-						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
@@ -128,9 +126,9 @@ async function updateCmStatus(item)
 			cmdone = true;
 		});
 	});
-};
+}
 
-async function updateHzStatus(item)
+function updateHzStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -140,7 +138,7 @@ async function updateHzStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], function(attrResult) {
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
@@ -149,7 +147,6 @@ async function updateHzStatus(item)
 					while(true)
 					{
 						if (cmdone == true) break;
-						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
@@ -169,33 +166,7 @@ async function updateHzStatus(item)
 			hzdone = true;
 		});
 	});
-};
-
-async function saveResults()
-{
-	while(true)
-	{
-		if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
-		await new Promise(resolve => setTimeout(resolve, 10));
-	}
-	println("Salvataggio in corso...","result");
-	window.alert(toSave.length);
-	RM.Data.setAttributes(toSave, function(result2){
-		if(result2.code !== RM.OperationResult.OPERATION_OK)
-		{
-			window.alert("Error: " + result2.code);
-		}
-		var modified = "";
-		var i;
-		window.alert("salva");
-		for(i=0;i<idChanged.length;i++)
-		{
-			modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
-		}
-		$("#result").empty();
-		println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
-	});
-};
+}
 
 $(function()
 {
@@ -238,7 +209,27 @@ $(function()
 					updateHzStatus(item1);
 				}
 			});
-			saveResults();
+			while(true)
+			{
+				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
+			}
+			println("Salvataggio in corso...","result");
+			window.alert(toSave.length);
+			RM.Data.setAttributes(toSave, function(result2){
+         			if(result2.code !== RM.OperationResult.OPERATION_OK)
+         			{
+            				window.alert("Error: " + result2.code);
+         			}
+				var modified = "";
+				var i;
+				window.alert("salva");
+				for(i=0;i<idChanged.length;i++)
+				{
+					modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+				}
+				$("#result").empty();
+				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
+      			});
 		});
 	});
 });
