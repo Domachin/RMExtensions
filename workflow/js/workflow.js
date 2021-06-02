@@ -148,7 +148,7 @@ async function updateHzStatus(item)
 					while(true)
 					{
 						if (cmdone == true) break;
-						await null; new Promise(resolve => setTimeout(resolve, 10));
+						await null; //new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
