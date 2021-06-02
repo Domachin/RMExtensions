@@ -170,12 +170,8 @@ function updateHzStatus(item)
 	});
 }
 
-const p = new Promise((res, rej) => {
-  res(1);
-});
-
-function basicReturn() {
-  return Promise.resolve(p);
+async function basicReturn() {
+  await null;
 }
 
 $(function()
