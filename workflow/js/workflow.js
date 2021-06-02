@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 39");
+	window.alert("prova 40");
 	initialize=false;
 }
 
@@ -196,8 +196,8 @@ $(async function()
 	});
 	
 	$("#SetStatus").on("click", async function() {
-		await null;
-		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), function(result1){
+		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
+			await null;
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
 				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
