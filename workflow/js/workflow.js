@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 41");
+	window.alert("prova 42");
 	initialize=false;
 }
 
@@ -198,7 +198,8 @@ $(async function()
 	$("#SetStatus").on("click", async function() {
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
 			window.alert(result1.data.length);
-			result1.data.forEach(function(item1){
+			result1.data.forEach(async function(item1){
+				await null;
 				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
