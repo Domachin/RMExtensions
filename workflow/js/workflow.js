@@ -129,7 +129,7 @@ function updateCmStatus(item)
 	});
 }
 
-function updateHzStatus(item)
+async function updateHzStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -199,7 +199,6 @@ $(async function()
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(async function(item1){
-				await null;
 				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
