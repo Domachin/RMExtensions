@@ -129,7 +129,7 @@ function updateCmStatus(item)
 	});
 }
 
-async function updateHzStatus(item)
+function updateHzStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -148,7 +148,7 @@ async function updateHzStatus(item)
 					while(true)
 					{
 						if (cmdone == true) break;
-						await null; //new Promise(resolve => setTimeout(resolve, 10));
+						//await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
@@ -168,6 +168,14 @@ async function updateHzStatus(item)
 			hzdone = true;
 		});
 	});
+}
+
+const p = new Promise((res, rej) => {
+  res(1);
+})
+
+function basicReturn() {
+  return Promise.resolve(p);
 }
 
 $(function()
