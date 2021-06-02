@@ -129,7 +129,7 @@ function updateCmStatus(item)
 	});
 }
 
-async function updateHzStatus(item)
+function updateHzStatus(item)
 {
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -148,7 +148,7 @@ async function updateHzStatus(item)
 					while(true)
 					{
 						if (cmdone == true) break;
-						await new Promise(resolve => setTimeout(resolve, 10));
+						//await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
@@ -177,7 +177,7 @@ async function basicReturn() {
 $(async function()
 {
 	if (initialize==true) version();
-	
+	await null;
 	var selection = [];
 	var docName = "";
 	println("Entrare in un modulo per aggiornare gli status","intro");
@@ -196,10 +196,10 @@ $(async function()
 		});
 	});
 	
-	$("#SetStatus").on("click", async function() {
-		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
+	$("#SetStatus").on("click", function() {
+		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), function(result1){
 			window.alert(result1.data.length);
-			result1.data.forEach(async function(item1){
+			result1.data.forEach(function(item1){
 				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
