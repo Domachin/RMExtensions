@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 37");
+	window.alert("prova 39");
 	initialize=false;
 }
 
@@ -177,7 +177,6 @@ async function basicReturn() {
 $(async function()
 {
 	if (initialize==true) version();
-	await null;
 	var selection = [];
 	var docName = "";
 	println("Entrare in un modulo per aggiornare gli status","intro");
@@ -196,7 +195,8 @@ $(async function()
 		});
 	});
 	
-	$("#SetStatus").on("click", function() {
+	$("#SetStatus").on("click", async function() {
+		await null;
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), function(result1){
 			window.alert(result1.data.length);
 			result1.data.forEach(function(item1){
