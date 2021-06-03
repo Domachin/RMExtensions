@@ -132,15 +132,15 @@ function updateCmStatus(item)
 async function updateHzStatus(item)
 {
 	var linkedStat = [];
-	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
+	RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], function(attrResult) {
-			attrResult.data.forEach(function(item2){
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], async function(attrResult) {
+			attrResult.data.forEach(async function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
 				{
