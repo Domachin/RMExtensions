@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 46");
+	window.alert("prova 47");
 	initialize=false;
 }
 
@@ -65,7 +65,7 @@ function updateReqStatus(item)
 			});
 		});
 		window.alert("link number: " + artifactIndex.length);
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
 			attrResult.data.forEach(function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
@@ -88,18 +88,18 @@ function updateReqStatus(item)
 	});
 }
 
-function updateCmStatus(item)
+async function updateCmStatus(item)
 {
 	var linkedStat = [];
-	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
+	RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], function(attrResult) {
-			attrResult.data.forEach(function(item2){
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
+			attrResult.data.forEach(async function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
@@ -107,7 +107,7 @@ function updateCmStatus(item)
 					while(true)
 					{
 						if (reqdone == true) break;
-						//await new Promise(resolve => setTimeout(resolve, 10));
+						await new Promise(resolver => setTimeout(resolver, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
@@ -139,17 +139,16 @@ async function updateHzStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], async function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], async function(attrResult) {
 			attrResult.data.forEach(async function(item2){
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
 				{
 					updateCmStatus(item2);
-					await new Promise(resolver => setTimeout(resolver, 10));
 					while(true)
 					{
 						if (cmdone == true) break;
-						//await new Promise(resolve => setTimeout(resolve, 10));
+						await new Promise(resolver => setTimeout(resolver, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
