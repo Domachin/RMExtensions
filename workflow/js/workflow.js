@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 47");
+	window.alert("prova 48");
 	initialize=false;
 }
 
@@ -99,21 +99,23 @@ async function updateCmStatus(item)
 			});
 		});
 		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
-			attrResult.data.forEach(async function(item2){
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+			var i;
+			for(i=0;i<attrResult.data.length;i++)
+			{
+				var linkedtype = attrResult.data[i].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
-					updateReqStatus(item2);
+					updateReqStatus(attrResult.data[i]);
 					while(true)
 					{
 						if (reqdone == true) break;
-						await new Promise(resolver => setTimeout(resolver, 10));
+						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
+					linkedStat.push(attrResult.data[i].values["State (Workflow " + linkedtype + ")"]);
 				}
-			});
+			}
 			equal = "Validato";
 			if(linkedStat.length > 0 && linkedStat.every(isequal))
 			{
@@ -140,21 +142,23 @@ async function updateHzStatus(item)
 			});
 		});
 		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], async function(attrResult) {
-			attrResult.data.forEach(async function(item2){
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+			var i;
+			for(i=0;i<attrResult.data.length;i++)
+			{
+				var linkedtype = attrResult.data[i].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
 				{
-					updateCmStatus(item2);
+					updateCmStatus(attrResult.data[i]);
 					while(true)
 					{
 						if (cmdone == true) break;
-						await new Promise(resolver => setTimeout(resolver, 10));
+						await new Promise(resolve => setTimeout(resolve, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
-					linkedStat.push(item2.values["State (Workflow Contromisura)"]);
+					linkedStat.push(attrResult.data[i].values["State (Workflow Contromisura)"]);
 				}
-			});
+			}
 			equal = "Chiuso";
 			if(linkedStat.length > 0 && linkedStat.every(isequal))
 			{
@@ -168,10 +172,6 @@ async function updateHzStatus(item)
 			hzdone = true;
 		});
 	});
-}
-
-async function basicReturn() {
-  await null;
 }
 
 $(async function()
@@ -198,20 +198,22 @@ $(async function()
 	$("#SetStatus").on("click", async function() {
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
 			window.alert(result1.data.length);
-			result1.data.forEach(async function(item1){
-				type = item1.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+			var i;
+			for(i=0;i<result1.data.length;i++)
+			{
+				type = result1.data[i].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
-					updateReqStatus(item1);
+					updateReqStatus(result1.data[i]);
 				}
 				else if (type == "Contromisura")
 				{
-					updateCmStatus(item1);
+					updateCmStatus(result1.data[i]);
 				}
 				else if (type == "Hazard")
 				{
-					updateHzStatus(item1);
+					updateHzStatus(result1.data[i]);
 				}
 			});
 			while(true)
@@ -227,7 +229,6 @@ $(async function()
             				window.alert("Error: " + result2.code);
          			}
 				var modified = "";
-				var i;
 				window.alert("salva");
 				for(i=0;i<idChanged.length;i++)
 				{
