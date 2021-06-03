@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 45");
+	window.alert("prova 46");
 	initialize=false;
 }
 
@@ -131,7 +131,6 @@ function updateCmStatus(item)
 
 async function updateHzStatus(item)
 {
-	await new Promise(resolver => setTimeout(resolver, 10));
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 		var artifactIndex = [];
@@ -146,6 +145,7 @@ async function updateHzStatus(item)
 				if (linkedtype == "Contromisura")
 				{
 					updateCmStatus(item2);
+					await new Promise(resolver => setTimeout(resolver, 10));
 					while(true)
 					{
 						if (cmdone == true) break;
