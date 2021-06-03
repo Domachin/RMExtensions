@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 44");
+	window.alert("prova 45");
 	initialize=false;
 }
 
@@ -131,7 +131,7 @@ function updateCmStatus(item)
 
 async function updateHzStatus(item)
 {
-	await null;
+	await new Promise(resolver => setTimeout(resolver, 10));
 	var linkedStat = [];
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 		var artifactIndex = [];
