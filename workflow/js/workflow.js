@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 49");
+	window.alert("prova 50");
 	initialize=false;
 }
 
@@ -57,6 +57,7 @@ function updateReqStatus(item)
 	$("#result").empty();
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
+	window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -200,7 +201,7 @@ $(async function()
 			for(item of result1.data)
 			{
 				type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				//window.alert(type);
+				window.alert("Tipo :" + type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					updateReqStatus(item);
@@ -224,6 +225,7 @@ $(async function()
 					}
 					await new Promise(resolve => setTimeout(resolve, 10));
 				}
+				window.alert("loop");
 			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
