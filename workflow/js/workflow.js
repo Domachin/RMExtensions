@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 48");
+	window.alert("prova 49");
 	initialize=false;
 }
 
@@ -64,26 +64,26 @@ function updateReqStatus(item)
 			indexArtifact(artifactIndex, ref);
 			});
 		});
-		window.alert("link number: " + artifactIndex.length);
+		//window.alert("link number: " + artifactIndex.length);
 		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
-			window.alert("length: " + attrResult.data.length);
+			//window.alert("length: " + attrResult.data.length);
 			for(item2 of attrResult.data)
 			{
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
 				{
-					window.alert("Req : " + item2.values["Esito"]);
+					//window.alert("Req : " + item2.values["Esito"]);
 					linkedStat.push(item2.values["Esito"]);
 				}
 			}
 			equal = "Passato";
 			if(linkedStat.length > 0 && linkedStat.every(isequal))
 			{
-				window.alert("modified ");
+				window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 				updateStatus(item,"Validato");
 			}
-			println("Completato","result");
+			//println("Completato","result");
 			reqdone = true;
 		});
 	});
@@ -213,11 +213,17 @@ $(async function()
 				{
 					updateHzStatus(item);
 				}
-			}
-			while(true)
-			{
-				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
-				await new Promise(resolve => setTimeout(resolve, 10));
+				while(true)
+				{
+					if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true))
+					{
+						reqdone = false;
+						cmdone = false;
+						hzdone = false;
+						break;
+					}
+					await new Promise(resolve => setTimeout(resolve, 10));
+				}
 			}
 			println("Salvataggio in corso...","result");
 			window.alert(toSave.length);
