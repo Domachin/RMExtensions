@@ -67,7 +67,8 @@ function updateReqStatus(item)
 		window.alert("link number: " + artifactIndex.length);
 		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
 			window.alert("length: " + attrResult.data.length);
-			attrResult.data.forEach(function(item2){
+			for(item2 of attrResult.data)
+			{
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				window.alert("Linked type: " + linkedtype);
 				if (linkedtype == "Test")
@@ -75,7 +76,7 @@ function updateReqStatus(item)
 					window.alert("Req : " + item2.values["Esito"]);
 					linkedStat.push(item2.values["Esito"]);
 				}
-			});
+			}
 			equal = "Passato";
 			if(linkedStat.length > 0 && linkedStat.every(isequal))
 			{
@@ -99,21 +100,20 @@ async function updateCmStatus(item)
 			});
 		});
 		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
-			var i;
-			for(i=0;i<attrResult.data.length;i++)
+			for(item2 of attrResult.data)
 			{
-				var linkedtype = attrResult.data[i].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
-					updateReqStatus(attrResult.data[i]);
+					updateReqStatus(item2);
 					while(true)
 					{
 						if (reqdone == true) break;
-						await new Promise(resolve => setTimeout(resolve, 10));
+						await new Promise(resolve2 => setTimeout(resolve2, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
-					linkedStat.push(attrResult.data[i].values["State (Workflow " + linkedtype + ")"]);
+					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
 				}
 			}
 			equal = "Validato";
@@ -142,21 +142,20 @@ async function updateHzStatus(item)
 			});
 		});
 		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], async function(attrResult) {
-			var i;
-			for(i=0;i<attrResult.data.length;i++)
+			for(item2 of attrResult.data)
 			{
-				var linkedtype = attrResult.data[i].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
 				{
-					updateCmStatus(attrResult.data[i]);
+					updateCmStatus(item2);
 					while(true)
 					{
 						if (cmdone == true) break;
-						await new Promise(resolve => setTimeout(resolve, 10));
+						await new Promise(resolve1 => setTimeout(resolve1, 10));
 					}
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
-					linkedStat.push(attrResult.data[i].values["State (Workflow Contromisura)"]);
+					linkedStat.push(item2.values["State (Workflow Contromisura)"]);
 				}
 			}
 			equal = "Chiuso";
@@ -198,24 +197,23 @@ $(async function()
 	$("#SetStatus").on("click", async function() {
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
 			window.alert(result1.data.length);
-			var i;
-			for(i=0;i<result1.data.length;i++)
+			for(item of result1.data)
 			{
-				type = result1.data[i].values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+				type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				//window.alert(type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
-					updateReqStatus(result1.data[i]);
+					updateReqStatus(item);
 				}
 				else if (type == "Contromisura")
 				{
-					updateCmStatus(result1.data[i]);
+					updateCmStatus(item);
 				}
 				else if (type == "Hazard")
 				{
-					updateHzStatus(result1.data[i]);
+					updateHzStatus(item);
 				}
-			});
+			}
 			while(true)
 			{
 				if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true)) break;
@@ -228,6 +226,7 @@ $(async function()
          			{
             				window.alert("Error: " + result2.code);
          			}
+				var i;
 				var modified = "";
 				window.alert("salva");
 				for(i=0;i<idChanged.length;i++)
