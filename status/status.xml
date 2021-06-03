@@ -15,7 +15,7 @@ U.S. Government Users Restricted Rights:  Use, duplication or disclosure restric
 	<![CDATA[
 		<html>
 			<head>
-				<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+				<script src="//code.jquery.com/jquery-3.6.0.js"></script>
 				<script src="js/status.js"></script>
 				<link rel="stylesheet" type="text/css" href="css/status.css">
 			</head>
