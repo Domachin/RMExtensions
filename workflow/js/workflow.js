@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 53");
+	window.alert("prova 54");
 	initialize=false;
 }
 
@@ -54,6 +54,8 @@ function updateStatus(item,string)
 }
 function updateReqStatus(item)
 {
+return new Promise(resolve =>
+{
 	$("#result").empty();
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
@@ -88,6 +90,7 @@ function updateReqStatus(item)
 			reqdone = true;
 		});
 	});
+});
 }
 
 async function updateCmStatus(item)
@@ -106,12 +109,7 @@ async function updateCmStatus(item)
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
-					updateReqStatus(item2);
-					while(true)
-					{
-						if (reqdone == true) break;
-						await new Promise(resolve2 => setTimeout(resolve2, 10));
-					}
+					await updateReqStatus(item2);
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
 					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
@@ -148,12 +146,7 @@ async function updateHzStatus(item)
 				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (linkedtype == "Contromisura")
 				{
-					updateCmStatus(item2);
-					while(true)
-					{
-						if (cmdone == true) break;
-						await new Promise(resolve1 => setTimeout(resolve1, 10));
-					}
+					await updateCmStatus(item2);
 					$("#result").empty();
 					println("Aggiornamento status hazard...","result");
 					linkedStat.push(item2.values["State (Workflow Contromisura)"]);
@@ -204,27 +197,15 @@ $(async function()
 				window.alert("Tipo :" + type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
-					updateReqStatus(item);
+					await updateReqStatus(item);
 				}
 				else if (type == "Contromisura")
 				{
-					updateCmStatus(item);
+					await updateCmStatus(item);
 				}
 				else if (type == "Hazard")
 				{
-					updateHzStatus(item);
-				}
-				while(true)
-				{
-					window.alert((type.startsWith("Requisito ")) + (reqdone));
-					if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true))
-					{
-						reqdone = false;
-						cmdone = false;
-						hzdone = false;
-						break;
-					}
-					await new Promise(resolve => setTimeout(resolve, 3000));
+					await updateHzStatus(item);
 				}
 				window.alert("loop");
 			}
