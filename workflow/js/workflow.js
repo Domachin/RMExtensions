@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 51");
+	window.alert("prova 52");
 	initialize=false;
 }
 
@@ -214,9 +214,9 @@ $(async function()
 				{
 					updateHzStatus(item);
 				}
-				window.alert((type.startsWith("Requisito ") && reqdone == true));
 				while(true)
 				{
+					window.alert((type.startsWith("Requisito ") && reqdone == true));
 					if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true))
 					{
 						reqdone = false;
@@ -224,7 +224,7 @@ $(async function()
 						hzdone = false;
 						break;
 					}
-					await new Promise(resolve => setTimeout(resolve, 10));
+					await new Promise(resolve => setTimeout(resolve, 3000));
 				}
 				window.alert("loop");
 			}
