@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 50");
+	window.alert("prova 51");
 	initialize=false;
 }
 
@@ -214,6 +214,7 @@ $(async function()
 				{
 					updateHzStatus(item);
 				}
+				window.alert((type.startsWith("Requisito ") && reqdone == true));
 				while(true)
 				{
 					if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true))
