@@ -8,7 +8,7 @@
 	<![CDATA[
 		<html>
 			<head>
-				<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+				<script src="//code.jquery.com/jquery-3.6.0.js"></script>
 				<script src="js/split-join.js"></script>
 				<link rel="stylesheet" type="text/css" href="css/split-join.css">
 			</head>
