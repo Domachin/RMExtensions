@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 52");
+	window.alert("prova 53");
 	initialize=false;
 }
 
@@ -216,7 +216,7 @@ $(async function()
 				}
 				while(true)
 				{
-					window.alert((type.startsWith("Requisito ") && reqdone == true));
+					window.alert((type.startsWith("Requisito ")) + (reqdone));
 					if ((type.startsWith("Requisito ") && reqdone == true) || (type == "Contromisura" && cmdone == true) || (type == "Hazard" && hzdone == true))
 					{
 						reqdone = false;
