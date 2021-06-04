@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 58");
+	window.alert("prova 59");
 	initialize=false;
 }
 
@@ -58,7 +58,7 @@ async function updateReqStatus(item)
 	println("Aggiornamento status requisiti...","result");
 	var linkedStat = [];
 	window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
-	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
+	await RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 		var artifactIndex = [];
 		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
 		linkDefinition.targets.forEach(function(ref) {
@@ -66,7 +66,7 @@ async function updateReqStatus(item)
 			});
 		});
 		//window.alert("link number: " + artifactIndex.length);
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
+		await RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"], async function(attrResult) {
 			//window.alert("length: " + attrResult.data.length);
 			for(item2 of attrResult.data)
 			{
@@ -86,7 +86,6 @@ async function updateReqStatus(item)
 			}
 			//println("Completato","result");
 			reqdone = true;
-			return null;
 		});
 	});
 }
