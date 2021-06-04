@@ -105,7 +105,7 @@ function updateReqStatus(item)
 
 async function updateCmStatus(item)
 {
-	return new Promise(async resolve2 => {
+	return new Promise(resolve2 => {
 		var linkedStat = [];
 		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
@@ -125,11 +125,11 @@ async function updateCmStatus(item)
 					window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 					{
-						var stato = await updateReqStatus(item2);
+						await updateReqStatus(item2);
 						$("#result").empty();
 						println("Aggiornamento status contromisure...","result");
-						window.alert("stato finale : " + stato);
-						linkedStat.push(stato);
+						window.alert("stato finale : " + "stato");
+						linkedStat.push("stato");
 					}
 				}
 				equal = "Validato";
@@ -154,7 +154,6 @@ async function updateCmStatus(item)
 					});
 				}
 				else resolve2();
-				resolve2();
 				println("Completato","result");
 				window.alert("resolved");
 			});
