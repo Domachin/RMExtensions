@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 70");
+	window.alert("prova 71");
 	initialize=false;
 }
 
@@ -88,6 +88,7 @@ function updateReqStatus(item)
 						{
 							window.alert("Error: " + result2.code);
 						}
+						window.alert("requisito salvato");
 						toSave = [];
 						resolve1();
 					});
