@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 55");
+	window.alert("prova 56");
 	initialize=false;
 }
 
@@ -88,7 +88,7 @@ function updateReqStatus(item)
 				}
 				//println("Completato","result");
 				reqdone = true;
-				return;
+				resolve();
 			});
 		});
 	});
