@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 69");
+	window.alert("prova 70");
 	initialize=false;
 }
 
@@ -80,8 +80,20 @@ function updateReqStatus(item)
 					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 					updateStatus(item,"Validato");
 				}
+				if (toSave.length > 0)
+				{
+					println("Salvataggio in corso...","result");
+					RM.Data.setAttributes(toSave, function(result2){
+						if(result2.code !== RM.OperationResult.OPERATION_OK)
+						{
+							window.alert("Error: " + result2.code);
+						}
+						toSave = [];
+						resolve1();
+					});
+				}
+				else resolve1();
 				println("Completato","result");
-				resolve1();
 				//window.alert("resolved");
 			});
 		});
@@ -107,12 +119,13 @@ async function updateCmStatus(item)
 				{
 					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 					window.alert("Linked type: " + linkedtype);
+					window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 					{
 						await updateReqStatus(item2);
-						window.alert("Req : " + item2.values["State (Workflow " + linkedtype + ")"]);
 						$("#result").empty();
 						println("Aggiornamento status contromisure...","result");
+						window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 						linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
 					}
 				}
@@ -125,8 +138,21 @@ async function updateCmStatus(item)
 				{
 					updateStatus(item,"Coperto");
 				}
-				println("Completato","result");
+				if (toSave.length > 0)
+				{
+					println("Salvataggio in corso...","result");
+					RM.Data.setAttributes(toSave, function(result2){
+						if(result2.code !== RM.OperationResult.OPERATION_OK)
+						{
+							window.alert("Error: " + result2.code);
+						}
+						toSave = [];
+						resolve2();
+					});
+				}
+				else resolve2();
 				resolve2();
+				println("Completato","result");
 				window.alert("resolved");
 			});
 		});
@@ -211,23 +237,15 @@ $(async function()
 				}
 				//window.alert("loop");
 			}
-			println("Salvataggio in corso...","result");
+			var i;
+			var modified = "";
+			for(i=0;i<idChanged.length;i++)
+			{
+				modified = modified + "</br><a href=\"" + urlChanged[i] + "\" target=\"_blank\">" + idChanged[i] + "</a>";
+			}
+			$("#result").empty();
+			println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
 			//window.alert(toSave.length);
-			RM.Data.setAttributes(toSave, function(result2){
-         			if(result2.code !== RM.OperationResult.OPERATION_OK)
-         			{
-            				window.alert("Error: " + result2.code);
-         			}
-				var i;
-				var modified = "";
-				//window.alert("salva");
-				for(i=0;i<idChanged.length;i++)
-				{
-					modified = modified + "</br><a href=\"" + urlChanged[i] + "\" target=\"_blank\">" + idChanged[i] + "</a>";
-				}
-				$("#result").empty();
-				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
-      			});
 		});
 	});
 });
