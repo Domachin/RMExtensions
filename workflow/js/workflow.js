@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 62");
+	window.alert("prova 63");
 	initialize=false;
 }
 
@@ -43,14 +43,14 @@ function isequal(string)
 
 function updateStatus(item,string)
 {
-	if (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] != string)
+	/*if (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] != string)
 	{
 		item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = string;
 		numChanged++;
 		idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
 		uriChanged.push(item.ref.toUri());
 		toSave.push(item);
-	}
+	}*/
 }
 function updateReqStatus(item)
 {
