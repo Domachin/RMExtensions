@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 54");
+	window.alert("prova 55");
 	initialize=false;
 }
 
@@ -54,43 +54,44 @@ function updateStatus(item,string)
 }
 function updateReqStatus(item)
 {
-return new Promise(resolve =>
-{
-	$("#result").empty();
-	println("Aggiornamento status requisiti...","result");
-	var linkedStat = [];
-	window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
-	RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
-		var artifactIndex = [];
-		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
-		linkDefinition.targets.forEach(function(ref) {
-			indexArtifact(artifactIndex, ref);
+	return new Promise(resolve =>
+	{
+		$("#result").empty();
+		println("Aggiornamento status requisiti...","result");
+		var linkedStat = [];
+		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
+			var artifactIndex = [];
+			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+			linkDefinition.targets.forEach(function(ref) {
+				indexArtifact(artifactIndex, ref);
+				});
+			});
+			//window.alert("link number: " + artifactIndex.length);
+			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
+				//window.alert("length: " + attrResult.data.length);
+				for(item2 of attrResult.data)
+				{
+					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+					window.alert("Linked type: " + linkedtype);
+					if (linkedtype == "Test")
+					{
+						//window.alert("Req : " + item2.values["Esito"]);
+						linkedStat.push(item2.values["Esito"]);
+					}
+				}
+				equal = "Passato";
+				if(linkedStat.length > 0 && linkedStat.every(isequal))
+				{
+					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
+					updateStatus(item,"Validato");
+				}
+				//println("Completato","result");
+				reqdone = true;
+				return;
 			});
 		});
-		//window.alert("link number: " + artifactIndex.length);
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"] , function(attrResult) {
-			//window.alert("length: " + attrResult.data.length);
-			for(item2 of attrResult.data)
-			{
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				window.alert("Linked type: " + linkedtype);
-				if (linkedtype == "Test")
-				{
-					//window.alert("Req : " + item2.values["Esito"]);
-					linkedStat.push(item2.values["Esito"]);
-				}
-			}
-			equal = "Passato";
-			if(linkedStat.length > 0 && linkedStat.every(isequal))
-			{
-				window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
-				updateStatus(item,"Validato");
-			}
-			//println("Completato","result");
-			reqdone = true;
-		});
 	});
-});
 }
 
 async function updateCmStatus(item)
