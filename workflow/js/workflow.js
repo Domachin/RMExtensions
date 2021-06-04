@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 72");
+	window.alert("prova 73");
 	initialize=false;
 }
 
@@ -95,7 +95,7 @@ function updateReqStatus(item)
 						resolve1(item.values["State (Workflow " + item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] + ")"]);
 					});
 				}
-				else resolve1(item.values["State (Workflow " + item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] + ")"]);
+				else resolve1(item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] + ")"]);
 				println("Completato","result");
 				//window.alert("resolved");
 			});
