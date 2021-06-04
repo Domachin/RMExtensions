@@ -90,7 +90,7 @@ function updateReqStatus(item)
 						{
 							window.alert("Error: " + result2.code);
 						}
-						window.alert("requisito salvato come : " + );
+						window.alert("requisito salvato come : " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"]);
 						toSave = [];
 						resolve1(item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"]);
 					});
