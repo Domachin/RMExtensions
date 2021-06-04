@@ -66,7 +66,7 @@ async function updateReqStatus(item)
 			});
 		});
 		//window.alert("link number: " + artifactIndex.length);
-		await RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"], function(attrResult) {
+		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"], function(attrResult) {
 			//window.alert("length: " + attrResult.data.length);
 			for(item2 of attrResult.data)
 			{
