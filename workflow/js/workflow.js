@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 66");
+	window.alert("prova 67");
 	initialize=false;
 }
 
@@ -47,7 +47,6 @@ function updateStatus(item,string)
 	numChanged++;
 	idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
 	urlChanged.push(item.ref.toUri());
-	window.alert(item.ref.toUri());
 	toSave.push(item);
 }
 
@@ -116,7 +115,7 @@ async function updateCmStatus(item)
 				}
 			}
 			equal = "Validato";
-			if(linkedStat.length > 0 && linkedStat.every(isequal))
+			if(linkedStat.length > 0 && linkedStat.every(isequal) && item.values["State (Workflow Contromisura)"] == "Coperto")
 			{
 				updateStatus(item,"Chiuso");
 			}
@@ -153,7 +152,7 @@ async function updateHzStatus(item)
 				}
 			}
 			equal = "Chiuso";
-			if(linkedStat.length > 0 && linkedStat.every(isequal))
+			if(linkedStat.length > 0 && linkedStat.every(isequal) && (item.values["State (Workflow Hazard)"] == "Obsoleto" || item.values["State (Workflow Hazard)"] == "Risolto"))
 			{
 				updateStatus(item,"Chiuso");
 			}
