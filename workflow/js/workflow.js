@@ -51,7 +51,7 @@ function updateStatus(item,string)
 
 function updateReqStatus(item)
 {
-	return new Promise(async resolve1 => {
+	return new Promise(resolve1 => {
 		$("#result").empty();
 		println("Aggiornamento status requisiti...","result");
 		var linkedStat = [];
@@ -105,7 +105,7 @@ function updateReqStatus(item)
 
 async function updateCmStatus(item)
 {
-	return new Promise(resolve2 => {
+	return new Promise(async resolve2 => {
 		var linkedStat = [];
 		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
