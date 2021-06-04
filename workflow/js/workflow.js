@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 68");
+	window.alert("prova 69");
 	initialize=false;
 }
 
@@ -49,7 +49,7 @@ function updateStatus(item,string)
 
 function updateReqStatus(item)
 {
-	return new Promise(resolve => {
+	return new Promise(resolve1 => {
 		$("#result").empty();
 		println("Aggiornamento status requisiti...","result");
 		var linkedStat = [];
@@ -77,11 +77,11 @@ function updateReqStatus(item)
 				equal = "Passato";
 				if(linkedStat.length > 0 && linkedStat.every(isequal) && (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Obsoleto" || item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Propagato" || ((linkedtype == "Requisito software" || linkedtype == "Requisito hardware") && item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Caratterizzato")))
 				{
-					//window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
+					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 					updateStatus(item,"Validato");
 				}
-				//println("Completato","result");
-				resolve();
+				println("Completato","result");
+				resolve1();
 				//window.alert("resolved");
 			});
 		});
@@ -90,36 +90,45 @@ function updateReqStatus(item)
 
 async function updateCmStatus(item)
 {
-	var linkedStat = [];
-	RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
-		var artifactIndex = [];
-		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
-		linkDefinition.targets.forEach(function(ref) {
-			indexArtifact(artifactIndex, ref);
+	return new Promise(resolve2 => {
+		var linkedStat = [];
+		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
+			var artifactIndex = [];
+			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+			linkDefinition.targets.forEach(function(ref) {
+				indexArtifact(artifactIndex, ref);
+				});
 			});
-		});
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
-			for(item2 of attrResult.data)
-			{
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
+			window.alert("link number: " + artifactIndex.length);
+			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
+				window.alert("length: " + attrResult.data.length);
+				for(item2 of attrResult.data)
 				{
-					await updateReqStatus(item2);
-					$("#result").empty();
-					println("Aggiornamento status contromisure...","result");
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
+					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+					window.alert("Linked type: " + linkedtype);
+					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
+					{
+						await updateReqStatus(item2);
+						window.alert("Req : " + item2.values["State (Workflow " + linkedtype + ")"]);
+						$("#result").empty();
+						println("Aggiornamento status contromisure...","result");
+						linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
+					}
 				}
-			}
-			equal = "Validato";
-			if(linkedStat.length > 0 && linkedStat.every(isequal) && item.values["State (Workflow Contromisura)"] == "Coperto")
-			{
-				updateStatus(item,"Chiuso");
-			}
-			else if(linkedStat.length > 0)
-			{
-				updateStatus(item,"Coperto");
-			}
-			println("Completato","result");
+				equal = "Validato";
+				if(linkedStat.length > 0 && linkedStat.every(isequal) && item.values["State (Workflow Contromisura)"] == "Coperto")
+				{
+					updateStatus(item,"Chiuso");
+				}
+				else if(linkedStat.length > 0)
+				{
+					updateStatus(item,"Coperto");
+				}
+				println("Completato","result");
+				resolve2();
+				window.alert("resolved");
+			});
 		});
 	});
 }
