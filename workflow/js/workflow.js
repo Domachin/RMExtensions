@@ -128,7 +128,6 @@ async function updateCmStatus(item)
 						var stato = await updateReqStatus(item2);
 						$("#result").empty();
 						println("Aggiornamento status contromisure...","result");
-						var 
 						window.alert("stato finale : " + stato);
 						linkedStat.push(stato);
 					}
