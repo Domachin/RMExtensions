@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 64");
+	window.alert("prova 65");
 	initialize=false;
 }
 
@@ -49,6 +49,7 @@ function updateStatus(item,string)
 		numChanged++;
 		idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
 		urlChanged.push(item.ref.toUri());
+		window.alert(item.ref.toUri());
 		toSave.push(item);
 	}
 }
