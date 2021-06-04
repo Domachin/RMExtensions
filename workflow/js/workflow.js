@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 67");
+	window.alert("prova 68");
 	initialize=false;
 }
 
@@ -31,9 +31,6 @@ var toSave = [];
 var numChanged = 0;
 var idChanged = [];
 var urlChanged = [];
-var reqdone = false;
-var cmdone = false;
-var hzdone = false;
 var type = "";
 
 function isequal(string)
@@ -56,7 +53,7 @@ function updateReqStatus(item)
 		$("#result").empty();
 		println("Aggiornamento status requisiti...","result");
 		var linkedStat = [];
-		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		//window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -70,7 +67,7 @@ function updateReqStatus(item)
 				for(item2 of attrResult.data)
 				{
 					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-					window.alert("Linked type: " + linkedtype);
+					//window.alert("Linked type: " + linkedtype);
 					if (linkedtype == "Test")
 					{
 						//window.alert("Req : " + item2.values["Esito"]);
@@ -80,13 +77,12 @@ function updateReqStatus(item)
 				equal = "Passato";
 				if(linkedStat.length > 0 && linkedStat.every(isequal) && (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Obsoleto" || item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Propagato" || ((linkedtype == "Requisito software" || linkedtype == "Requisito hardware") && item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Caratterizzato")))
 				{
-					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
+					//window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 					updateStatus(item,"Validato");
 				}
 				//println("Completato","result");
-				reqdone = true;
 				resolve();
-				window.alert("resolved");
+				//window.alert("resolved");
 			});
 		});
 	});
@@ -124,7 +120,6 @@ async function updateCmStatus(item)
 				updateStatus(item,"Coperto");
 			}
 			println("Completato","result");
-			cmdone = true;
 		});
 	});
 }
@@ -161,7 +156,6 @@ async function updateHzStatus(item)
 				updateStatus(item,"Risolto");
 			}
 			println("Completato","result");
-			hzdone = true;
 		});
 	});
 }
@@ -189,11 +183,11 @@ $(async function()
 	
 	$("#SetStatus").on("click", async function() {
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
-			window.alert(result1.data.length);
+			//window.alert(result1.data.length);
 			for(item of result1.data)
 			{
 				type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				window.alert("Tipo :" + type);
+				//window.alert("Tipo :" + type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
 					await updateReqStatus(item);
@@ -206,10 +200,10 @@ $(async function()
 				{
 					await updateHzStatus(item);
 				}
-				window.alert("loop");
+				//window.alert("loop");
 			}
 			println("Salvataggio in corso...","result");
-			window.alert(toSave.length);
+			//window.alert(toSave.length);
 			RM.Data.setAttributes(toSave, function(result2){
          			if(result2.code !== RM.OperationResult.OPERATION_OK)
          			{
@@ -217,10 +211,10 @@ $(async function()
          			}
 				var i;
 				var modified = "";
-				window.alert("salva");
+				//window.alert("salva");
 				for(i=0;i<idChanged.length;i++)
 				{
-					modified = modified + "</br><a href=\"" + urlChanged[i] + "\">" + idChanged[i] + "</a>";
+					modified = modified + "</br><a href=\"" + urlChanged[i] + "\" target=\"_blank\">" + idChanged[i] + "</a>";
 				}
 				$("#result").empty();
 				println("I seguenti " + numChanged + " artefatti sono stati aggiornati:" + modified,"result");
