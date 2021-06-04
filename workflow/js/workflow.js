@@ -51,7 +51,7 @@ function updateStatus(item,string)
 
 function updateReqStatus(item)
 {
-	return new Promise(resolve1 => {
+	return new Promise(async resolve1 => {
 		$("#result").empty();
 		println("Aggiornamento status requisiti...","result");
 		var linkedStat = [];
