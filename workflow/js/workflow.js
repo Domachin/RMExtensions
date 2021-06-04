@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 65");
+	window.alert("prova 66");
 	initialize=false;
 }
 
@@ -43,16 +43,14 @@ function isequal(string)
 
 function updateStatus(item,string)
 {
-	if (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] != string)
-	{
-		item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = string;
-		numChanged++;
-		idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
-		urlChanged.push(item.ref.toUri());
-		window.alert(item.ref.toUri());
-		toSave.push(item);
-	}
+	item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = string;
+	numChanged++;
+	idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
+	urlChanged.push(item.ref.toUri());
+	window.alert(item.ref.toUri());
+	toSave.push(item);
 }
+
 function updateReqStatus(item)
 {
 	return new Promise(resolve => {
@@ -81,7 +79,7 @@ function updateReqStatus(item)
 					}
 				}
 				equal = "Passato";
-				if(linkedStat.length > 0 && linkedStat.every(isequal))
+				if(linkedStat.length > 0 && linkedStat.every(isequal) && (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Obsoleto" || item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Propagato" || ((linkedtype == "Requisito software" || linkedtype == "Requisito hardware") && item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Caratterizzato")))
 				{
 					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 					updateStatus(item,"Validato");
