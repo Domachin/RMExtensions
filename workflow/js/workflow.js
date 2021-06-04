@@ -92,7 +92,7 @@ function updateReqStatus(item)
 						}
 						window.alert("requisito salvato come : " + );
 						toSave = [];
-						resolve1(item.values["State (Workflow " + item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] + ")"]);
+						resolve1(item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] + ")"]);
 					});
 				}
 				else resolve1(item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] + ")"]);
