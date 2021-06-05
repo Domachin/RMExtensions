@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 77");
+	window.alert("prova 78");
 	initialize=false;
 }
 
@@ -225,7 +225,8 @@ $(async function()
 				//window.alert("Tipo :" + type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
-					await updateReqStatus(item);
+					var lol = await updateReqStatus(item);
+					window.alert(lol);
 				}
 				else if (type == "Contromisura")
 				{
