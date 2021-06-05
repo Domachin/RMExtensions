@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 75");
+	window.alert("prova 76");
 	initialize=false;
 }
 
@@ -150,10 +150,10 @@ async function updateCmStatus(item)
 						window.alert("Error: " + result2.code);
 					}
 					toSave = [];
-					resolve2();
+					//resolve2();
 				});
 			}
-			else resolve2();
+			//else resolve2();
 			println("Completato","result");
 			window.alert("resolved");
 			return null;
