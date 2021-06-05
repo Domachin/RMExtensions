@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 74");
+	window.alert("prova 75");
 	initialize=false;
 }
 
@@ -125,6 +125,7 @@ async function updateCmStatus(item)
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
 					var uffa = await updateReqStatus(item2);
+                                        window.alert(uffa);
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
 					window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"]);
