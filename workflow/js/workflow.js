@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 73");
+	window.alert("prova 74");
 	initialize=false;
 }
 
@@ -92,10 +92,10 @@ function updateReqStatus(item)
 						}
 						window.alert("requisito salvato come : " + item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"]);
 						toSave = [];
-						resolve1();
+						resolve1("save");
 					});
 				}
-				else resolve1();
+				else resolve1("save");
 				println("Completato","result");
 				//window.alert("resolved");
 			});
@@ -124,7 +124,7 @@ async function updateCmStatus(item)
 				window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
-					await updateReqStatus(item2);
+					var uffa = await updateReqStatus(item2);
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
 					window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"]);
