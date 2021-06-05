@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 76");
+	window.alert("prova 77");
 	initialize=false;
 }
 
@@ -124,8 +124,7 @@ async function updateCmStatus(item)
 				window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 				{
-					var uffa = await updateReqStatus(item2);
-                                        window.alert(uffa);
+					await updateReqStatus(item2);
 					$("#result").empty();
 					println("Aggiornamento status contromisure...","result");
 					window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"]);
@@ -156,7 +155,6 @@ async function updateCmStatus(item)
 			//else resolve2();
 			println("Completato","result");
 			window.alert("resolved");
-			return null;
 		});
 	});
 }
