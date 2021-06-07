@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 85");
+	window.alert("prova 86");
 	initialize=false;
 }
 
@@ -141,7 +141,7 @@ async function updateCmStatus(item)
 				{
 					updateStatus(item,"Chiuso");
 				}
-				else if(linkedStat.length > 0)
+				else if(linkedStat.length > 0 && item.values["State (Workflow Contromisura)"] != "Chiuso")
 				{
 					updateStatus(item,"Coperto");
 				}
@@ -197,7 +197,7 @@ async function updateHzStatus(item)
 				{
 					updateStatus(item,"Chiuso");
 				}
-				else if(linkedStat.length > 0)
+				else if(linkedStat.length > 0 && item.values["State (Workflow Hazard)"] != "Chiuso")
 				{
 					updateStatus(item,"Risolto");
 				}
