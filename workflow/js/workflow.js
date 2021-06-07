@@ -187,8 +187,6 @@ async function updateHzStatus(item)
 					if (linkedtype == "Contromisura")
 					{
 						var saved = await updateCmStatus(item2);
-						$("#result").empty();
-						println("Aggiornamento status hazard...","result");
 						linkedStat.push(saved);
 					}
 				}
