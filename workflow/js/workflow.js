@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 84");
+	window.alert("prova 85");
 	initialize=false;
 }
 
@@ -64,6 +64,7 @@ function updateReqStatus(item)
 				});
 			});
 			//window.alert("link number: " + artifactIndex.length);
+			if(artifactIndex.length == 0) resolve1();
 			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"Esito"], function(attrResult) {
 				//window.alert("length: " + attrResult.data.length);
 				for(item2 of attrResult.data)
@@ -118,6 +119,7 @@ async function updateCmStatus(item)
 				});
 			});
 			window.alert("link number: " + artifactIndex.length);
+			if(artifactIndex.length == 0) resolve2();
 			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
 				window.alert("length: " + attrResult.data.length);
 				for(item2 of attrResult.data)
@@ -177,6 +179,7 @@ async function updateHzStatus(item)
 				indexArtifact(artifactIndex, ref);
 				});
 			});
+			if(artifactIndex.length == 0) resolve3();
 			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE, "State (Workflow Contromisura)"], async function(attrResult) {
 				for(item2 of attrResult.data)
 				{
