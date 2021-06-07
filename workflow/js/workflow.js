@@ -33,6 +33,7 @@ var idChanged = [];
 var urlChanged = [];
 var type = "";
 var modified = "";
+var steps = true;
 
 function isequal(string)
 {
@@ -130,8 +131,12 @@ async function updateCmStatus(item)
 					//window.alert("Linked type: " + linkedtype);
 					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 					{
-						var saved = await updateReqStatus(item2);
-						linkedStat.push(saved);
+						if(steps)
+						{
+							var saved = await updateReqStatus(item2);
+							linkedStat.push(saved);
+						}
+						else linkedStat.push(item2.values["State (Workflow " + item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"]);
 					}
 				}
 				equal = "Validato";
@@ -186,8 +191,12 @@ async function updateHzStatus(item)
 					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 					if (linkedtype == "Contromisura")
 					{
-						var saved = await updateCmStatus(item2);
-						linkedStat.push(saved);
+						if(steps)
+						{
+							var saved = await updateCmStatus(item2);
+							linkedStat.push(saved);
+						}
+						else linkedStat.push(item2.values["State (Workflow Contromisura)"]);
 					}
 				}
 				equal = "Chiuso";
@@ -245,6 +254,8 @@ $(async function()
 	});
 	
 	$("#SetStatus").on("click", async function() {
+		if($("#steps").prop('checked')) steps = true;
+		else steps = false;
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
 			//window.alert(result1.data.length);
 			for(item of result1.data)
