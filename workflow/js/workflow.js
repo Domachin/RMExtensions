@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 88");
+	window.alert("prova 89");
 	initialize=false;
 }
 
@@ -52,8 +52,8 @@ function updateStatus(item,string)
 function updateReqStatus(item)
 {
 	return new Promise(resolve1 => {
-		$("#result").empty();
-		println("Aggiornamento status requisiti...","result");
+		if (type.startsWith("Requisito ")) {$("#result").empty(); println("Aggiornamento status requisito" + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");}
+		else println("Aggiornamento status requisiti...","result");
 		var linkedStat = [];
 		//window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, function(linksResult) {
@@ -110,6 +110,8 @@ async function updateCmStatus(item)
 {
 	return new Promise(resolve2 => {
 		var linkedStat = [];
+		if (type == "Contromisura") {$("#result").empty(); println("Aggiornamento status contromisura" + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");}
+		else println("Aggiornamento status contromisure...","result");
 		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
@@ -130,8 +132,6 @@ async function updateCmStatus(item)
 					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 					{
 						var saved = await updateReqStatus(item2);
-						$("#result").empty();
-						println("Aggiornamento status contromisure...","result");
 						//window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"] + " " + saved);
 						linkedStat.push(saved);
 					}
@@ -172,6 +172,8 @@ async function updateHzStatus(item)
 {
 	return new Promise(resolve3 => {
 		var linkedStat = [];
+		$("#result").empty();
+		println("Aggiornamento status hazard" + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
