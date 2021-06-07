@@ -52,7 +52,7 @@ function updateStatus(item,string)
 function updateReqStatus(item)
 {
 	return new Promise(resolve1 => {
-		if (type.startsWith("Requisito ")) {$("#result").empty(); println("Aggiornamento status requisito" + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");}
+		if (type.startsWith("Requisito ")) {$("#result").empty(); println("Aggiornamento status requisito " + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");}
 		else println("Aggiornamento status requisiti...","result");
 		var linkedStat = [];
 		//window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
@@ -110,7 +110,7 @@ async function updateCmStatus(item)
 {
 	return new Promise(resolve2 => {
 		var linkedStat = [];
-		if (type == "Contromisura") {$("#result").empty(); println("Aggiornamento status contromisura" + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");}
+		if (type == "Contromisura") {$("#result").empty(); println("Aggiornamento status contromisura " + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");}
 		else println("Aggiornamento status contromisure...","result");
 		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
@@ -173,7 +173,7 @@ async function updateHzStatus(item)
 	return new Promise(resolve3 => {
 		var linkedStat = [];
 		$("#result").empty();
-		println("Aggiornamento status hazard" + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");
+		println("Aggiornamento status hazard " + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
