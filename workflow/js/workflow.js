@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 80");
+	window.alert("prova 82");
 	initialize=false;
 }
 
@@ -82,6 +82,8 @@ function updateReqStatus(item)
 					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 					updateStatus(item,"Validato");
 				}
+				var finalstate = "";
+				finalstate = item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 				if (toSave.length > 0)
 				{
 					println("Salvataggio in corso...","result");
@@ -90,9 +92,9 @@ function updateReqStatus(item)
 						{
 							window.alert("Error: " + result2.code);
 						}
-						window.alert("requisito salvato come : " + item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"]);
+						finalstate = item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
 						toSave = [];
-						resolve1("save");
+						resolve1(finalstate);
 					});
 				}
 				else resolve1("save");
@@ -125,11 +127,11 @@ async function updateCmStatus(item)
 					window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 					{
-						var lol = await updateReqStatus(item2);
+						var saved = await updateReqStatus(item2);
 						$("#result").empty();
 						println("Aggiornamento status contromisure...","result");
-						window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"] + " " + lol);
-						linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
+						window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"] + " " + saved);
+						linkedStat.push(saved);
 					}
 				}
 				equal = "Validato";
