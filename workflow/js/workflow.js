@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 82");
+	window.alert("prova 83");
 	initialize=false;
 }
 
@@ -144,7 +144,7 @@ async function updateCmStatus(item)
 					updateStatus(item,"Coperto");
 				}
 				var finalstate = "";
-				finalstate = item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"];
+				finalstate = item.values["State (Workflow Contromisura)"];
 				if (toSave.length > 0)
 				{
 					println("Salvataggio in corso...","result");
@@ -154,7 +154,7 @@ async function updateCmStatus(item)
 							window.alert("Error: " + result2.code);
 						}
 						toSave = [];
-						finalstate = item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"];
+						finalstate = item.values["State (Workflow Contromisura)"];
 						resolve2(finalstate);
 					});
 				}
@@ -168,7 +168,7 @@ async function updateCmStatus(item)
 
 async function updateHzStatus(item)
 {
-	return new Promise(resolve2 => {
+	return new Promise(resolve3 => {
 		var linkedStat = [];
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
@@ -199,6 +199,24 @@ async function updateHzStatus(item)
 					updateStatus(item,"Risolto");
 				}
 				println("Completato","result");
+				var finalstate = "";
+				finalstate = item.values["State (Workflow Hazard)"];
+				if (toSave.length > 0)
+				{
+					println("Salvataggio in corso...","result");
+					RM.Data.setAttributes(toSave, function(result2){
+						if(result2.code !== RM.OperationResult.OPERATION_OK)
+						{
+							window.alert("Error: " + result2.code);
+						}
+						toSave = [];
+						finalstate = item.values["State (Workflow Hazard)"];
+						resolve3(finalstate);
+					});
+				}
+				else resolve3(finalstate);
+				println("Completato","result");
+				window.alert("resolved");
 			});
 		});
 	});
