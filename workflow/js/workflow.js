@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 79");
+	window.alert("prova 80");
 	initialize=false;
 }
 
@@ -105,60 +105,60 @@ function updateReqStatus(item)
 
 async function updateCmStatus(item)
 {
-return new Promise(resolve2 => {
-	var linkedStat = [];
-	window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
-	RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
-		var artifactIndex = [];
-		linksResult.data.artifactLinks.forEach(function(linkDefinition) {
-		linkDefinition.targets.forEach(function(ref) {
-			indexArtifact(artifactIndex, ref);
+	return new Promise(resolve2 => {
+		var linkedStat = [];
+		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
+			var artifactIndex = [];
+			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
+			linkDefinition.targets.forEach(function(ref) {
+				indexArtifact(artifactIndex, ref);
+				});
+			});
+			window.alert("link number: " + artifactIndex.length);
+			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
+				window.alert("length: " + attrResult.data.length);
+				for(item2 of attrResult.data)
+				{
+					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+					window.alert("Linked type: " + linkedtype);
+					window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
+					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
+					{
+						var lol = await updateReqStatus(item2);
+						$("#result").empty();
+						println("Aggiornamento status contromisure...","result");
+						window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"] + " " + lol);
+						linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
+					}
+				}
+				equal = "Validato";
+				if(linkedStat.length > 0 && linkedStat.every(isequal) && item.values["State (Workflow Contromisura)"] == "Coperto")
+				{
+					updateStatus(item,"Chiuso");
+				}
+				else if(linkedStat.length > 0)
+				{
+					updateStatus(item,"Coperto");
+				}
+				if (toSave.length > 0)
+				{
+					println("Salvataggio in corso...","result");
+					RM.Data.setAttributes(toSave, function(result2){
+						if(result2.code !== RM.OperationResult.OPERATION_OK)
+						{
+							window.alert("Error: " + result2.code);
+						}
+						toSave = [];
+						resolve2();
+					});
+				}
+				else resolve2();
+				println("Completato","result");
+				window.alert("resolved");
 			});
 		});
-		window.alert("link number: " + artifactIndex.length);
-		RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
-			window.alert("length: " + attrResult.data.length);
-			for(item2 of attrResult.data)
-			{
-				var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-				window.alert("Linked type: " + linkedtype);
-				window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
-				if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
-				{
-					await updateReqStatus(item2);
-					$("#result").empty();
-					println("Aggiornamento status contromisure...","result");
-					window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"]);
-					linkedStat.push(item2.values["State (Workflow " + linkedtype + ")"]);
-				}
-			}
-			equal = "Validato";
-			if(linkedStat.length > 0 && linkedStat.every(isequal) && item.values["State (Workflow Contromisura)"] == "Coperto")
-			{
-				updateStatus(item,"Chiuso");
-			}
-			else if(linkedStat.length > 0)
-			{
-				updateStatus(item,"Coperto");
-			}
-			if (toSave.length > 0)
-			{
-				println("Salvataggio in corso...","result");
-				RM.Data.setAttributes(toSave, function(result2){
-					if(result2.code !== RM.OperationResult.OPERATION_OK)
-					{
-						window.alert("Error: " + result2.code);
-					}
-					toSave = [];
-					resolve2();
-				});
-			}
-			else resolve2();
-			println("Completato","result");
-			window.alert("resolved");
-		});
 	});
-});
 }
 
 async function updateHzStatus(item)
@@ -227,8 +227,7 @@ $(async function()
 				//window.alert("Tipo :" + type);
 				if (type.startsWith("Requisito ") && type != "Requisito input")
 				{
-					var lol = await updateReqStatus(item);
-					window.alert(lol);
+					await updateReqStatus(item);
 				}
 				else if (type == "Contromisura")
 				{
