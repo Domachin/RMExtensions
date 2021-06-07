@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 87");
+	window.alert("prova 88");
 	initialize=false;
 }
 
@@ -110,7 +110,7 @@ async function updateCmStatus(item)
 {
 	return new Promise(resolve2 => {
 		var linkedStat = [];
-		//window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -118,7 +118,7 @@ async function updateCmStatus(item)
 				indexArtifact(artifactIndex, ref);
 				});
 			});
-			//window.alert("link number: " + artifactIndex.length);
+			window.alert("link number: " + artifactIndex.length);
 			if(artifactIndex.length == 0) resolve2();
 			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
 				//window.alert("length: " + attrResult.data.length);
@@ -162,7 +162,7 @@ async function updateCmStatus(item)
 				}
 				else resolve2(finalstate);
 				println("Completato","result");
-				//window.alert("resolved");
+				window.alert("resolved");
 			});
 		});
 	});
