@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 78");
+	window.alert("prova 79");
 	initialize=false;
 }
 
@@ -105,6 +105,7 @@ function updateReqStatus(item)
 
 async function updateCmStatus(item)
 {
+return new Promise(resolve2 => {
 	var linkedStat = [];
 	window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 	RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
@@ -149,14 +150,15 @@ async function updateCmStatus(item)
 						window.alert("Error: " + result2.code);
 					}
 					toSave = [];
-					//resolve2();
+					resolve2();
 				});
 			}
-			//else resolve2();
+			else resolve2();
 			println("Completato","result");
 			window.alert("resolved");
 		});
 	});
+});
 }
 
 async function updateHzStatus(item)
