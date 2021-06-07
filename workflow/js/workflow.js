@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 86");
+	window.alert("prova 87");
 	initialize=false;
 }
 
@@ -80,7 +80,7 @@ function updateReqStatus(item)
 				equal = "Passato";
 				if(linkedStat.length > 0 && linkedStat.every(isequal) && (item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Obsoleto" || item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Propagato" || ((linkedtype == "Requisito software" || linkedtype == "Requisito hardware") && item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] == "Caratterizzato")))
 				{
-					window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
+					//window.alert("modified " + item.values[RM.Data.Attributes.IDENTIFIER]);
 					updateStatus(item,"Validato");
 				}
 				var finalstate = "";
@@ -110,7 +110,7 @@ async function updateCmStatus(item)
 {
 	return new Promise(resolve2 => {
 		var linkedStat = [];
-		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		//window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -118,21 +118,21 @@ async function updateCmStatus(item)
 				indexArtifact(artifactIndex, ref);
 				});
 			});
-			window.alert("link number: " + artifactIndex.length);
+			//window.alert("link number: " + artifactIndex.length);
 			if(artifactIndex.length == 0) resolve2();
 			RM.Data.getAttributes(artifactIndex, [RM.Data.Attributes.IDENTIFIER, RM.Data.Attributes.ARTIFACT_TYPE,"State (Workflow Requisito sistema)","State (Workflow Requisito sottosistema)","State (Workflow Requisito software)","State (Workflow Requisito hardware)"], async function(attrResult) {
-				window.alert("length: " + attrResult.data.length);
+				//window.alert("length: " + attrResult.data.length);
 				for(item2 of attrResult.data)
 				{
 					var linkedtype = item2.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-					window.alert("Linked type: " + linkedtype);
-					window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
+					//window.alert("Linked type: " + linkedtype);
+					//window.alert("stato iniziale : " + item2.values["State (Workflow " + linkedtype + ")"]);
 					if (linkedtype.startsWith("Requisito ") && linkedtype != "Requisito input")
 					{
 						var saved = await updateReqStatus(item2);
 						$("#result").empty();
 						println("Aggiornamento status contromisure...","result");
-						window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"] + " " + saved);
+						//window.alert("stato finale : " + item2.values["State (Workflow " + linkedtype + ")"] + " " + saved);
 						linkedStat.push(saved);
 					}
 				}
@@ -162,7 +162,7 @@ async function updateCmStatus(item)
 				}
 				else resolve2(finalstate);
 				println("Completato","result");
-				window.alert("resolved");
+				//window.alert("resolved");
 			});
 		});
 	});
@@ -219,7 +219,7 @@ async function updateHzStatus(item)
 				}
 				else resolve3(finalstate);
 				println("Completato","result");
-				window.alert("resolved");
+				//window.alert("resolved");
 			});
 		});
 	});
