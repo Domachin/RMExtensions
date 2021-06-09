@@ -246,7 +246,7 @@ $(async function()
 				if (item.values[RM.Data.Attributes.FORMAT] === RM.Data.Formats.MODULE)
 				{
 					$("#intro").empty();
-					println("Modulo: <b>"+item.values[RM.Data.Attributes.NAME]+"</b><br/><br/>Se si effettuano modifiche, uscire e rientrare nel modulo prima di ricalcolare.","intro");
+					println("Modulo: <b>"+item.values[RM.Data.Attributes.NAME]+"</b><br/><br/><small>Se si effettuano modifiche, uscire e rientrare nel modulo prima di ricalcolare.</small>","intro");
 					docName=item.values[RM.Data.Attributes.NAME]+"_";
 				}
 			});
