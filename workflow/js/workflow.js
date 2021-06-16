@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 3");
+	window.alert("prova 5");
 	initialize=false;
 }
 
@@ -207,6 +207,7 @@ async function updateHzStatus(item)
 				}
 				else if(linkedStat.length > 0 && item.values["State (Workflow Hazard)"] != "Chiuso")
 				{
+					window.alert("Risolto");
 					updateStatus(item,"Risolto");
 				}
 				println("Completato","result");
