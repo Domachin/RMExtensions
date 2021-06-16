@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 89");
+	window.alert("prova 1");
 	initialize=false;
 }
 
@@ -257,7 +257,7 @@ $(async function()
 		if($("#steps").prop('checked')) steps = true;
 		else steps = false;
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
-			//window.alert(result1.data.length);
+			window.alert(result1.data.length);
 			for(item of result1.data)
 			{
 				type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
@@ -274,7 +274,7 @@ $(async function()
 				{
 					await updateHzStatus(item);
 				}
-				//window.alert("loop");
+				window.alert("loop");
 			}
 			var i;
 			var modified = "";
