@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 2");
+	window.alert("prova 3");
 	initialize=false;
 }
 
@@ -272,7 +272,7 @@ $(async function()
 				{
 					await updateCmStatus(item);
 				}
-				else if (type == "Hazard")
+				else if (type.startsWith("Hazard "))
 				{
 					await updateHzStatus(item);
 				}
