@@ -179,7 +179,7 @@ async function updateHzStatus(item)
 		var linkedStat = [];
 		$("#result").empty();
 		println("Aggiornamento status hazard " + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");
-		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
+		//window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -209,7 +209,7 @@ async function updateHzStatus(item)
 				}
 				else if(linkedStat.length > 0 && item.values["State (Workflow Hazard)"] != "Chiuso")
 				{
-					window.alert("Risolto");
+					//window.alert("Risolto");
 					updateStatus(item,"Risolto");
 				}
 				println("Completato","result");
@@ -238,7 +238,7 @@ async function updateHzStatus(item)
 
 $(async function()
 {
-	if (initialize==true) version();
+	//if (initialize==true) version();
 	var selection = [];
 	var docName = "";
 	println("Entrare in un modulo per aggiornare gli status","intro");
@@ -260,9 +260,9 @@ $(async function()
 	$("#SetStatus").on("click", async function() {
 		if($("#steps").prop('checked')) steps = true;
 		else steps = false;
-		window.alert(steps);
+		//window.alert(steps);
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
-			window.alert(result1.data.length);
+			//window.alert(result1.data.length);
 			for(item of result1.data)
 			{
 				type = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
@@ -279,7 +279,7 @@ $(async function()
 				{
 					await updateHzStatus(item);
 				}
-				window.alert("loop");
+				//window.alert("loop");
 			}
 			var i;
 			var modified = "";
