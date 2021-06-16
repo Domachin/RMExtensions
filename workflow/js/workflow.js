@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 5");
+	window.alert("prova 6");
 	initialize=false;
 }
 
@@ -42,7 +42,9 @@ function isequal(string)
 
 function updateStatus(item,string)
 {
-	item.values["State (Workflow " + item.values[RM.Data.Attributes.ARTIFACT_TYPE].name + ")"] = string;
+	var name = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
+	if (name.startsWith("Hazard ")) name = "hazard";
+	item.values["State (Workflow " + name + ")"] = string;
 	modified = string;
 	numChanged++;
 	idChanged.push(parseInt(item.values[RM.Data.Attributes.IDENTIFIER]));
