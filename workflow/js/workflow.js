@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 6");
+	window.alert("prova 7");
 	initialize=false;
 }
 
@@ -43,7 +43,7 @@ function isequal(string)
 function updateStatus(item,string)
 {
 	var name = item.values[RM.Data.Attributes.ARTIFACT_TYPE].name;
-	if (name.startsWith("Hazard ")) name = "hazard";
+	if (name.startsWith("Hazard ")) name = "Hazard";
 	item.values["State (Workflow " + name + ")"] = string;
 	modified = string;
 	numChanged++;
