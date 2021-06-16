@@ -3,7 +3,7 @@ var initialize = true;
 
 function version()
 {
-	window.alert("prova 1");
+	window.alert("prova 2");
 	initialize=false;
 }
 
@@ -177,6 +177,7 @@ async function updateHzStatus(item)
 		var linkedStat = [];
 		$("#result").empty();
 		println("Aggiornamento status hazard " + item.values[RM.Data.Attributes.IDENTIFIER] + "...","result");
+		window.alert("opening: " + item.values[RM.Data.Attributes.IDENTIFIER]);
 		RM.Data.getLinkedArtifacts(item.ref, async function(linksResult) {
 			var artifactIndex = [];
 			linksResult.data.artifactLinks.forEach(function(linkDefinition) {
@@ -256,6 +257,7 @@ $(async function()
 	$("#SetStatus").on("click", async function() {
 		if($("#steps").prop('checked')) steps = true;
 		else steps = false;
+		window.alert(steps);
 		RM.Data.getContentsAttributes(selection, stati.concat([RM.Data.Attributes.ARTIFACT_TYPE,RM.Data.Attributes.IDENTIFIER]), async function(result1){
 			window.alert(result1.data.length);
 			for(item of result1.data)
